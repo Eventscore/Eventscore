@@ -33,3 +33,10 @@ export function addEvent() {
     type: types.ADD_EVENT,
   };
 }
+
+export function removeEvent() {
+  return {
+    type: types.REMOVE_EVENT,
+  };
+}
+
