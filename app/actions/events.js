@@ -16,7 +16,7 @@ export function fetchEvents(genres) {
       dispatch(setSearchedEvents({ events: res }));
     }).catch( err => {
       console.log(err);
-    }
+    });
   };
 }
 
@@ -31,5 +31,5 @@ export function setSearchedEvents( { events } ) {
 export function addEvent() {
   return {
     type: types.ADD_EVENT,
-  }
+  };
 }
