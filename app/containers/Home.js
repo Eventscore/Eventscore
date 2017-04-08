@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   }
 });
 
-
+//Enter data you want to send from the store to the component below
 function mapStateToProps(state) {
   return {
     searchedEvents: state.searchedEvents

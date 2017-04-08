@@ -23,9 +23,7 @@ function configureStore(initialState) {
 //store
 const store = configureStore({});
 
-import {
-  AppRegistry,
-} from 'react-native';
+import { AppRegistry } from 'react-native';
 
 
 const App = () => (

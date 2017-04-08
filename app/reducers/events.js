@@ -18,5 +18,8 @@ export const eventCount = createReducer(0, {
   },
   [types.ADD_EVENT](state, action){
     return ++state;
+  },
+  [types.REMOVE_EVENT](state, action){
+    return --state;
   }
 });
