@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-import Home from './Home'
+
+import Home from './Home';
+// import Landing from './Landing';
+// import Search from './Search';
 
 class AppContainer extends Component {
   render() {
