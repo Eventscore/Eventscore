@@ -1,0 +1,3 @@
+rootProject.name = 'Eventscore'
+
+include ':app'
