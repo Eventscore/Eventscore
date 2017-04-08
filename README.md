@@ -24,17 +24,14 @@
 - git remote add upstream https://github.com/Eventscore/Eventscore.git
 
 ## Start Instructions
-- npm start
 - In xCode open Eventscore/ios/Eventscore.xcodeproj to view the app
-
-## When trying to commit
-
-- git pull --rebase upstream master
+- npm start
+- Hit the play button
 
 ### Documentation
 
-View the project documentation [here](https://docs.google.com/document/d/1bOhUhUnwRuyP1Lwo77mrFLjlYe-N_BVRGO15Y5kEWAI/edit?usp=sharing)
+- View the project documentation [here](https://docs.google.com/document/d/1bOhUhUnwRuyP1Lwo77mrFLjlYe-N_BVRGO15Y5kEWAI/edit?usp=sharing)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+- See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
