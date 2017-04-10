@@ -30,10 +30,10 @@ import EventView from './containers/EventView';
 import EventList from './containers/EventList';
 
 const TabIcon = ({ selected, title }) => {
-    return (
-      <Text style={{color: selected ? 'red' : 'black'}}>{title}</Text>
-    )
-}
+  return (
+    <Text style={{color: selected ? 'red' : 'black'}}>{title}</Text>
+  );
+};
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -59,7 +59,7 @@ export default class App extends Component {
       <Provider store={store}>
         <RouterWithRedux scenes={scenes}/>
       </Provider>
-    )
+    );
   }
 }
 
@@ -68,5 +68,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     opacity: 0.5,
   }
-})
+});
 
