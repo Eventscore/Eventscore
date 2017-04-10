@@ -1,5 +1,3 @@
-import * as EventsActions from './events';
+import * as LoginActions from './login'
 
-export const ActionCreators = Object.assign({}, 
-  EventsActions,
-);
+export const ActionCreators = Object.assign( {}, LoginActions );
