@@ -3,6 +3,7 @@ import ReactNative from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
+import EventListItem from './EventListItem';
 
 const {
   Image,
@@ -18,7 +19,7 @@ class EventList extends Component {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['Rum Ham', 'Jon Snow']),
+      dataSource: ds.cloneWithRows([]),
     };
     
   }
@@ -27,8 +28,8 @@ class EventList extends Component {
     return fetch('http://localhost:1337/api/events')
     .then((response) => { return response.json(); })
     .then((responseData) => {
-      console.log('responseData: ', responseData, this.state);
-      this.setState({dataSource: responseData});
+      console.log('responseData: ', responseData);
+      this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData)});
       return responseJson;
     })
     .catch((err) => {
@@ -45,7 +46,7 @@ class EventList extends Component {
       <ListView
         style={{flex: 1, paddingTop: 22}}
         dataSource={this.state.dataSource}
-        renderRow={(rowData) => <Text>{rowData}</Text>}
+        renderRow={(event) => <EventListItem key={event._id} event={event}/>}
       />
     );
   }
