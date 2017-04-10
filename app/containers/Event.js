@@ -6,12 +6,14 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import Search from './Search';
 
 class Event extends Component {
   render() {
     console.log(this);
     return (
       <View style={styles.container}>
+        <Search />
         <Text style={styles.welcome}>
           { `This is the ${ this.props.title }` }
         </Text>
