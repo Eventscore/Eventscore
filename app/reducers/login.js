@@ -1,17 +1,12 @@
-//login reducer
-
-import createReducer from '../lib/createReducer';
-import * as types from '../actions/types';
-
-export const invokeLogin = createReducer({}, {
-  [types.INVOKE_LOGIN](state, action){
-    state['hello'] = 'world';
-    return state;
+export default function invokeLoginReducer(state = {username: null, password: null}, action) {
+  switch (action.type) {
+    case 'INVOKE_LOGIN':
+      return {
+        username: action.username,
+        password: action.password
+      };
+    // ...other actions
+    default:
+      return state;
   }
-});
-
-export const addCount = createReducer(0, {
-  [types.ADD_COUNT](state, action){
-    return state+1;
-  }
-})
+}

@@ -45,12 +45,12 @@ export default function configureStore (initialState) {
   // const store = compose(
   //   applyMiddleware(...middleware))(createStore)(reducers);
 
-  if (module.hot) {
-    module.hot.accept(() => {
-      const nextRootReducer = require('../reducers/index').default
-      store.replaceReducer(nextRootReducer)
-    })
-  }
+  // if (module.hot) {
+  //   module.hot.accept(() => {
+  //     const nextRootReducer = require('../reducers/index').default
+  //     store.replaceReducer(nextRootReducer)
+  //   })
+  // }
   return store;
 }
 

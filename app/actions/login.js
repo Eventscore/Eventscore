@@ -3,16 +3,16 @@ import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
 
 export function invokeLogin ({ username, password }){
-  console.log('hello');
   return {
-    type: 'INVOKE_LOGIN',
+    type: types.INVOKE_LOGIN,
     username,
     password
   }
 };
 
-export function addCount (){
+export function addCount (count){
   return {
-    type: 'ADD_COUNT',
+    type: types.ADD_COUNT,
+    count
   }
 }
