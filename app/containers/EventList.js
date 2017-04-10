@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
 
+const serverDomain = 'http://localhost:1337/api/events';
+
 const {
   Image,
   ListView,
@@ -25,7 +27,7 @@ class EventList extends Component {
   }
 
   getEvents() {
-    return fetch('http://localhost:1337/api/events')
+    return fetch(serverDomain)
     .then((response) => { return response.json(); })
     .then((responseData) => {
       console.log('responseData: ', responseData);
