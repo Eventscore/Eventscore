@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { ActionCreators } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 class Login extends Component {
   constructor(props) {
@@ -31,7 +33,8 @@ class Login extends Component {
 
 
   render(){
-    console.log(this);
+    const { state, actions } = this.props;
+    console.log("Props", this.props, state, actions);
     return (
       <View style={styles.container}>
         <TextInput style={styles.textInput}
@@ -124,3 +127,4 @@ const styles = StyleSheet.create({
 // })
 
 export default connect(({routes}) => ({routes}))(Login);
+

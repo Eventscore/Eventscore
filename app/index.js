@@ -11,12 +11,12 @@ import { bindActionCreators } from 'redux';
 
 
 // --- child component can connect and listen to props they want.
-const myConnectedMainComponent = connect()(Home);
+// const myConnectedMainComponent = connect()(Home);
 // const myConnectedLoginComponent = connect()(Login);
 
 
 //Include initialState inside configureStore as param
-const store = configureStore()
+const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
 import Search from './containers/Search';
@@ -62,10 +62,18 @@ export default class App extends Component {
   //   this.setState((prevState) => {test: prevState.test + 1});
   // }
 
+  // render() {
+  //   return (
+  //     <Provider store={store}>
+  //       <RouterWithRedux scenes={scenes} state={this.state} />
+  //     </Provider>
+  //   )
+  // }
+
   render() {
     return (
       <Provider store={store}>
-        <RouterWithRedux scenes={scenes} state={this.state} />
+        <RouterWithRedux scenes={scenes}/>
       </Provider>
     )
   }
