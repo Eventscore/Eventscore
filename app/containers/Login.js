@@ -31,10 +31,14 @@ class Login extends Component {
     this.props.invokeLogin({username: this.state.username, password: this.state.password});
   }
 
+  addCountRedux(val){
+    this.props.addCount(val);
+  }
+
 
   render(){
-    const { state, actions } = this.props;
-    console.log("Props", this.props, state, actions);
+    const { username, password } = this.state;
+    console.log("this", { username, password });
     return (
       <View style={styles.container}>
         <TextInput style={styles.textInput}
@@ -49,9 +53,14 @@ class Login extends Component {
           onChangeText={(password) => this.setState({password})}
           value={this.state.password}
         />    
-        <TouchableOpacity onPress={() => this.loginPressedRedux()} style={styles.button}>
+
+        <TouchableOpacity onPress={() => this.loginPressedRedux({ username, password })} style={styles.button}>
             <Text style={styles.buttonText}> Login </Text>
-        </TouchableOpacity>       
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.addCountRedux(this.props.addCountExample.count)} style={styles.button}>
+            <Text style={styles.buttonText} value={this.props.addCountExample.count}> {this.props.addCountExample.count} </Text>
+        </TouchableOpacity>
       </View>
     )    
   }
@@ -126,5 +135,17 @@ const styles = StyleSheet.create({
 //   }
 // })
 
-export default connect(({routes}) => ({routes}))(Login);
+// function mapStateToProps(state) {
+//   return {
+//     routes: state.routes,
+//     addCount: state.addCount
+//   };
+// }
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(({routes, loginReducers, addCountExample}) => { return {routes, loginReducers, addCountExample}}, mapDispatchToProps)(Login);
+// export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
