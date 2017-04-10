@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import {
   Text,
@@ -79,6 +80,7 @@ export default class App extends Component {
   }
 }
 
+<<<<<<< HEAD
 const styles = StyleSheet.create({
   tarBarStyle: {
     backgroundColor: '#FFFFFF',

@@ -40,4 +40,3 @@ export default function reducer(state = {}, {type, scene}) {
 //       return state;
 //   }
 // }
-

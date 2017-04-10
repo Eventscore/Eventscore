@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+
 class Landing extends Component {
   static propTypes = {
     routes: PropTypes.object,
