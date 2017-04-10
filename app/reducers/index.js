@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import * as eventsReducer from './events';
 import routes from './routes';
+import * as loginReducers from './login';
+// ... other reducers
 
-export default combineReducers(Object.assign(
+export default combineReducers({
+  loginReducers,
   routes,
-  eventsReducer,
-));
+  // ... other reducers
+});

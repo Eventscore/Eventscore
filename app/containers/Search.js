@@ -1,37 +1,62 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import ReactNative from 'react-native';
-
-const {
+<<<<<<< HEAD
+import {
   View,
   Text,
   StyleSheet,
-} = ReactNative;
+  TextInput,
+  TouchableHighlight,
+  TouchableOpacity,
+} from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
-const Search = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>
-        Search
-      </Text>
-    </View>
-  )
+class Search extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      genreInput: '',
+      searching: false,
+    };
+  }
+  
+  //TODO: search logic is not built out
+  searchPressed() {
+    console.log('clicked');
+  }
+  
+  render(){
+    return (
+      <View style={styles.searchSection}>
+        <TextInput style={styles.searchInput}
+          returnKeyType='search'
+          placeholder='Write a placeholder here'
+          onChangeText={(genreInput) => this.setState({genreInput})}
+          value={this.state.genreInput}
+        />
+        <TouchableOpacity onPress={() => this.searchPressed()} style={styles.searchButton}>
+          <Text> Fetch Events </Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffcb05',
+  searchSection: {
+    height: 30,
+    borderBottomColor: '#000',
+    borderBottomWidth: 1,
+    padding: 5,
+    flexDirection: 'row',
+    backgroundColor: 'white',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
-  }
-})
+  searchInput: {
+    flex: 0.7,
+  },
+  searchButton: {
+    flex: 0.3,
+  },  
+});
 
 export default connect(({routes}) => ({routes}))(Search)

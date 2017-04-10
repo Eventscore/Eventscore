@@ -1,21 +1,31 @@
-import ReactNative from 'react-native';
+<<<<<<< HEAD
 import React, { Component } from 'react';
+import {
+  Text,
+  StyleSheet,
+} from 'react-native';
+import { Router, Scene, Actions } from 'react-native-router-flux';
 import { connect, Provider } from 'react-redux';
-import { Actions, Scene, Router } from 'react-native-router-flux';
 import configureStore from './store/configureStore';
+import { ActionCreators } from './actions/index';
+import { bindActionCreators } from 'redux';
+
+
+// --- child component can connect and listen to props they want.
+// const myConnectedMainComponent = connect()(Home);
+// const myConnectedLoginComponent = connect()(Login);
+
+
+//Include initialState inside configureStore as param
 const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
-const {
-  Text,
-  StyleSheet,
-} = ReactNative;
-
-import reducer from './reducers';
-import AppContainer from './containers/AppContainer';
-import Home from './containers/Home';
-import Landing from './containers/Landing';
 import Search from './containers/Search';
+import Landing from './containers/Landing';
+import Home from './containers/Home';
+import Login from './containers/Login';
+import User from './containers/User';
+import Event from './containers/Event';
 
 const TabIcon = ({ selected, title }) => {
     return (
@@ -23,40 +33,64 @@ const TabIcon = ({ selected, title }) => {
     )
 }
 
+const scenes = Actions.create(
+  <Scene key="root">
+    <Scene key="landing" component={Landing} title="Landing" hideNavBar initial/>
+    <Scene key="login" direction="vertical" component={Login} title="Login" hideNavBar />
+    <Scene
+      key="rootTabBar"
+      tabs
+      tabBarStyle={{backgroundColor: '#ffffff'}}>
+      <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
+      <Scene key="event" component={Event} title="Event" icon={TabIcon} hideNavBar/>
+      <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>              
+    </Scene>
+  </Scene>
+);
+
 export default class App extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     'test': 0
+  //   }
+  // //   this.testCount = this.testCount.bind(this);
+  // }
+
+  //You can pass functions and state values through RouterWithRedux
+  // testCount() { 
+  //   console.log(this);
+  //   this.setState((prevState) => {test: prevState.test + 1});
+  // }
+
+  // render() {
+  //   return (
+  //     <Provider store={store}>
+  //       <RouterWithRedux scenes={scenes} state={this.state} />
+  //     </Provider>
+  //   )
+  // }
+
   render() {
     return (
       <Provider store={store}>
-        <RouterWithRedux>
-          <Scene key="root">
-            <Scene key="landing" component={Landing} title="Landing" initial={true} />
-            <Scene 
-              key="rootNavBar"
-              tabs={true}
-              tabBarStyle={{backgroundColor: '#FFFFFF'}}>
-              <Scene key="home" component={Home} title="Home" icon={TabIcon} initial />
-              <Scene key="search" component={Search} title="Search" icon={TabIcon} /> 
-            </Scene>
-          </Scene>
-        </RouterWithRedux>
+        <RouterWithRedux scenes={scenes}/>
       </Provider>
     )
   }
 }
 
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <Provider store={store}>
-//         <AppContainer />
-//       </Provider>
-//     )
-//   }
-// }
-
+<<<<<<< HEAD
 const styles = StyleSheet.create({
-  tabBarStyle: {
+  tarBarStyle: {
     backgroundColor: '#FFFFFF',
     opacity: 0.5,
   }
 })
+
+// function mapDispatchToProps(dispatch){
+//   return bindActionCreators(ActionCreators, dispatch);
+// }
+
+// export default connect(() => { return {} }, mapDispatchToProps)(App);
+
