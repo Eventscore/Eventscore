@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
 });
 
 const data = [
-  {'number': 8, 'name': 'Fun activities'},
-  {'number': 7, 'name': 'Dog'},
-  {'number': 16, 'name': 'Food'},
-  {'number': 23, 'name': 'Car'},
-  {'number': 42, 'name': 'Rent'},
+  {'number': 8, 'name': 'Spotify Artist Ranking'},
+  {'number': 7, 'name': 'Spotify Play Count'},
+  {'number': 16, 'name': 'SeatGeek Score'},
+  {'number': 23, 'name': 'iamjasonkuo internet crawling'},
+  {'number': 42, 'name': 'Beyonce test'},
   {'number': 4, 'name': 'Misc'},
 ];
 
@@ -65,6 +65,10 @@ class Graph extends Component {
   constructor(props) {
     super(props);
     this._value = this._value.bind(this);
+    this._label = this._label.bind(this);
+    this._color = this._color.bind(this);
+    this._createPieChart = this._createPieChart.bind(this);
+    // this._selectedPieItem = this._onPieItemSelected.bind(this);
   }  
   _value(item) { return item.number; }
   _label(item) { return item.name; }
@@ -114,11 +118,26 @@ class Graph extends Component {
         }
         </Group>
         </Surface>
+        <View style={{position: 'absolute', top: 20, left: 2 * 20 + this.props.pieWidth}}>
+        </View>
       </View>
     );
   }
 
 }
+          // {
+          //   data.map( (item, index) =>
+          //   {
+          //     // var fontWeight = this.state.highlightedIndex === index ? 'bold' : 'normal';
+          //     // return (
+          //       <TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
+          //         <View>
+          //           <Text style={[styles.label, {color: this._color(index), fontWeight: fontWeight}]}>{this._label(item)}: {this._value(item)}%</Text>
+          //         </View>
+          //       </TouchableWithoutFeedback>
+          //     // );
+          //   });
+          // }
 
               // color={colors[index]}
 export default connect(({routes}) => ({routes}))(Graph);
