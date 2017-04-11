@@ -1,4 +1,8 @@
-export default function addCountReducer(state = {count: 0}, action) {
+const initialState = {
+  count: 0
+}
+
+export default function addCountReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD_COUNT':
       return {

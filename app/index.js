@@ -3,7 +3,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Router, Scene, Actions, Switch } from 'react-native-router-flux';
 import { connect, Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { ActionCreators } from './actions/index';
@@ -39,7 +39,8 @@ const scenes = Actions.create(
     <Scene
       key="rootTabBar"
       tabs
-      tabBarStyle={{backgroundColor: '#ffffff'}}>
+      tabBarStyle={{backgroundColor: '#ffffff'}}
+      type="replace">
       <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
       <Scene key="event" component={Event} title="Event" icon={TabIcon} hideNavBar/>
       <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>              
@@ -48,28 +49,6 @@ const scenes = Actions.create(
 );
 
 export default class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     'test': 0
-  //   }
-  // //   this.testCount = this.testCount.bind(this);
-  // }
-
-  //You can pass functions and state values through RouterWithRedux
-  // testCount() { 
-  //   console.log(this);
-  //   this.setState((prevState) => {test: prevState.test + 1});
-  // }
-
-  // render() {
-  //   return (
-  //     <Provider store={store}>
-  //       <RouterWithRedux scenes={scenes} state={this.state} />
-  //     </Provider>
-  //   )
-  // }
-
   render() {
     return (
       <Provider store={store}>

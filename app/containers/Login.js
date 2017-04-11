@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { ActionCreators } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
@@ -21,14 +21,11 @@ class Login extends Component {
       count: 0
     }
   }
-   
-  loginPressed() {
-    this.setState({validating: true});
-    console.log('username: ', this.state.username + ' password: ', this.state.password);
-  }
 
   loginPressedRedux(){
     this.props.invokeLogin({username: this.state.username, password: this.state.password});
+      console.log('im here');
+      {Actions.home({type: ActionConst.POP_AND_REPLACE})}
   }
 
   addCountRedux(val){
@@ -38,7 +35,8 @@ class Login extends Component {
 
   render(){
     const { username, password } = this.state;
-    console.log("this", { username, password });
+    const {routes} = this.context;
+    console.log('this: ', this);
     return (
       <View style={styles.container}>
         <TextInput style={styles.textInput}
@@ -61,6 +59,11 @@ class Login extends Component {
         <TouchableOpacity onPress={() => this.addCountRedux(this.props.addCountExample.count)} style={styles.button}>
             <Text style={styles.buttonText} value={this.props.addCountExample.count}> {this.props.addCountExample.count} </Text>
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {Actions.home()}} style={styles.button}>
+            <Text style={styles.buttonText}> To home </Text>
+        </TouchableOpacity>
+
       </View>
     )    
   }
@@ -97,5 +100,5 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(({routes, loginReducers, addCountExample}) => { return {routes, loginReducers, addCountExample}}, mapDispatchToProps)(Login);
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
+// export default connect(state => { return {routes: state.routes, loginReducers: state.loginReducers, addCountExample: state.addCountExample} }, mapDispatchToProps)(Login);
 
