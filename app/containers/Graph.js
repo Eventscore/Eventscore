@@ -125,27 +125,27 @@ class Graph extends Component {
         }
         </Group>
         </Surface>
-        <View style={{position: 'absolute', top: margin, left: 2 * margin + pieWidth}}>
+        <View style={{position: 'absolute', top: 20 * margin, left: 2 * margin + pieWidth}}>
+          {
+            data.map( (item, index) =>
+            // {
+              // var fontWeight = this.state.highlightedIndex == index ? 'bold' : 'normal';
+              
+                (<TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
+                  <View>
+                    <Text style={[styles.label, {color: this._color(index), fontWeight: 'normal'}]}>{this._label(item)}: {this._value(item)}%</Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              )
+            // })
+            )
+          }
         </View>
       </View>
     );
   }
 
 }
-          // {
-          //   data.map( (item, index) =>
-          //   // {
-          //     // var fontWeight = this.state.highlightedIndex == index ? 'bold' : 'normal';
-              
-          //       (<TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
-          //         <View>
-          //           <Text style={[styles.label, {color: this._color(index), fontWeight: fontWeight}]}>{this._label(item)}: {this._value(item)}%</Text>
-          //         </View>
-          //       </TouchableWithoutFeedback>
-          //     )
-          //   // })
-          //   )
-          // }
 
           // above works. below was old
           // {
