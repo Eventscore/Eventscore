@@ -92,56 +92,6 @@ const styles = StyleSheet.create({
   }
 })
 
-
-// import React, { Component } from 'react';
-// import {
-//   View,
-//   Text,
-//   StyleSheet,
-// } from 'react-native';
-// import { connect } from 'react-redux';
-// import { Actions } from 'react-native-router-flux';
-
-// class Login extends Component {
-//   render() {
-//     console.log(this);
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.welcome}>
-//           { `This is the ${ this.props.title }` }
-//         </Text>
-//         <Text style={styles.welcome}
-//           onPress={() => Actions.pop()}>
-//           Close User
-//         </Text>
-//       </View>
-//     )
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     marginTop: 20,
-//     alignItems: 'center',
-//     backgroundColor: 'skyblue',
-//     // justifyContent: 'center',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//     color: '#ffffff',
-//   }
-// })
-
-// function mapStateToProps(state) {
-//   return {
-//     routes: state.routes,
-//     addCount: state.addCount
-//   };
-// }
-
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
