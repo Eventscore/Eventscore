@@ -22,8 +22,37 @@ class EventList extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows([]),
+      geolocation: ''
     };
-    
+  }
+
+  getLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // console.log('position: ', position);
+        var initialPosition = JSON.stringify(position);
+        // console.log('init position: ', initialPosition);
+        this.setState({geolocation: initialPosition});
+        this.sendLocation();
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    // this.watchID = navigator.geolocation.watchPosition((position) => {
+    //   var lastPosition = JSON.stringify(position);
+    //   this.setState({lastPosition});
+    // });
+  }
+
+  sendLocation() {
+    fetch(serverDomain, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: this.state.geolocation
+    })
   }
 
   getEvents() {
@@ -32,7 +61,6 @@ class EventList extends Component {
     .then((responseData) => {
       console.log('responseData: ', responseData);
       this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData)});
-      return responseJson;
     })
     .catch((err) => {
       console.log(err);
@@ -41,6 +69,7 @@ class EventList extends Component {
 
   componentWillMount() {
     this.getEvents();
+    this.getLocation();
   }
 
   render() {
