@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import ReactNative, {ART} from 'react-native';
+import ReactNative, {ART, TouchableWithoutFeedback} from 'react-native';
 import PiePiece from './PiePiece';
 
 const {
@@ -59,7 +59,12 @@ const colors = [
 //   return item.number; 
 // }
 
-
+// delete these later // change to props;
+const pieWidth = 150;
+const pieHeight = 150;
+const margin = 20;
+const width = 200;
+const height = 500;
         // d={'M-68.9646319937036,-29.476762610114324A75,75,0,0,1,-49.345310456503256,-56.48044206582762L-20.635195356782273,-21.775874553905552A30,30,0,0,0,-27.086713440010442,-12.896121704557451Z'}
 class Graph extends Component {
   constructor(props) {
@@ -77,6 +82,8 @@ class Graph extends Component {
   }
 
   _createPieChart(index) {
+
+
     let arcs = d3.shape.pie()
       // .value(this._value)
       .value(this._value)
@@ -104,8 +111,8 @@ class Graph extends Component {
           Oh Hai
         </Text>
 
-        <Surface width={200} height={500}>
-        <Group x={95} y={95}> 
+        <Surface width={width} height={height}>
+        <Group x={(pieWidth / 2) + margin} y={(pieWidth / 2) + margin}> 
         {
           data.map( (item, index) => 
             // {console.log(item)}
@@ -118,13 +125,29 @@ class Graph extends Component {
         }
         </Group>
         </Surface>
-        <View style={{position: 'absolute', top: 20, left: 2 * 20 + this.props.pieWidth}}>
+        <View style={{position: 'absolute', top: margin, left: 2 * margin + pieWidth}}>
         </View>
       </View>
     );
   }
 
 }
+          // {
+          //   data.map( (item, index) =>
+          //   // {
+          //     // var fontWeight = this.state.highlightedIndex == index ? 'bold' : 'normal';
+              
+          //       (<TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
+          //         <View>
+          //           <Text style={[styles.label, {color: this._color(index), fontWeight: fontWeight}]}>{this._label(item)}: {this._value(item)}%</Text>
+          //         </View>
+          //       </TouchableWithoutFeedback>
+          //     )
+          //   // })
+          //   )
+          // }
+
+          // above works. below was old
           // {
           //   data.map( (item, index) =>
           //   {

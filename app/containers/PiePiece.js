@@ -33,7 +33,6 @@ class PiePiece extends Component {
   constructor(props) {
     super(props);
   }   
-  // const path = this.props.path;
   render () {
     console.log('d', this.props.d);
     return (
