@@ -23,6 +23,7 @@ import Search from './containers/Search';
 import Landing from './containers/Landing';
 import Home from './containers/Home';
 import Login from './containers/Login';
+import Signup from './containers/Signup';
 import User from './containers/User';
 import Event from './containers/Event';
 import EventList from './containers/EventList';
@@ -37,6 +38,7 @@ const scenes = Actions.create(
   <Scene key="root">
     <Scene key="landing" component={Landing} title="Landing" hideNavBar initial/>
     <Scene key="login" direction="vertical" component={Login} title="Login" hideNavBar />
+    <Scene key="signup" direction="vertical" component={Signup} title="Sign Up" hideNavBar />
     <Scene
       key="rootTabBar"
       tabs
