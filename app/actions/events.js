@@ -3,10 +3,6 @@ import createReducer from '../lib/createReducer';
 import fetch from 'isomorphic-fetch';
 import * as types from '../actions/types';
 
-export function getLocation(){
-  
-}
-
 export function fetchNearbyEvents(long, lat) {
   return (dispatch, getState) => {
     const params = [
