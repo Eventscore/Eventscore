@@ -2,6 +2,7 @@
 import createReducer from '../lib/createReducer';
 import fetch from 'isomorphic-fetch';
 import * as types from '../actions/types';
+import Api from '../lib/api';
 
 export function fetchNearbyEvents(long, lat) {
   return (dispatch, getState) => {
@@ -9,7 +10,7 @@ export function fetchNearbyEvents(long, lat) {
       `longitude/${encodeURIComponent(long)}`,
       `latitude/${encodeURIComponent(lat)}`
     ];
-    return Api.get('/'+`${params.join('/')}`).then(res => {
+    return Api.get(`/api/events/${params.join('/')}`).then(res => {
       dispatch({
         type: types.RECEIVE_EVENTS,
         long: long,
