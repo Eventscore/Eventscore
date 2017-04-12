@@ -27,12 +27,8 @@ class EventList extends Component {
   getLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        // console.log('position: ', position);
         this.setState({geolocation: position});
         var initialPosition = JSON.stringify(position);
-        // console.log('init position: ', initialPosition);
-        // console.log('state.geolocation after finding: ', this.state.geolocation);
-        // this.sendLocation();
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -43,38 +39,42 @@ class EventList extends Component {
     // });
   }
 
-  sendLocation() {
-    fetch(serverDomain, {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: this.state.geolocation
-    })
-  }
+        //Testing purposes only
+        componentWillMount() {
+          this.getLocation();
+          this.getEvents();
+        }
 
-  getEvents() {
-    return fetch(serverDomain + '/exampledata')
-    .then((response) => { return response.json(); })
-    .then((responseData) => {
-      console.log('responseData: ', responseData);
-      this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData)});
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+        //Testing Only
+        sendLocation() {
+          fetch(serverDomain, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: this.state.geolocation
+          })
+        }
+
+        //Testing for Dummy Data
+        getEvents() {
+          return fetch(serverDomain + '/exampledata')
+          .then((response) => { return response.json(); })
+          .then((responseData) => {
+            console.log('responseData: ', responseData);
+            this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData)});
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+        }
 
   searchPressed() {
     // console.log('props: ', this.props);
     this.props.fetchNearbyEvents(this.state.geolocation.coords.longitude, this.state.geolocation.coords.latitude);
   }
 
-  componentWillMount() {
-    this.getLocation();
-    this.getEvents();
-  }
 
   componentDidMount() {
   }
@@ -103,9 +103,8 @@ class EventList extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-// export default EventList;
-export default connect((state) => { return {} }, mapDispatchToProps)(EventList);
+export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers}}, mapDispatchToProps)(EventList);
