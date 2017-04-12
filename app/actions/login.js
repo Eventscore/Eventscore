@@ -7,6 +7,7 @@ export function invokeLogin({ username, password }) {
   return (dispatch, getState) => {
     const params = { username, password };
     return Api.post('/auth/users/login', params).then(res => {
+      console.log(res);
       dispatch({
         type: types.INVOKE_LOGIN,
         username: params.username,
@@ -19,8 +20,9 @@ export function invokeLogin({ username, password }) {
         response: res,
       });
     }).catch( (ex) => {
+      console.log(ex);
       dispatch({
-        type: types.INVOKE_LOGIN,
+        type: types.INVOKE_FAILED_LOGIN,
         username: params.username,
         isLoggingIn: false,
         isLoggedIn: false,

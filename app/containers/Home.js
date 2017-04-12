@@ -2,6 +2,7 @@ import React , { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 // import ActionCreators from '../actions/index';
+import { ActionCreators } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import {
   ScrollView,
@@ -22,7 +23,6 @@ class Home extends Component {
       <View style={styles.container}>
         <Search />
         <Text style={styles.welcome}>Home</Text>
-        <Text onPress={Actions.login}>Open modal</Text>
       </View>
     )
   }
@@ -43,14 +43,8 @@ const styles = StyleSheet.create({
   }
 })
 
-// Enter data you want to send from the store to the component below
-// function mapStateToProps(state) {
-//   return {
-//     searchedEvents: state.searchedEvents
-//   };
-// }
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-//React Native Router Flux
-export default connect(({routes}) => ({routes}))(Home)
+export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Home);

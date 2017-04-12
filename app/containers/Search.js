@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { ActionCreators } from '../actions/index';
+import { bindActionCreators } from 'redux';
 
 class Search extends Component {
   constructor(props){
@@ -58,4 +60,9 @@ const styles = StyleSheet.create({
   },  
 });
 
-export default connect(({routes}) => ({routes}))(Search)
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Search);

@@ -16,8 +16,8 @@ export default function invokeLoginReducer(state = initialState, action) {
     case 'INVOKE_LOGIN':
       return {
         username: action.username,
-        isLoggingIn: false,
-        isLoggedIn: true,
+        isLoggingIn: action.isLoggingIn,
+        isLoggedIn: action.isLoggedIn,
         token: '',
         userId: action.userId,
         error: action.error,
@@ -28,8 +28,8 @@ export default function invokeLoginReducer(state = initialState, action) {
     case 'INVOKE_FAILED_LOGIN':
       return {
         username: action.username,
-        isLoggingIn: false,
-        isLoggedIn: false,
+        isLoggingIn: action.isLoggingIn,
+        isLoggedIn: action.isLoggedIn,
         token: '',
         userId: action.userId,
         error: action.error,

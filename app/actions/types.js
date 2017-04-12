@@ -1,3 +1,9 @@
+//example
+export const ADD_COUNT = 'ADD_COUNT';
+
 export const INVOKE_LOGIN = 'INVOKE_LOGIN';
 export const INVOKE_FAILED_LOGIN = 'INVOKE_FAILED_LOGIN';
-export const ADD_COUNT = 'ADD_COUNT';
+
+export const REQUEST_EVENTS = 'REQUEST_EVENTS';
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+export const RECEIVE_EVENTS_FAILED = 'RECEIVE_EVENTS_FAILED';

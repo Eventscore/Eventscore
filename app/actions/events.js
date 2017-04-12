@@ -1,10 +1,43 @@
 //event actions
 import createReducer from '../lib/createReducer';
 import fetch from 'isomorphic-fetch';
-// import * as types from '../actions/types';
+import * as types from '../actions/types';
 
+export function getLocation(){
+  
+}
+
+export function fetchNearbyEvents(long, lat) {
+  return (dispatch, getState) => {
+    const params = [
+      `longitude/${encodeURIComponent(long)}`,
+      `latitude/${encodeURIComponent(lat)}`
+    ];
+    return Api.get('/'+`${params.join('/')}`).then(res => {
+      dispatch({
+        type: types.RECEIVE_EVENTS,
+        long: long,
+        lat: lat,
+        events: res.events,
+        receivedAt: Date.now(),
+        res: res
+      });
+    }).catch( (ex) => {
+      dispatch({
+        type: types.RECEIVE_EVENTS_FAILED,
+        long: long,
+        lat: lat,
+        events: null,
+        receivedAt: Date.now(),        
+        res: ex
+      });
+    });
+  }
+}
+
+/*
+//Al's code
 const serverDomain = 'http://localhost:1337/api/events';
-
 
 export function requestEvents(long, lat){
   return {
@@ -47,26 +80,4 @@ export function fetchNearbyEvents(long, lat) {
 
   }
 };
-
-// example
-// export function fetchRecipes(ingredients) {
-//   return (dispatch, getState) => {
-//     const params = [
-//       `i=${encodeURIComponent(ingredients)}`,
-//       'p=1'
-//     ].join('&')
-//     return Api.get(`/api/?${params}`).then(resp => {
-//       dispatch(setSearchedRecipes({recipes: resp}));
-//     }).catch( (ex) => {
-//       console.log(ex);
-//     });
-//   }
-// }
-
-// example
-export function addCount(count){
-  return {
-    type: types.ADD_COUNT,
-    count
-  }
-};
+*/

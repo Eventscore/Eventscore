@@ -1,18 +1,16 @@
 import React , { Component } from 'react';
-import ReactNative from 'react-native';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ActionCreators } from '../actions';
-import EventListItem from './EventListItem';
-
-const {
+import {
   Image,
   ListView,
   TouchableHighlight,
   StyleSheet,
   Text,
   View,
-} = ReactNative;
+} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
+import EventListItem from './EventListItem';
 
 const serverDomain = 'http://localhost:1337/api/events';
 
@@ -82,6 +80,7 @@ class EventList extends Component {
   }
 
   render() {
+    console.log(this.state.geolocation);
     return (
       <View>
       <TouchableHighlight style={{paddingTop: 22}} onPress={ () => this.searchPressed() }>
