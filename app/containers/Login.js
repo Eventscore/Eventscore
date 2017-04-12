@@ -17,20 +17,27 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      validating: false,
-      count: 0
+      // count: 0
     }
   }
 
   loginPressedRedux(){
-    this.props.invokeLogin({username: this.state.username, password: this.state.password});
-      console.log('im here');
-      {Actions.home({type: ActionConst.POP_AND_REPLACE})}
+    var login = this.props.invokeLogin({username: this.state.username, password: this.state.password}).then( () => {
+        this.validateLogin();    
+      });
   }
 
-  addCountRedux(val){
-    this.props.addCount(val);
+  validateLogin(){
+    if(this.props.loginReducers.status === 'success') {
+      {Actions.rootTabBar({type: ActionConst.POP_AND_REPLACE})}
+    } else {
+      console.log('I failed');
+    }
   }
+
+  // addCountRedux(val){
+  //   this.props.addCount(val);
+  // }
 
 
   render(){
@@ -56,18 +63,17 @@ class Login extends Component {
             <Text style={styles.buttonText}> Login </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this.addCountRedux(this.props.addCountExample.count)} style={styles.button}>
-            <Text style={styles.buttonText} value={this.props.addCountExample.count}> {this.props.addCountExample.count} </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {Actions.home()}} style={styles.button}>
-            <Text style={styles.buttonText}> To home </Text>
-        </TouchableOpacity>
-
       </View>
     )    
   }
 }
+
+/*
+//addCountExample
+<TouchableOpacity onPress={() => this.addCountRedux(this.props.addCountExample.count)} style={styles.button}>
+    <Text style={styles.buttonText} value={this.props.addCountExample.count}> {this.props.addCountExample.count} </Text>
+</TouchableOpacity>
+*/
 
 const styles = StyleSheet.create({
   container: {
@@ -99,6 +105,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, addCountExample}) => { return {routes, loginReducers, addCountExample}}, mapDispatchToProps)(Login);
-// export default connect(state => { return {routes: state.routes, loginReducers: state.loginReducers, addCountExample: state.addCountExample} }, mapDispatchToProps)(Login);
-
+export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Login);

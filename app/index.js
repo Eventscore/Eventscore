@@ -44,7 +44,7 @@ const scenes = Actions.create(
       type="replace">
       <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
       <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar/>
-      <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>              
+      <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>
     </Scene>
   </Scene>
 );
@@ -65,10 +65,4 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   }
 })
-
-// function mapDispatchToProps(dispatch){
-//   return bindActionCreators(ActionCreators, dispatch);
-// }
-
-// export default connect(() => { return {} }, mapDispatchToProps)(App);
 

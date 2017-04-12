@@ -7,29 +7,6 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-// //Enter data you want to send from the store to the component below
-// const mapStateToProps = (state) => {
-//   return {
-//     searchedEvents: state.searchedEvents,
-//     eventCount: state.eventCount,
-//   };
-// }
-
-// const mapDispatchToProps = (dispatch) => ({
-//     fetchEvents: (genre) => {
-//       dispatch(fetchEvents(genre));
-//     },
-//     setSearchedEvents: (event) => {
-//       dispatch(setSearchedEvents(event));
-//     },
-//     addEvent: () => {
-//       dispatch(addEvent());
-//     },
-//     removeEvent: () => {
-//       dispatch(removeEvent());
-//     },
-// });
-
 class User extends Component {
   render() {
     return (
