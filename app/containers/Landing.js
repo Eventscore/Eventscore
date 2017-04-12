@@ -22,11 +22,16 @@ class Landing extends Component {
     return (
       <View style={styles.container}>
         <Image style={styles.backgroundImage} source={require('../assets/image/concert_crowd.jpg')} />
-          <Text style={styles.headline}>Eventscore</Text>
-          <View style={styles.backdropView}>
-            <Text style={styles.selectionText} onPress={() => {Actions.login()}}>Login</Text>
-            <Text style={styles.selectionText} onPress={() => {Actions.signup()}}>Sign Up</Text>
-          </View>        
+        <Text style={styles.headline}>Eventscore</Text>
+        <View style={styles.backdropView}>
+          <TouchableOpacity onPress={() => {Actions.login()}} style={styles.button}>
+              <Text style={styles.buttonText}> Login </Text>
+          </TouchableOpacity>
+          <View style={{'width': 10}}></View>
+          <TouchableOpacity onPress={() => {Actions.signup()}} style={styles.button}>
+              <Text style={styles.buttonText}> Sign Up </Text>
+          </TouchableOpacity>
+        </View>     
       </View>
     );
   }
@@ -35,9 +40,9 @@ class Landing extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display: 'flex',    
     justifyContent: 'flex-start',
     alignItems: 'center',
-    // backgroundColor: '#F5FCFF',
     backgroundColor: '#000000',
     flexDirection: 'column',
   },
@@ -47,9 +52,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   headline: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',    
     fontSize: 50,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -59,17 +61,23 @@ const styles = StyleSheet.create({
   },
   backdropView: {
     flex: 1,
+    display: 'flex',
+    alignItems: 'flex-end',
     flexDirection: 'row',
-    // justifyContent: 'space-between', 
     backgroundColor: 'rgba(0,0,0,0)',
+    justifyContent: 'space-around',
+    marginBottom: 150,
   },
-  selectionText: {
-    flex: 1,
-    // flexDirection: 'column',
-    justifyContent: 'space-between',
-    // alignItems: 'center',  
+  button: {
+    padding: 5,
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'black', 
+  },
+  buttonText: {
     color: 'white',
-  },
+    alignSelf: 'center',
+  },  
 })
 
 // const styles = StyleSheet.create({

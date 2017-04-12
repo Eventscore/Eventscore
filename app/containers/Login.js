@@ -46,23 +46,29 @@ class Login extends Component {
     console.log('this: ', this);
     return (
       <View style={styles.container}>
-        <TextInput style={styles.textInput}
-          returnKeyType='send'
-          placeholder='username'
-          onChangeText={(username) => this.setState({username})}
-          value={this.state.username}
-        />
-        <TextInput style={styles.textInput}
-          returnKeyType='send'
-          placeholder='password'
-          onChangeText={(password) => this.setState({password})}
-          value={this.state.password}
-        />    
-
-        <TouchableOpacity onPress={() => this.loginPressedRedux({ username, password })} style={styles.button}>
-            <Text style={styles.buttonText}> Login </Text>
-        </TouchableOpacity>
-
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.textInput}
+            returnKeyType='send'
+            placeholder='username'
+            onChangeText={(username) => this.setState({username})}
+            value={this.state.username}
+          />
+          <TextInput style={styles.textInput}
+            returnKeyType='send'
+            placeholder='password'
+            onChangeText={(password) => this.setState({password})}
+            value={this.state.password}
+          />    
+        </View>
+        <View style={styles.backdropView}>
+          <TouchableOpacity onPress={() => this.loginPressedRedux({ username, password })} style={styles.button}>
+              <Text style={styles.buttonText}> Login </Text>
+          </TouchableOpacity>
+          <View>
+            <View style={{height: 10}}></View>
+            <Text style={styles.Text}>Forgot Password?</Text>
+          </View>
+        </View>
       </View>
     )    
   }
@@ -79,9 +85,12 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 80,
     flex: 1,
+  },
+  inputContainer: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    maxHeight: 400,
+    maxHeight: 300,
     alignItems: 'center',
   },
   textInput: {
@@ -90,14 +99,27 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignSelf: 'stretch',
   },
+  backdropView: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    marginBottom: 150,
+  },
   button: {
-      padding: 5,
-      borderWidth: 1,
-      borderRadius: 5,
-      backgroundColor: 'black',
+    width: 300,
+    height: 50,
+    padding: 5,
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: 'black',
+    justifyContent: 'center',
   },
   buttonText: {
-      color: 'white',
+    color: 'white',
+    alignSelf: 'center',
   }
 })
 
