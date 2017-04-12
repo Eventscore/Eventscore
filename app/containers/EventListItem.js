@@ -1,5 +1,8 @@
 import React , { Component } from 'react';
 import ReactNative from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
 
 const {
   Image,
@@ -23,7 +26,7 @@ class EventListItem extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{borderWidth: 0.5, margin: 0.5}}>
         <Text>{this.props.event.name}</Text>
         <Text>Artists: </Text>
         {this.props.event.artists.map((artist) => {
@@ -38,5 +41,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default EventListItem;
-// export default connect((state) => { return {} }, mapDispatchToProps)(EventListItem);
+// export default EventListItem;
+export default connect((state) => { return {} }, mapDispatchToProps)(EventListItem);
