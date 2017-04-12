@@ -25,6 +25,7 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import User from './containers/User';
 import Event from './containers/Event';
+import EventList from './containers/EventList';
 
 const TabIcon = ({ selected, title }) => {
     return (
@@ -42,7 +43,7 @@ const scenes = Actions.create(
       tabBarStyle={{backgroundColor: '#ffffff'}}
       type="replace">
       <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
-      <Scene key="event" component={Event} title="Event" icon={TabIcon} hideNavBar/>
+      <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar/>
       <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>              
     </Scene>
   </Scene>

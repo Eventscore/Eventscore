@@ -26,7 +26,7 @@ class Home extends Component {
       </View>
     )
   }
-
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
