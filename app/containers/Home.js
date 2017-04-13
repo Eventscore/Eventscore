@@ -30,6 +30,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display: 'flex',
     marginTop: 20,
     alignItems: 'center',
     backgroundColor: '#DCDCDC',

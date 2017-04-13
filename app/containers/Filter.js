@@ -73,12 +73,16 @@ class Filter extends Component {
 
 const styles = StyleSheet.create({
   filterContainer: {
+    // flex: 1,
+    display: 'flex',
     height: 100,
     width: 350,
-    padding: 5,
+    // padding: 5,
+    position: 'relative',
+    marginTop:5,
+    borderBottomWidth: 1,
     flexDirection: 'column',
-    // flex: 1,
-    flexWrap: 'wrap',
+    // flexWrap: 'nowrap',
     backgroundColor: '#DCDCDC',
   },
   filterOption: {
@@ -98,12 +102,14 @@ const styles = StyleSheet.create({
 
   // },
   filterIcon: {
-    flex: 0.1,
+    flex: 0.2,
     color: 'black',
+    alignSelf: 'center',
   },
   searchIcon: {
-    flex: 0.1,
+    flex: 0.2,
     color: 'black',
+    alignSelf: 'center',    
   },  
   filterBy: {
     flex: 0.8,
