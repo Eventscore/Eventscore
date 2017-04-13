@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,93 +14,81 @@ import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
 
 const serverDomain = 'http://localhost:1337/api/events';
+const styles = StyleSheet.create({
+  fetchEventsText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+});
 
 class EventList extends Component {
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([]),
-      geolocation: ''
+      eventList: ds.cloneWithRows([]),
+      loading: true
     };
   }
 
   getLocation() {
+    // get locations
+    this.setState({loading: true});
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        this.setState({geolocation: position});
-        var initialPosition = JSON.stringify(position);
+        // console.log('position: ', position);
+        // this.setState({geolocation: position});
+        // once location is received then fetch nearby events
+        this.props.fetchNearbyEvents(position.coords.longitude, position.coords.latitude)
+        .then(() => {
+          // then set eventlist state to fetched events and set loading state to false
+          // datasource of list depends on eventlist state
+          this.setState({
+            eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
+            loading: false
+          });
+        });
+        // var initialPosition = JSON.stringify(position);
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
+    )
     // this.watchID = navigator.geolocation.watchPosition((position) => {
     //   var lastPosition = JSON.stringify(position);
     //   this.setState({lastPosition});
     // });
   }
 
-        //Testing purposes only
-        componentWillMount() {
-          this.getLocation();
-          this.getEvents();
-        }
-
-        //Testing Only
-        sendLocation() {
-          fetch(serverDomain, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: this.state.geolocation
-          })
-        }
-
-        //Testing for Dummy Data
-        getEvents() {
-          return fetch(serverDomain + '/exampledata')
-          .then((response) => { return response.json(); })
-          .then((responseData) => {
-            console.log('responseData: ', responseData);
-            this.setState({dataSource: this.state.dataSource.cloneWithRows(responseData)});
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-        }
-
   searchPressed() {
-    // console.log('props: ', this.props);
-    this.props.fetchNearbyEvents(this.state.geolocation.coords.longitude, this.state.geolocation.coords.latitude);
+    this.getLocation();
   }
 
+  componentWillMount() {
+    this.getLocation();
+  }
 
   componentDidMount() {
+   // this.getLocation(); 
   }
 
   render() {
-    console.log(this.state.geolocation);
-    return (
-      <View>
-      <TouchableHighlight style={{paddingTop: 22}} onPress={ () => this.searchPressed() }>
-        <Text>Fetch Events</Text>
-      </TouchableHighlight>
-      <ListView
-        // style={{flex: 1, paddingTop: 22}}
-        dataSource={this.state.dataSource}
-        renderRow={(event) => <EventListItem key={event._id} event={event} />}
-      />
-      </View>
-    )
-    // return (
-    //   <ListView
-    //     style={{flex: 1, paddingTop: 22}}
-    //     dataSource={this.state.dataSource}
-    //     renderRow={(event) => <EventListItem key={event._id} event={event}/>}
-    //   />
-    // );
+    if (this.state.loading) {
+      return( <ActivityIndicator size='large' style={{height:80}} />)
+    } else {
+      return (
+        <View>
+        <TouchableHighlight style={{paddingTop: 22}} onPress={ () => this.searchPressed() }>
+          <Text style={styles.fetchEventsText}>Fetch Events</Text>
+        </TouchableHighlight>
+        <ListView
+          dataSource={this.state.eventList}
+          // dataSource={this.props.eventsReducers.events}
+          renderRow={(event) => <EventListItem key={event._id} event={event} />}
+        />
+        </View>
+      )
+    }
   }
 }
 

@@ -1,12 +1,20 @@
-export default function eventsReducer(state = [], action) {
+export default function eventsReducer(state = {}, action) {
   switch (action.type) {
     case 'REQUEST_EVENTS':
       return state;
     case 'RECEIVE_EVENTS':
-      return action.events;
+      return Object.assign({}, state, {
+        events: action.events
+      });
     case 'RECEIVE_EVENTS_FAILED':
-      return action.events;
+      return Object.assign({}, state, {
+        events: action.events
+      });
     // ...other actions
+    case 'CHANGE_CURR_EVENT':
+      return Object.assign({}, state, {
+        currEvent: action.currEvent
+      });
     default:
       return state;
   }

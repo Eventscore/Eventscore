@@ -1,6 +1,5 @@
 //event actions
 import createReducer from '../lib/createReducer';
-import fetch from 'isomorphic-fetch';
 import * as types from '../actions/types';
 import Api from '../lib/api';
 
@@ -15,7 +14,7 @@ export function fetchNearbyEvents(long, lat) {
         type: types.RECEIVE_EVENTS,
         long: long,
         lat: lat,
-        events: res.events,
+        events: res,
         receivedAt: Date.now(),
         res: res
       });
@@ -29,6 +28,20 @@ export function fetchNearbyEvents(long, lat) {
         res: ex
       });
     });
+  }
+}
+
+export function changeCurrEvent(event) {
+  return {
+    type: types.CHANGE_CURR_EVENT,
+    currEvent: event
+  }
+}
+
+// does location need to be in the state store?
+export function getLocation(longitude, latitude) {
+  return {
+
   }
 }
 
