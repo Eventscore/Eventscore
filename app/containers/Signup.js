@@ -11,42 +11,44 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import { ActionCreators } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-class Login extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       username: '',
       password: '',
-      // count: 0
+      email: '',
     }
   }
 
-  loginPressedRedux(){
-    var login = this.props.invokeLogin({username: this.state.username, password: this.state.password}).then( () => {
-        this.validateLogin();    
+  signupPressedRedux(){
+    this.props.invokeSignup({name: this.state.name, username: this.state.username, password: this.state.password, email: this.state.email}).then( () => {
+        this.validateSignup();    
       });
   }
 
-  validateLogin(){
-    if(this.props.loginReducers.status === 'success') {
+  validateSignup(){
+    if(this.props.signupReducers.status === 'success') {
       {Actions.rootTabBar({type: ActionConst.POP_AND_REPLACE})}
     } else {
       console.log('I failed');
     }
   }
 
-  // addCountRedux(val){
-  //   this.props.addCount(val);
-  // }
-
-
   render(){
-    const { username, password } = this.state;
+    const { name, username, password, email } = this.state;
     const {routes} = this.context;
     console.log('this: ', this);
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
+          <TextInput style={styles.textInput}
+            returnKeyType='send'
+            placeholder='name'
+            onChangeText={(name) => this.setState({name})}
+            value={this.state.name}
+          />
           <TextInput style={styles.textInput}
             returnKeyType='send'
             placeholder='username'
@@ -59,37 +61,36 @@ class Login extends Component {
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />    
+          <TextInput style={styles.textInput}
+            returnKeyType='send'
+            placeholder='email'
+            onChangeText={(email) => this.setState({email})}
+            value={this.state.email}
+          />
         </View>
         <View style={styles.backdropView}>
-          <TouchableOpacity onPress={() => this.loginPressedRedux({ username, password })} style={styles.button}>
-              <Text style={styles.buttonText}> Login </Text>
+          <TouchableOpacity onPress={() => this.signupPressedRedux({ name ,username, password, email })} style={styles.button}>
+              <Text style={styles.buttonText}> Sign Up </Text>
           </TouchableOpacity>
-          <View>
-            <View style={{height: 10}}></View>
-            <Text style={styles.Text}>Forgot Password?</Text>
-          </View>
         </View>
       </View>
     )    
   }
 }
 
-/*
-//addCountExample
-<TouchableOpacity onPress={() => this.addCountRedux(this.props.addCountExample.count)} style={styles.button}>
-    <Text style={styles.buttonText} value={this.props.addCountExample.count}> {this.props.addCountExample.count} </Text>
-</TouchableOpacity>
-*/
-
 const styles = StyleSheet.create({
   container: {
     marginTop: 80,
     flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'space-between',
+    // maxHeight: 400,
+    // alignItems: 'center',
   },
   inputContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     maxHeight: 300,
     alignItems: 'center',
   },
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
     marginBottom: 150,
-  },
+  },  
   button: {
     width: 300,
     height: 50,
@@ -120,11 +121,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     alignSelf: 'center',
-  },
+  }
 })
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Login);
+export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Signup);
