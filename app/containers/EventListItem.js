@@ -33,6 +33,7 @@ class EventListItem extends Component {
     return (
       <TouchableHighlight style={{borderWidth: 0, margin: 0.5}} onPress={() => this.pressListItem()}>
       <View>
+        <Text>{this.props.event._id}</Text>
         <Text>{this.props.event.name}</Text>
         <Text>Artists: </Text>
         {this.props.event.artists.map((artist) => {

@@ -77,8 +77,8 @@ class EventList extends Component {
       return( <ActivityIndicator size='large' style={{height:80}} />)
     } else {
       return (
-        <View>
-        <TouchableHighlight style={{paddingTop: 22}} onPress={ () => this.searchPressed() }>
+        <View style={{paddingTop: 22, paddingBottom: 75}}>
+        <TouchableHighlight onPress={ () => this.searchPressed() }>
           <Text style={styles.fetchEventsText}>Fetch Events</Text>
         </TouchableHighlight>
         <ListView
