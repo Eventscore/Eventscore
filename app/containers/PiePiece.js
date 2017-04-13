@@ -21,42 +21,6 @@ const d3 = {
   shape,
 };
 
-// let arcs = d3.shape.pie()
-//   // .value(this._value)
-//   .value(8)
-//   (this.props.data);
-
-// let arc = d3.shape.arc()
-//   .outerRadius(150 / 2)  // Radius of the pie 
-//   .padAngle(.05)    // Angle between sections
-//   .innerRadius(30);  // Inner radius: to create a donut or pie
-//   // (arcs[index]);
-
-// let arcData = arcs[this.props.index];
-// let path = arc(arcData);
-      /*<View>
-        <Shape
-          d={this.props.d()}
-          stroke={this.props.color} // green line
-          fill={this.props.color}
-        />
-        <Shape />
-      </View>*/
-
-              /*<View>
-        <Shape
-          d={this.props.d()[0]}
-          stroke={this.props.color} // green line
-        strokeWidth={3}
-        />
-        <View>
-        <Shape
-          d={this.props.d()[1]}
-          stroke={this.props.color} // green line
-          strokeWidth={3}
-        /></View>
-        </View>*/
-
 class PiePiece extends Component { 
   constructor(props) {
     super(props);
@@ -65,10 +29,10 @@ class PiePiece extends Component {
     console.log('d', this.props.d);
     return (
         <Shape
-          d={this.props.d}
-          stroke={'#808080'} // gray line
-          strokeWidth={3}
-        fill={this.props.color}
+          d={this.props.d} // path
+          stroke={'#808080'} // gray border line
+          strokeWidth={1} // for border
+          fill={this.props.color} // fill color of selected information
         />
 
     );

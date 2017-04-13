@@ -60,27 +60,17 @@ const eventScore =
   }, 0)
   );
 
-// const data = [
-//   {'number': 8, 'name': 'Spotify Artist Ranking'},
-//   {'number': 7, 'name': 'Spotify Play Count'},
-//   {'number': 16, 'name': 'SeatGeek Score'},
-//   {'number': 23, 'name': 'iamjasonkuo internet crawling'},
-//   {'number': 42, 'name': 'Beyonce test'},
-//   {'number': 4, 'name': 'Misc'},
-// ];
-
 const colors = [
   '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
   '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
 ];
 
 // delete these later // change to props;
-const pieWidth = 200;
-const pieHeight = 200;
+const propsradius = 100;
 const innerRadius = 20; // .3 * pieWidth/2  OR .3 * pieRadius
 const margin = 20;
-const width = pieWidth + 2*margin;
-const height = pieWidth + 2*margin;
+const width = 2*propsradius + 2*margin;
+const height = 2*propsradius + 2*margin;
 
 class Graph extends Component {
   constructor(props) {
@@ -92,7 +82,6 @@ class Graph extends Component {
     this._onPieItemSelected = this._onPieItemSelected.bind(this);
   }  
   _value(item) { return item.weight; }
-  // _value(item) { return 100/data.length; }
   _label(item) { return item.name; }
   _color(index) { 
     return colors[index % colors.length]; 
@@ -107,13 +96,13 @@ class Graph extends Component {
       (data);
 
     let arc = d3.shape.arc()
-      .outerRadius(( (pieWidth / 2) - innerRadius)*item.score/100 + innerRadius)  // Radius of the pie 
+      .outerRadius(( propsradius - innerRadius)*item.score/100 + innerRadius)  // Radius of the pie 
       .padAngle(.05)    // Angle between sections
       .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
       // (arcs[index]);
 
     let outerArc = d3.shape.arc()
-      .outerRadius(pieWidth / 2)  // Radius of the pie 
+      .outerRadius(propsradius)  // Radius of the pie 
       .padAngle(.05)    // Angle between sections
       .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
       // (arcs[index]);
@@ -128,31 +117,24 @@ class Graph extends Component {
     this.props.onItemSelected(index);
   }
 
-  // console.log('what is paths even anyway', arcs);
-  // console.log('this is the path', path);
-  // this._value = 
-          // key={index}
-        // <Text style={styles.welcome}>
-        //   Score
-        // </Text>
   render () {
     return (
       <View style={styles.container}>
 
         <Surface width={width} height={height}>
-        <Group x={width/2} y={(pieWidth / 2) + margin}> 
+        <Group x={width/2} y={propsradius + margin}> 
         {
           data.map( (item, index) => 
             // {console.log(item)}
             (<PiePiece
               key={index}
-              color={'#ffffff'}
+              color={'rgba(0,0,0,0)'} // white is #ffffff
               d={this._createPieChart(index, item)[1]}  
             />)
           )
         }
         </Group>
-        <Group x={width/2} y={(pieWidth / 2) + margin}> 
+        <Group x={width/2} y={propsradius + margin}> 
         {
           data.map( (item, index) => 
             // {console.log(item)}
@@ -174,10 +156,10 @@ class Graph extends Component {
 
 
 
-        <View style={{position: 'absolute', top: pieHeight/2 + margin - 15}}>
+        <View style={{position: 'absolute', top: propsradius + margin - 15}}>
           <Text style={[styles.welcome, {}]}>{eventScore}</Text>
         </View>
-        <View style={{position: 'absolute', top: pieHeight + 2 * margin}}>
+        <View style={{position: 'absolute', top: height}}>
           {
             data.map( (item, index) =>
             // {
@@ -203,4 +185,3 @@ class Graph extends Component {
         
 
 export default connect(({routes}) => ({routes}))(Graph);
-
