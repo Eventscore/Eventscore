@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 // import ActionCreators from '../actions/index';
@@ -27,6 +27,7 @@ class Home extends Component {
     )
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -35,7 +36,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DCDCDC',
   }
-})
+});
+
+class Home extends Component {
+  render() {
+    console.log('this', this);
+    return (
+      <View style={styles.container}>
+        <Search />
+        <Text style={styles.welcome}>Home</Text>
+        <Text onPress={Actions.login}>Open modal</Text>
+      </View>
+    );
+  }
+}
+
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
