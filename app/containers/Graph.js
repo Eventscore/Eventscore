@@ -27,10 +27,11 @@ const d3 = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
   },
   welcome: {
     fontSize: 20,
@@ -74,11 +75,12 @@ const colors = [
 ];
 
 // delete these later // change to props;
-const pieWidth = 150;
-const pieHeight = 150;
+const pieWidth = 200;
+const pieHeight = 200;
+const innerRadius = 20; // .3 * pieWidth/2  OR .3 * pieRadius
 const margin = 20;
-const width = 300;
-const height = 500;
+const width = pieWidth + 2*margin;
+const height = pieWidth + 2*margin;
 
 class Graph extends Component {
   constructor(props) {
@@ -105,13 +107,19 @@ class Graph extends Component {
       (data);
 
     let arc = d3.shape.arc()
-      .outerRadius((pieWidth / 2)*item.score/100)  // Radius of the pie 
+      .outerRadius(( (pieWidth / 2) - innerRadius)*item.score/100 + innerRadius)  // Radius of the pie 
       .padAngle(.05)    // Angle between sections
-      .innerRadius(20);  // Inner radius: to create a donut or pie
+      .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
+      // (arcs[index]);
+
+    let outerArc = d3.shape.arc()
+      .outerRadius(pieWidth / 2)  // Radius of the pie 
+      .padAngle(.05)    // Angle between sections
+      .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
       // (arcs[index]);
 
     let arcData = arcs[index];
-    let path = arc(arcData);
+    let path = [arc(arcData), outerArc(arcData)];
     return path;
   }
 
@@ -124,31 +132,52 @@ class Graph extends Component {
   // console.log('this is the path', path);
   // this._value = 
           // key={index}
+        // <Text style={styles.welcome}>
+        //   Score
+        // </Text>
   render () {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Score
-        </Text>
 
         <Surface width={width} height={height}>
-        <Group x={width/2} y={(pieWidth / 2)}> 
+        <Group x={width/2} y={(pieWidth / 2) + margin}> 
+        {
+          data.map( (item, index) => 
+            // {console.log(item)}
+            (<PiePiece
+              key={index}
+              color={'#ffffff'}
+              d={this._createPieChart(index, item)[1]}  
+            />)
+          )
+        }
+        </Group>
+        <Group x={width/2} y={(pieWidth / 2) + margin}> 
         {
           data.map( (item, index) => 
             // {console.log(item)}
             (<PiePiece
               key={index}
               color={this._color(index)}
-              d={() => this._createPieChart(index, item)}  
+              d={this._createPieChart(index, item)[0]}  
             />)
           )
         }
         </Group>
+
+
         </Surface>
-        <View style={{position: 'absolute', top: margin + pieHeight/2 - 5, left: width/2 - 12}}>
+
+
+
+
+
+
+
+        <View style={{position: 'absolute', top: pieHeight/2 + margin - 15}}>
           <Text style={[styles.welcome, {}]}>{eventScore}</Text>
         </View>
-        <View style={{position: 'absolute', top: 10 * margin, left: 2 * margin /* + pieWidth*/}}>
+        <View style={{position: 'absolute', top: pieHeight + 2 * margin}}>
           {
             data.map( (item, index) =>
             // {
@@ -164,11 +193,14 @@ class Graph extends Component {
             )
           }
         </View>
+
+
       </View>
     );
   }
 
 }
+        
 
 export default connect(({routes}) => ({routes}))(Graph);
 
