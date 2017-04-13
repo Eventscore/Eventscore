@@ -7,24 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Search from './Search';
-
-class Event extends Component {
-  render() {
-    console.log(this);
-    return (
-      <View style={styles.container}>
-        <Search />
-        <Text style={styles.welcome}>
-          { `This is the ${ this.props.title }` }
-        </Text>
-        <Text style={styles.welcome}
-          onPress={() => Actions.pop()}>
-          Close User
-        </Text>
-      </View>
-    )
-  }
-}
+import Graph from './Graph';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,6 +23,26 @@ const styles = StyleSheet.create({
     margin: 10,
     color: '#ffffff',
   }
-})
+});
+
+class Event extends Component {
+  render() {
+    console.log(this);
+    return (
+      <View style={styles.container}>
+        <Search />
+        <Text style={styles.welcome}>
+          { `This is the ${ this.props.title }` }
+        </Text>
+        <Text style={styles.welcome}
+          onPress={() => Actions.pop()}>
+          Close User
+        </Text>
+        <Graph/>
+      </View>
+    );
+  }
+}
+
 
 export default connect(({routes}) => ({routes}))(Event);
