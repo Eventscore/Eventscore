@@ -3,14 +3,20 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import {
-  View,
-  Text,
   StyleSheet,
-  TouchableOpacity,
+  Text,
+  View,
   Image,
+  Dimensions,
+  TextInput,
+  Button,
+  TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+const background = require("../assets/image/signup_bg.png");
+
+const { width , height } = Dimensions.get("window");
 
 class Landing extends Component {
   static propTypes = {
@@ -19,26 +25,37 @@ class Landing extends Component {
 
   render () {
     const {routes} = this.context;
-    // console.log('this: ', this);
     return (
-      <View style={styles.container}>
-        <Image style={styles.backgroundImage} source={require('../assets/image/concert_crowd.jpg')} />
-        <Text style={styles.headline}>Eventscore</Text>
-        <View style={styles.backdropView}>
-          <TouchableOpacity onPress={() => {Actions.login()}} style={styles.button}>
-              <Icon name='chevron-left' size={15} style={styles.chevronLeft} />
-              <Text style={styles.buttonText}> Login </Text>
-          </TouchableOpacity>
-          <View style={{'flex': 1}}></View>
-          <TouchableOpacity onPress={() => {Actions.rootTabBar()}} style={styles.button}>
-              <Icon name='chevron-right' size={15} style={styles.chevronLeft} />          
-              <Text style={styles.buttonText}> Home </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {Actions.signup()}} style={styles.button}>
-              <Icon name='chevron-right' size={15} style={styles.chevronLeft} />          
-              <Text style={styles.buttonText}> Sign Up </Text>
-          </TouchableOpacity>
-        </View>     
+      <View style={styles.container}>      
+        <Image 
+          source={background} 
+          style={[styles.container, styles.bg]}
+          resizeMode="cover"
+        >
+          <View style={styles.headerContainer}>
+            <View style={styles.headerLandTitle}>
+              <Text style={styles.titleViewText}>Eventscore</Text>
+              <Text style={styles.subtitleText}>Klout for concert tickets</Text>
+            </View>
+          </View>
+
+          <View style={styles.container}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} activeOpacity={.5} onPress={() => {Actions.login()}}>
+                <View>
+                  <Text style={styles.buttonText}>Login</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} activeOpacity={.5} onPress={() => {Actions.signup()}}>
+                <View>
+                  <Text style={styles.buttonText}>Sign Up</Text>
+                </View>
+              </TouchableOpacity>              
+            </View>
+
+
+          </View>
+        </Image>
       </View>
     );
   }
@@ -47,64 +64,56 @@ class Landing extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display: 'flex',    
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: '#000000',
-    flexDirection: 'column',
   },
-  backgroundImage:{
-    flex:1,
-    position: 'absolute',
-    resizeMode: 'cover',
+  bg: {
+    paddingTop: 30,
+    width: null,
+    height: null
+  },  
+  headerContainer: {
+    flex: 1,
   },
-  headline: {
+  headerLandTitle: {
+    backgroundColor: 'transparent',
+    marginTop: 25,
+    marginLeft: 25,
+  },
+  titleViewText: {
     fontSize: 50,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 100,
-    backgroundColor: 'rgba(0,0,0,0)',
-    color: 'gray'
+    color: '#fff',
   },
-  backdropView: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    backgroundColor: 'rgba(0,0,0,0)',
-    justifyContent: 'space-around',
-    marginBottom: 150,
+  subtitleText: {
+    fontSize: 20,
+    color: '#fff',
+  }, 
+  background: {
+    paddingTop: 30,
+    width: null,
+    height: null
+  },
+  buttonContainer: {
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-around",
   },
   button: {
-    padding: 5,
+    backgroundColor: "transparent",
+    // paddingVertical: 20,
+    alignItems: "center",
+    justifyContent: "center",
     borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: 'black', 
+    padding: 15,
+    borderRadius: 30,
+    borderColor: "#CCC",
+    // marginTop: 30,
   },
   buttonText: {
-    color: 'white',
-    alignSelf: 'center',
-  },
-  chevronLeft: {
-    color: 'white',
-    alignSelf: 'center',
-  },
-  chevronRight: {
-    color: 'white',
-    alignSelf: 'center',
+    color: "#FFF",
+    fontSize: 18,
   }
 })
-
-// const styles = StyleSheet.create({
-//   outerContainer: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   container: {
-//     flex: 1
-//   }
-// })
 
 export default connect(state => ({routes: state.routes}), null)(Landing);
 
