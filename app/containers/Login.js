@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     maxHeight: 300,
     alignItems: 'center',
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     alignSelf: 'center',
-  }
+  },
 })
 
 function mapDispatchToProps(dispatch){

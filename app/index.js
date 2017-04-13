@@ -20,6 +20,7 @@ const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
 import Search from './containers/Search';
+import Filter from './containers/Filter';
 import Landing from './containers/Landing';
 import Home from './containers/Home';
 import Login from './containers/Login';
@@ -37,8 +38,8 @@ const TabIcon = ({ selected, title }) => {
 const scenes = Actions.create(
   <Scene key="root">
     <Scene key="landing" component={Landing} title="Landing" hideNavBar initial/>
-    <Scene key="login" direction="vertical" component={Login} title="Login" hideNavBar />
-    <Scene key="signup" direction="vertical" component={Signup} title="Sign Up" hideNavBar />
+    <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
+    <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
     <Scene
       key="rootTabBar"
       tabs

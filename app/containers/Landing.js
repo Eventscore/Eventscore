@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 class Landing extends Component {
@@ -25,10 +26,12 @@ class Landing extends Component {
         <Text style={styles.headline}>Eventscore</Text>
         <View style={styles.backdropView}>
           <TouchableOpacity onPress={() => {Actions.login()}} style={styles.button}>
+              <Icon name='chevron-left' size={15} style={styles.chevronLeft} />
               <Text style={styles.buttonText}> Login </Text>
           </TouchableOpacity>
-          <View style={{'width': 10}}></View>
+          <View style={{'flex': 1}}></View>
           <TouchableOpacity onPress={() => {Actions.signup()}} style={styles.button}>
+              <Icon name='chevron-right' size={15} style={styles.chevronLeft} />          
               <Text style={styles.buttonText}> Sign Up </Text>
           </TouchableOpacity>
         </View>     
@@ -77,7 +80,15 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     alignSelf: 'center',
-  },  
+  },
+  chevronLeft: {
+    color: 'white',
+    alignSelf: 'center',
+  },
+  chevronRight: {
+    color: 'white',
+    alignSelf: 'center',
+  }
 })
 
 // const styles = StyleSheet.create({

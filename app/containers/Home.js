@@ -15,14 +15,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import Search from './Search';
+import Filter from './Filter';
 
 class Home extends Component {
   render() {
-    console.log('this', this);
     return (
       <View style={styles.container}>
         <Search />
-        <Text style={styles.welcome}>Home</Text>
+        <Filter />
       </View>
     )
   }
@@ -32,14 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
     alignItems: 'center',
-    backgroundColor: '#bb0000',
-    // justifyContent: 'center',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: '#ffffff',
+    backgroundColor: '#DCDCDC',
   }
 })
 
@@ -47,4 +40,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Home);
+export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Home);
