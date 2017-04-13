@@ -26,7 +26,7 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import User from './containers/User';
-import Event from './containers/Event';
+import EventView from './containers/EventView';
 import EventList from './containers/EventList';
 
 const TabIcon = ({ selected, title }) => {
@@ -49,6 +49,7 @@ const scenes = Actions.create(
       <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar/>
       <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>
     </Scene>
+    <Scene key="eventview" component={EventView} hideNavBar/>
   </Scene>
 );
 
