@@ -30,6 +30,10 @@ class Landing extends Component {
               <Text style={styles.buttonText}> Login </Text>
           </TouchableOpacity>
           <View style={{'flex': 1}}></View>
+          <TouchableOpacity onPress={() => {Actions.rootTabBar()}} style={styles.button}>
+              <Icon name='chevron-right' size={15} style={styles.chevronLeft} />          
+              <Text style={styles.buttonText}> Home </Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => {Actions.signup()}} style={styles.button}>
               <Icon name='chevron-right' size={15} style={styles.chevronLeft} />          
               <Text style={styles.buttonText}> Sign Up </Text>
