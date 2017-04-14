@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import Graph from './Graph';
 
 const {
   Image,
@@ -41,6 +42,7 @@ class EventView extends Component {
         color="#841584"
         />
         <Text style={styles.titleText}>{this.props.eventsReducers.currEvent._id}</Text>
+        <Graph/>
       </View>
     );
   }
