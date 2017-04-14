@@ -19,7 +19,7 @@ class Landing extends Component {
 
   render () {
     const {routes} = this.context;
-    console.log('this: ', this);
+    // console.log('this: ', this);
     return (
       <View style={styles.container}>
         <Image style={styles.backgroundImage} source={require('../assets/image/concert_crowd.jpg')} />
