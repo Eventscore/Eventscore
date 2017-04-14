@@ -17,17 +17,6 @@ import {
 import Search from './Search';
 import Filter from './Filter';
 
-class Home extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Search />
-        <Filter />
-      </View>
-    )
-  }
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -40,20 +29,17 @@ const styles = StyleSheet.create({
 
 class Home extends Component {
   render() {
-    console.log('this', this);
     return (
       <View style={styles.container}>
         <Search />
-        <Text style={styles.welcome}>Home</Text>
-        <Text onPress={Actions.login}>Open modal</Text>
+        <Filter />
       </View>
     );
   }
 }
 
-
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Home);
+export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}; }, mapDispatchToProps)(Home);
