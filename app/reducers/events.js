@@ -1,4 +1,4 @@
-export default function eventsReducer(state = {}, action) {
+export default function eventsReducer(state = {}, action) {  
   switch (action.type) {
     case 'REQUEST_EVENTS':
       return state;
@@ -14,6 +14,14 @@ export default function eventsReducer(state = {}, action) {
     case 'CHANGE_CURR_EVENT':
       return Object.assign({}, state, {
         currEvent: action.currEvent
+      });
+    case 'GET_LOCATION':
+      return Object.assign({}, state, {
+        geolocation: action.geolocation
+      });
+    case 'GET_LOCATION_FAILED':
+      return Object.assign({}, state, {
+        geolocation: action.geolocation
       });
     default:
       return state;

@@ -31,19 +31,44 @@ class EventListItem extends Component {
 
   render() {
     return (
-      <TouchableHighlight style={{borderWidth: 0, margin: 0.5}} onPress={() => this.pressListItem()}>
-      <View>
-        <Text>{this.props.event._id}</Text>
-        <Text>{this.props.event.name}</Text>
-        <Text>Artists: </Text>
-        {this.props.event.artists.map((artist) => {
-          return (<Text key={artist.name}>{artist.name}</Text>)
-        })}
+      <TouchableHighlight onPress={() => this.pressListItem()}>
+      <View style={styles.container}>
+        <View style={styles.item}>
+          <Text style={{color: 'white'}}>{this.props.event._id}</Text>
+          <Text>{this.props.event.name}</Text>
+        </View>
+        <View style={styles.item}>
+          <Text>{this.props.event.artists[0].name}</Text>
+          <Text>{this.props.event.name}</Text>
+        </View>
+        <View style={styles.item}>
+          <Text>Artists: </Text>
+          {this.props.event.artists.map((artist) => {
+            return (<Text key={artist.name}>{artist.name}</Text>)
+          })}
+        </View>
       </View>
       </TouchableHighlight>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderWidth: 0,
+    margin: 0.5,
+    display: 'flex',
+    flexDirection: 'row',
+    // alignItems: 'center',
+    backgroundColor: '#4682B4',
+    flex: 1,
+    justifyContent: 'center'
+  },
+  item:{
+    borderWidth: 0,
+    flexDirection: 'column',
+  }
+});
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
