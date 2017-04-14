@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import Graph from './Graph';
 
 class User extends Component {
   render() {
@@ -18,6 +19,7 @@ class User extends Component {
           onPress={() => Actions.pop()}>
           Close User
         </Text>
+        <Graph/>
       </View>
     )
   }
