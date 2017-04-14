@@ -39,30 +39,29 @@ class Signup extends Component {
   render(){
     const { name, username, password, email } = this.state;
     const {routes} = this.context;
-    console.log('this: ', this);
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput style={styles.textInput}
-            returnKeyType='send'
+            returnKeyType='next'
             placeholder='name'
             onChangeText={(name) => this.setState({name})}
             value={this.state.name}
           />
           <TextInput style={styles.textInput}
-            returnKeyType='send'
+            returnKeyType='next'
             placeholder='username'
             onChangeText={(username) => this.setState({username})}
             value={this.state.username}
           />
           <TextInput style={styles.textInput}
-            returnKeyType='send'
+            returnKeyType='next'
             placeholder='password'
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />    
           <TextInput style={styles.textInput}
-            returnKeyType='send'
+            returnKeyType='done'
             placeholder='email'
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     maxHeight: 300,
     alignItems: 'center',
   },

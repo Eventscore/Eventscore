@@ -48,13 +48,13 @@ class Login extends Component {
       <View style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput style={styles.textInput}
-            returnKeyType='send'
+            returnKeyType='next'
             placeholder='username'
             onChangeText={(username) => this.setState({username})}
             value={this.state.username}
           />
           <TextInput style={styles.textInput}
-            returnKeyType='send'
+            returnKeyType='done'
             placeholder='password'
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
