@@ -14,6 +14,7 @@ import {
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Graph from './Graph';
+import LocationMap from './Map';
 
 class User extends Component {
   render() {
@@ -26,6 +27,7 @@ class User extends Component {
           onPress={() => Actions.pop()}>
           Close User
         </Text>
+        <LocationMap/>
         <Graph/>
       </View>
     )
