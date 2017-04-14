@@ -38,15 +38,31 @@ export function changeCurrEvent(event) {
   }
 }
 
-// does location need to be in the state store?
-export function getLocation(longitude, latitude) {
-  return {
-
+// location action
+export function getLocation() {
+  // console.log('hit get location');
+  return (dispatch, getState) => {
+    return navigator.geolocation.getCurrentPosition(
+      (position) => {
+        // console.log('position: ', position);
+        dispatch({
+          type: types.GET_LOCATION,
+          geolocation: position
+        })
+      }, (error) => {
+        alert(JSON.stringify(error));
+        dispatch({
+          type: types.GET_LOCATION_FAILED,
+          geolocation: null
+        })
+      },
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
+    });
   }
 }
 
 /*
-//Al's code
+//Al's awesome code
 const serverDomain = 'http://localhost:1337/api/events';
 
 export function requestEvents(long, lat){

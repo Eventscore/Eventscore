@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
 });
 
 class Home extends Component {
+  componentDidMount() {
+    this.props.getLocation();
+  }
   render() {
     return (
       <View style={styles.container}>

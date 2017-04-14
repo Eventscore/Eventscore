@@ -14,12 +14,22 @@ import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
 
 const serverDomain = 'http://localhost:1337/api/events';
+
 const styles = StyleSheet.create({
   fetchEventsText: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#333333'
   },
+  container: {
+    // alignItems: 'center',
+    backgroundColor: '#4682B4',
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 22,
+    paddingBottom: 50
+  }
 });
 
 class EventList extends Component {
@@ -28,56 +38,91 @@ class EventList extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       eventList: ds.cloneWithRows([]),
-      loading: true
+      loading: true,
+      cannotGetLocation: false
     };
   }
 
-  getLocation() {
-    // get locations
-    this.setState({loading: true});
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // console.log('position: ', position);
-        // this.setState({geolocation: position});
-        // once location is received then fetch nearby events
-        this.props.fetchNearbyEvents(position.coords.longitude, position.coords.latitude)
-        .then(() => {
-          // then set eventlist state to fetched events and set loading state to false
-          // datasource of list depends on eventlist state
-          this.setState({
-            eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
-            loading: false
-          });
-        });
-        // var initialPosition = JSON.stringify(position);
-      },
-      (error) => alert(JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    )
-    // this.watchID = navigator.geolocation.watchPosition((position) => {
-    //   var lastPosition = JSON.stringify(position);
-    //   this.setState({lastPosition});
-    // });
-  }
+  // geolocation with standard react state
+  // getLocation() {
+  //   // get locations
+  //   this.setState({loading: true});
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       // console.log('position: ', position);
+  //       // this.setState({geolocation: position});
+  //       // once location is received then fetch nearby events
+  //       this.props.fetchNearbyEvents(position.coords.longitude, position.coords.latitude)
+  //       .then(() => {
+  //         // then set eventlist state to fetched events and set loading state to false
+  //         // datasource of list depends on eventlist state
+  //         this.setState({
+  //           eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
+  //           loading: false
+  //         });
+  //       });
+  //       // var initialPosition = JSON.stringify(position);
+  //     },
+  //     (error) => alert(JSON.stringify(error)),
+  //     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+  //   )
+  //   // this.watchID = navigator.geolocation.watchPosition((position) => {
+  //   //   var lastPosition = JSON.stringify(position);
+  //   //   this.setState({lastPosition});
+  //   // });
+  // }
 
   searchPressed() {
-    this.getLocation();
+    this.setState({loading: true});
+    this.props.getLocation();
+    this.getEvents();
+    // this.props.getLocation().then(() => {
+    //   this.getEvents();
+    // });
+    // .then(() => {
+    //   this.props.getLocation();
+    // })
+  }
+
+  getEvents() {
+    this.setState({cannotGetLocation: false});
+    this.props.fetchNearbyEvents(
+      this.props.eventsReducers.geolocation.coords.longitude,
+      this.props.eventsReducers.geolocation.coords.latitude
+    ).then(() => {
+      this.setState({
+        eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
+        loading: false
+      });
+    }).catch((error) => {
+      console.log(error);
+      this.setState({
+        loading: false,
+        cannotGetLocation: true
+        // eventList: this.state.eventList.cloneWithRows([{name: 'Rum Ham'}]),
+      });
+    })
   }
 
   componentWillMount() {
-    this.getLocation();
+    this.getEvents();
   }
 
   componentDidMount() {
-   // this.getLocation(); 
   }
 
   render() {
     if (this.state.loading) {
-      return( <ActivityIndicator size='large' style={{height:80}} />)
+      return(<ActivityIndicator size='large' style={{height:80}} />)
+    } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
+      return (
+        <View style={{justifyContent: 'center', paddingTop: 22}}>
+          <Text>Error, please try again</Text>
+        </View>
+      )
     } else {
       return (
-        <View style={{paddingTop: 22, paddingBottom: 75}}>
+        <View style={styles.container}>
         <TouchableHighlight onPress={ () => this.searchPressed() }>
           <Text style={styles.fetchEventsText}>Fetch Events</Text>
         </TouchableHighlight>
