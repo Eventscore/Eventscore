@@ -44,6 +44,17 @@ class Login extends Component {
     }
   }
 
+  // Back Button Render
+  // <View style={styles.headerIconView}>
+  //   <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>
+  //     <Image 
+  //       source={backIcon} 
+  //       style={styles.backButtonIcon} 
+  //       resizeMode="contain"
+  //     />
+  //   </TouchableOpacity>
+  // </View>
+
  render() {
     return (
       <View style={styles.container}>
@@ -51,15 +62,6 @@ class Login extends Component {
         style={[styles.container, styles.bg]} 
         resizeMode="cover">
           <View style={styles.headerContainer}>
-            <View style={styles.headerIconView}>
-              <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>
-                <Image 
-                  source={backIcon} 
-                  style={styles.backButtonIcon} 
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            </View>
             <View style={styles.headerTitleView}>
               <Text style={styles.titleViewText}>Login</Text>
             </View>

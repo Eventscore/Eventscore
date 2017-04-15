@@ -47,97 +47,17 @@ class Signup extends Component {
       console.log('I failed');
     }
   }
-
-//   render(){
-//     const { name, username, password, email } = this.state;
-//     const {routes} = this.context;
-//     return (
-//       <View style={styles.container}>
-//         <View style={styles.inputContainer}>
-//           <TextInput style={styles.textInput}
-//             returnKeyType='next'
-//             placeholder='name'
-//             onChangeText={(name) => this.setState({name})}
-//             value={this.state.name}
-//           />
-//           <TextInput style={styles.textInput}
-//             returnKeyType='next'
-//             placeholder='username'
-//             onChangeText={(username) => this.setState({username})}
-//             value={this.state.username}
-//           />
-//           <TextInput style={styles.textInput}
-//             returnKeyType='next'
-//             placeholder='password'
-//             onChangeText={(password) => this.setState({password})}
-//             value={this.state.password}
-//           />    
-//           <TextInput style={styles.textInput}
-//             returnKeyType='done'
-//             placeholder='email'
-//             onChangeText={(email) => this.setState({email})}
-//             value={this.state.email}
-//           />
-//         </View>
-//         <View style={styles.backdropView}>
-//           <TouchableOpacity onPress={() => this.signupPressedRedux({ name ,username, password, email })} style={styles.button}>
-//               <Text style={styles.buttonText}> Sign Up </Text>
-//           </TouchableOpacity>
-//           <View>
-//             <View style={{height: 10}}></View>
-//             <Text style={styles.Text} onPress={() => {Actions.pop()}}>CANCEL</Text>
-//           </View>                
-//         </View>
-//       </View>
-//     )    
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     marginTop: 80,
-//     flex: 1,
-//     // flexDirection: 'column',
-//     // justifyContent: 'space-between',
-//     // maxHeight: 400,
-//     // alignItems: 'center',
-//   },
-//   inputContainer: {
-//     flex: 1,
-//     flexDirection: 'column',
-//     // justifyContent: 'space-between',
-//     maxHeight: 300,
-//     alignItems: 'center',
-//   },
-//   textInput: {
-//     flex: 1,
-//     alignItems: 'center',
-//     textAlign: 'center',
-//     alignSelf: 'stretch',
-//   },
-//   backdropView: {
-//     flex: 1,
-//     display: 'flex',
-//     flexDirection: 'column',
-//     justifyContent: 'flex-end',
-//     alignItems: 'center',
-//     backgroundColor: 'rgba(0,0,0,0)',
-//     marginBottom: 150,
-//   },  
-//   button: {
-//     width: 300,
-//     height: 50,
-//     padding: 5,
-//     borderWidth: 1,
-//     borderRadius: 5,
-//     backgroundColor: 'black',
-//     justifyContent: 'center',
-//   },
-//   buttonText: {
-//     color: 'white',
-//     alignSelf: 'center',
-//   }
-// })
+  
+  // Back Button Render  
+  // <View style={styles.headerIconView}>
+  //   <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>
+  //     <Image 
+  //       source={backIcon} 
+  //       style={styles.backButtonIcon} 
+  //       resizeMode="contain"
+  //     />
+  //   </TouchableOpacity>
+  // </View>
 
   render() {
     const { name, username, password, email } = this.state;
@@ -150,15 +70,6 @@ class Signup extends Component {
           resizeMode="cover"
         >
           <View style={styles.headerContainer}>
-            <View style={styles.headerIconView}>
-              <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>
-                <Image 
-                  source={backIcon} 
-                  style={styles.backButtonIcon} 
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            </View>
             <View style={styles.headerTitleView}>
               <Text style={styles.titleViewText}>Sign Up</Text>
             </View>

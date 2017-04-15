@@ -37,8 +37,7 @@ const TabIcon = ({ selected, title }) => {
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="landing" component={Landing} title="Landing" hideNavBar initial/>
-    <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
+    <Scene key="login" direction="right" component={Login} title="Login" hideNavBar initial />
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
     <Scene
       key="rootTabBar"
