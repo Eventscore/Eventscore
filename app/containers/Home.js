@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 
 class Home extends Component {
   componentDidMount() {
+    // get location
     this.props.getLocation();
   }
   render() {
