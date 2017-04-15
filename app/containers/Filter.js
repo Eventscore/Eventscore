@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',    
   },  
   filterBy: {
-    flex: 0.8,
+    flex: 0.6,
   }
 });
 

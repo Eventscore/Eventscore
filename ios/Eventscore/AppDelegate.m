@@ -18,6 +18,12 @@
 {
   NSURL *jsCodeLocation;
 
+//  Run Bundle
+//  Command Line: Re-configure AppDelegate.m to fun bundle
+//  $ react-native bundle --entry-file index.ios.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios
+//  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  
+//  Run Local Node Process
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
