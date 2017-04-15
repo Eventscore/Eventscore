@@ -37,7 +37,7 @@ const TabIcon = ({ selected, title }) => {
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar inital />    
+    <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar />    
     <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
     <Scene
@@ -45,6 +45,7 @@ const scenes = Actions.create(
       tabs
       tabBarStyle={{backgroundColor: '#ffffff'}}
       // type="replace"
+      initial
     >
       <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
       <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar/>

@@ -105,7 +105,7 @@ class Login extends Component {
           </View>
           <View style={styles.container}>
             <View style={styles.signupWrap}>
-              <Text style={styles.accountText}>Don't have an account?</Text>
+              <Text style={styles.accountText}>{'Don\'t have an account?'}</Text>
               <TouchableOpacity activeOpacity={.5} onPress={() => {Actions.signup()}}>
                 <View>
                   <Text style={styles.signupLinkText}>Sign Up</Text>
