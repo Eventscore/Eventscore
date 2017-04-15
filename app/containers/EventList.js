@@ -12,25 +12,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
+import EventListMap from './EventListMap';
 
 const serverDomain = 'http://localhost:1337/api/events';
-
-const styles = StyleSheet.create({
-  fetchEventsText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333333'
-  },
-  container: {
-    // alignItems: 'center',
-    backgroundColor: '#4682B4',
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: 22,
-    paddingBottom: 50
-  }
-});
 
 class EventList extends Component {
   constructor() {
@@ -124,7 +108,7 @@ class EventList extends Component {
       return (
         <View style={styles.container}>
         <TouchableHighlight onPress={ () => this.searchPressed() }>
-          <Text style={styles.fetchEventsText}>Fetch Events</Text>
+          <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
         </TouchableHighlight>
         <ListView
           dataSource={this.state.eventList}
@@ -136,6 +120,24 @@ class EventList extends Component {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  fetchEventsText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#333333',
+    margin: 5
+  },
+  container: {
+    // alignItems: 'center',
+    // backgroundColor: '#4682B4',
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 22,
+    paddingBottom: 50
+  }
+});
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
