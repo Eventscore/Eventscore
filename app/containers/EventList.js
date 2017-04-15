@@ -100,16 +100,16 @@ class EventList extends Component {
       return(<ActivityIndicator size='large' style={{height:80}} />)
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
       return (
-        <View style={{justifyContent: 'center', paddingTop: 22}}>
+        <View style={styles.container}>
           <Text>Error, please try again</Text>
         </View>
       )
     } else {
       return (
         <View style={styles.container}>
-        <TouchableHighlight onPress={ () => this.searchPressed() }>
-          <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
-        </TouchableHighlight>
+          <TouchableHighlight onPress={ () => this.searchPressed() }>
+            <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
+          </TouchableHighlight>
         <ListView
           dataSource={this.state.eventList}
           // dataSource={this.props.eventsReducers.events}
@@ -130,10 +130,10 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
-    // alignItems: 'center',
     // backgroundColor: '#4682B4',
     flex: 1,
     justifyContent: 'center',
+    display: 'flex',
     paddingTop: 22,
     paddingBottom: 50
   }

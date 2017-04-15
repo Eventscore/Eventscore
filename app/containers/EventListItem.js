@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   },
   timeVenue:{
     textAlign: 'center',
+    fontSize: 12
   },
   location:{
     textAlign: 'center',
