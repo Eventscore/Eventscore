@@ -10,6 +10,7 @@ import {
   TouchableHighlight,
   TouchableOpacity, 
   StyleSheet,
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
@@ -27,16 +28,22 @@ class User extends Component {
           onPress={() => Actions.pop()}>
           Close User
         </Text>
-        <LocationMap/>
-        <Graph/>
+        <ScrollView
+          style={StyleSheet.absoluteFill}
+          contentContainerStyle={styles.scrollview}
+        >
+          <LocationMap/>
+          <Graph/>
+        </ScrollView>
       </View>
-    )
+    );
   }
 }
 
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     marginTop: 20,
     alignItems: 'center',
@@ -48,8 +55,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#ffffff',
-  }
-})
+  },
+  scrollview: {
+    alignItems: 'center',
+    paddingVertical: 100,
+  },
+});
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
