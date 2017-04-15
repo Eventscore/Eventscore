@@ -74,7 +74,6 @@ export function changeCurrEvent(event) {
 
 // location action
 export function getLocation() {
-  // console.log('hit get location');
   return (dispatch, getState) => {
     return navigator.geolocation.getCurrentPosition(
       (position) => {
