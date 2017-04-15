@@ -71,6 +71,10 @@ class Signup extends Component {
           <TouchableOpacity onPress={() => this.signupPressedRedux({ name ,username, password, email })} style={styles.button}>
               <Text style={styles.buttonText}> Sign Up </Text>
           </TouchableOpacity>
+          <View>
+            <View style={{height: 10}}></View>
+            <Text style={styles.Text} onPress={() => {Actions.pop()}}>CANCEL</Text>
+          </View>                
         </View>
       </View>
     )    

@@ -56,6 +56,7 @@ class Login extends Component {
           <TextInput style={styles.textInput}
             returnKeyType='done'
             placeholder='password'
+            secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
           />    
@@ -68,6 +69,10 @@ class Login extends Component {
             <View style={{height: 10}}></View>
             <Text style={styles.Text}>Forgot Password?</Text>
           </View>
+          <View>
+            <View style={{height: 10}}></View>
+            <Text style={styles.Text} onPress={() => {Actions.pop()}}>CANCEL</Text>
+          </View>          
         </View>
       </View>
     )    
