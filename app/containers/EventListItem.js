@@ -30,22 +30,47 @@ class EventListItem extends Component {
   }
 
   render() {
+    const start = new Date(this.props.event.start);
+    const startArray = start.toString() === 'Invalid Date' ? [] : start.toString().split(' '); 
+    const day = startArray[0] || 'TBD';
+    const date = startArray.slice(1, 3).join(' ') || 'TBD';
+    
+    let timeString = startArray[4] || ''; // convert to array
+    let time = timeString.split(':');
+    // fetch
+    let hours = Number(time[0]);
+    let minutes = Number(time[1]);
+
+    // calculate
+    let timeValue;
+
+    if (hours > 0 && hours <= 12) {
+      timeValue= "" + hours;
+    } else if (hours > 12) {
+      timeValue= "" + (hours - 12);
+    } else if (hours === 0) {
+      timeValue= "12";
+    }
+     
+    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+    timeValue += (hours >= 12) ? "PM" : "AM";  // get AM/PM
+
     return (
       <TouchableHighlight onPress={() => this.pressListItem()}>
       <View style={styles.container}>
         <View style={styles.dateBox}>
-          <Text style={styles.weekday}>Wed</Text>
-          <Text style={styles.date}>Nov 12</Text>
+          <Text style={styles.weekday}>{day}</Text>
+          <Text style={styles.date}>{date}</Text>
         </View>
         <View style={styles.eventInfo}>
-          <Text style={styles.artist}>{this.props.event.artists[0].name}</Text>
+          <Text style={styles.artist}>{this.props.event.artists[0] ? this.props.event.artists[0].name : 'Rum Ham'}</Text>
           <Text style={styles.headline}>{this.props.event.name}</Text>
-          <Text style={styles.timeVenue}>8:00PM @ Wrigley Field</Text>
-          <Text style={styles.location}>Chicago, IL</Text>
+          <Text style={styles.timeVenue}>{timeValue} @ {this.props.event.venue ? this.props.event.venue : 'Wrigley Field'}</Text>
+          <Text style={styles.location}>{this.props.event.city ? this.props.event.city : 'Chicago, IL'}</Text>
         </View>
         <View style={styles.scoreBox}>
           <Text style={styles.score}>Score:</Text>
-          <Text style={styles.scoreNumber}>94</Text>
+          <Text style={styles.scoreNumber}>{this.props.event.score !== 0 ? this.props.event.score : Math.floor(Math.random() * 100)}</Text>
         </View>
       </View>
       </TouchableHighlight>

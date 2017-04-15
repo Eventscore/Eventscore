@@ -31,7 +31,7 @@ import EventList from './containers/EventList';
 
 const TabIcon = ({ selected, title }) => {
   return (
-    <Text style={{color: selected ? 'red' : 'black'}}>{title}</Text>
+    <Text style={{color: selected ? 'black' : 'gray'}}>{title}</Text>
   );
 };
 
