@@ -52,8 +52,6 @@ class Landing extends Component {
                 </View>
               </TouchableOpacity>              
             </View>
-
-
           </View>
         </Image>
       </View>
