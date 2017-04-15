@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
   TextInput,
-  TouchableOpacity,
+  Button,
+  TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import { ActionCreators } from '../actions/index';
 import { bindActionCreators } from 'redux';
+
+const { width , height } = Dimensions.get("window");
+
+const background = require("../assets/image/login1_bg.png");
+const backIcon = require("../assets/image/back.png");
+const lockIcon = require("../assets/image/login1_lock.png");
+const personIcon = require("../assets/image/login1_person.png");
 
 class Login extends Component {
   constructor(props) {
@@ -17,7 +27,6 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      // count: 0
     }
   }
 
@@ -35,93 +44,172 @@ class Login extends Component {
     }
   }
 
-  // addCountRedux(val){
-  //   this.props.addCount(val);
-  // }
+  // Back Button Render
+  // <View style={styles.headerIconView}>
+  //   <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>
+  //     <Image 
+  //       source={backIcon} 
+  //       style={styles.backButtonIcon} 
+  //       resizeMode="contain"
+  //     />
+  //   </TouchableOpacity>
+  // </View>
 
-
-  render(){
-    const { username, password } = this.state;
-    const {routes} = this.context;
-    console.log('this: ', this);
+ render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.textInput}
-            returnKeyType='send'
-            placeholder='username'
-            onChangeText={(username) => this.setState({username})}
-            value={this.state.username}
-          />
-          <TextInput style={styles.textInput}
-            returnKeyType='send'
-            placeholder='password'
-            onChangeText={(password) => this.setState({password})}
-            value={this.state.password}
-          />    
-        </View>
-        <View style={styles.backdropView}>
-          <TouchableOpacity onPress={() => this.loginPressedRedux({ username, password })} style={styles.button}>
-              <Text style={styles.buttonText}> Login </Text>
-          </TouchableOpacity>
-          <View>
-            <View style={{height: 10}}></View>
-            <Text style={styles.Text}>Forgot Password?</Text>
+        <Image source={background} 
+        style={[styles.container, styles.bg]} 
+        resizeMode="cover">
+          <View style={styles.headerContainer}>
+            <View style={styles.headerTitleView}>
+              <Text style={styles.titleViewText}>Login</Text>
+            </View>
           </View>
-        </View>
+          <View style={styles.wrapper}>
+            <View style={styles.inputWrap}>
+              <View style={styles.iconWrap}>
+                <Image source={personIcon} style={styles.icon} resizeMode="contain" />
+              </View>
+              <TextInput 
+                placeholder="Username" 
+                placeholderTextColor="#FFF"
+                style={styles.input} 
+                onChangeText={(username) => this.setState({username})}
+                value={this.state.username}                
+              />
+            </View>
+            <View style={styles.inputWrap}>
+              <View style={styles.iconWrap}>
+                <Image source={lockIcon} style={styles.icon} resizeMode="contain" />
+              </View>
+              <TextInput 
+                placeholderTextColor="#FFF"
+                placeholder="Password" 
+                style={styles.input}
+                onChangeText={(password) => this.setState({password})}
+                value={this.state.password}                 
+                secureTextEntry 
+              />
+            </View>
+            <TouchableOpacity activeOpacity={.5}>
+              <View>
+                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={.5} onPress={() => this.loginPressedRedux()}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>Sign In</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.container}>
+            <View style={styles.signupWrap}>
+              <Text style={styles.accountText}>{'Don\'t have an account?'}</Text>
+              <TouchableOpacity activeOpacity={.5} onPress={() => {Actions.signup()}}>
+                <View>
+                  <Text style={styles.signupLinkText}>Sign Up</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Image>
       </View>
-    )    
+    );
   }
 }
-
-/*
-//addCountExample
-<TouchableOpacity onPress={() => this.addCountRedux(this.props.addCountExample.count)} style={styles.button}>
-    <Text style={styles.buttonText} value={this.props.addCountExample.count}> {this.props.addCountExample.count} </Text>
-</TouchableOpacity>
-*/
-
 const styles = StyleSheet.create({
   container: {
-    marginTop: 80,
     flex: 1,
   },
-  inputContainer: {
+  bg: {
+    paddingTop: 30,
+    width: null,
+    height: null
+  },  
+  headerContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    maxHeight: 300,
-    alignItems: 'center',
   },
-  textInput: {
-    flex: 1,
-    alignItems: 'center',
-    textAlign: 'center',
-    alignSelf: 'stretch',
+  headerIconView: {
+    marginLeft: 10,
+    backgroundColor: 'transparent'
   },
-  backdropView: {
+  headerBackButtonView: {
+    width: 25,
+    height: 25,
+  },
+  backButtonIcon: {
+    width: 25,
+    height: 25
+  },
+  headerTitleView: {
+    backgroundColor: 'transparent',
+    marginTop: 25,
+    marginLeft: 25,
+  },
+  titleViewText: {
+    fontSize: 40,
+    color: '#fff',
+  },  
+  background: {
+    paddingTop: 30,
+    width: null,
+    height: null
+  },
+  wrapper: {
+    paddingVertical: 30,
+  },
+  inputWrap: {
+    flexDirection: "row",
+    marginVertical: 10,
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: "#CCC"
+  },
+  iconWrap: {
+    paddingHorizontal: 7,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  icon: {
+    height: 20,
+    width: 20,
+  },
+  input: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0)',
-    marginBottom: 150,
+    paddingHorizontal: 10,
   },
   button: {
-    width: 300,
-    height: 50,
-    padding: 5,
-    borderWidth: 1,
-    borderRadius: 5,
-    backgroundColor: 'black',
-    justifyContent: 'center',
+    backgroundColor: "#efb358",
+    paddingVertical: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 30,
   },
   buttonText: {
-    color: 'white',
-    alignSelf: 'center',
+    color: "#FFF",
+    fontSize: 18,
   },
-})
+  forgotPasswordText: {
+    color: "#D8D8D8",
+    backgroundColor: "transparent",
+    textAlign: "right",
+    paddingRight: 15,
+  },
+  signupWrap: {
+    backgroundColor: "transparent",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  accountText: {
+    color: "#D8D8D8"
+  },
+  signupLinkText: {
+    color: "#FFF",
+    marginLeft: 5,
+  }
+});
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);

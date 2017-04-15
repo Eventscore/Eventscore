@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import { ActionCreators } from '../actions/index';
+import { bindActionCreators } from 'redux';
 import {
+  ScrollView,
   View,
+  TextInput,
   Text,
+  Image,
+  TouchableHighlight,
+  TouchableOpacity, 
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -42,6 +49,8 @@ const styles = StyleSheet.create({
   }
 })
 
-// export default connect(mapStateToProps, mapDispatchToProps)(User);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
 
-export default connect(({routes}) => ({routes}))(User);
+export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}; }, mapDispatchToProps)(User);

@@ -16,14 +16,17 @@ class Search extends Component {
   constructor(props){
     super(props);
     this.state ={
-      genreInput: '',
+      keyword: '',
+      location: '',
+      priceRange: '',
+      genre: '',      
       searching: false,
     };
   }
   
   //TODO: search logic is not built out
-  searchPressed() {
-    console.log('clicked');
+  searchKeywordPressedRedux() {
+
   }
   
   render(){
@@ -31,12 +34,12 @@ class Search extends Component {
       <View style={styles.searchSection}>
         <TextInput style={styles.searchInput}
           returnKeyType='search'
-          placeholder='Write a placeholder here'
-          onChangeText={(genreInput) => this.setState({genreInput})}
-          value={this.state.genreInput}
+          placeholder='Search Keyword'
+          onChangeText={(keyword) => this.setState({keyword})}
+          value={this.state.keyword}
         />
-        <TouchableOpacity onPress={() => this.searchPressed()} style={styles.searchButton}>
-          <Text> Fetch Events </Text>
+        <TouchableOpacity onPress={() => this.searchKeywordPressedRedux()} style={styles.searchButton}>
+          <Text> Search </Text>
         </TouchableOpacity>
       </View>
     )
