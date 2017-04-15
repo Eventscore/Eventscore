@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import {
   StyleSheet,
@@ -13,18 +13,22 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TimerMixin from 'react-timer-mixin';
 
 const background = require("../assets/image/signup_bg.png");
 
 const { width , height } = Dimensions.get("window");
 
-class Landing extends Component {
-  static propTypes = {
-    routes: PropTypes.object,
-  };
-
-  render () {
-    const {routes} = this.context;
+const Landing = React.createClass({
+  mixins: [TimerMixin],
+  componentDidMount: function() {
+    this.setTimeout(
+      () => {
+        {Actions.login()}
+      }, 1500);
+  },
+  render() {
+    const {routes} = this.context;    
     return (
       <View style={styles.container}>      
         <Image 
@@ -35,29 +39,14 @@ class Landing extends Component {
           <View style={styles.headerContainer}>
             <View style={styles.headerLandTitle}>
               <Text style={styles.titleViewText}>Eventscore</Text>
-              <Text style={styles.subtitleText}>Klout for concert tickets</Text>
-            </View>
-          </View>
-
-          <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} activeOpacity={.5} onPress={() => {Actions.login()}}>
-                <View>
-                  <Text style={styles.buttonText}>Login</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} activeOpacity={.5} onPress={() => {Actions.signup()}}>
-                <View>
-                  <Text style={styles.buttonText}>Sign Up</Text>
-                </View>
-              </TouchableOpacity>              
+              <Text style={styles.subtitleText}>Scores for concert tickets</Text>
             </View>
           </View>
         </Image>
       </View>
-    );
+    )
   }
-}
+});
 
 const styles = StyleSheet.create({
   container: {

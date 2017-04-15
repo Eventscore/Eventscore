@@ -97,7 +97,7 @@ class Login extends Component {
                 <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={.5} onPress={() => this.loginPressedRedux({ username, password })}>
+            <TouchableOpacity activeOpacity={.5} onPress={() => this.loginPressedRedux()}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>Sign In</Text>
               </View>
