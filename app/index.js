@@ -44,7 +44,7 @@ const scenes = Actions.create(
       key="rootTabBar"
       tabs
       tabBarStyle={{backgroundColor: '#ffffff'}}
-      // type="replace"
+      type="replace"
       initial
     >
       <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
