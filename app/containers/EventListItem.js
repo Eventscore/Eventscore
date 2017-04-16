@@ -66,7 +66,7 @@ class EventListItem extends Component {
           <Text style={styles.artist}>{this.props.event.artists[0] ? this.props.event.artists[0].name : 'Rum Ham'}</Text>
           <Text style={styles.headline}>{this.props.event.name}</Text>
           <Text style={styles.timeVenue}>{timeValue} @ {this.props.event.venue ? this.props.event.venue : 'Wrigley Field'}</Text>
-          <Text style={styles.location}>{this.props.event.city ? this.props.event.city : 'Chicago, IL'}</Text>
+          <Text style={styles.location}>{this.props.event.city ? this.props.event.city : 'Chicago'}, {this.props.event.state ? this.props.event.state : 'IL'}</Text>
         </View>
         <View style={styles.scoreBox}>
           <Text style={styles.score}>Score:</Text>
