@@ -63,14 +63,22 @@ class EventListItem extends Component {
           <Text style={styles.date}>{date}</Text>
         </View>
         <View style={styles.eventInfo}>
-          <Text style={styles.artist}>{this.props.event.artists[0] ? this.props.event.artists[0].name : 'Rum Ham'}</Text>
+          <Text style={styles.artist}>
+            {this.props.event.artists[0] ? this.props.event.artists[0].name : 'Rum Ham'}
+          </Text>
           <Text style={styles.headline}>{this.props.event.name}</Text>
-          <Text style={styles.timeVenue}>{timeValue} @ {this.props.event.venue ? this.props.event.venue : 'Wrigley Field'}</Text>
-          <Text style={styles.location}>{this.props.event.city ? this.props.event.city : 'Chicago'}, {this.props.event.state ? this.props.event.state : 'IL'}</Text>
+          <Text style={styles.timeVenue}>
+            {timeValue} @ {this.props.event.venue ? this.props.event.venue : 'Wrigley Field'}
+          </Text>
+          <Text style={styles.location}>
+            {this.props.event.city ? this.props.event.city : 'Chicago'}, {this.props.event.state ? this.props.event.state : 'IL'}
+          </Text>
         </View>
         <View style={styles.scoreBox}>
           <Text style={styles.score}>Score:</Text>
-          <Text style={styles.scoreNumber}>{this.props.event.score !== 0 ? this.props.event.score : Math.floor(Math.random() * 100)}</Text>
+          <Text style={styles.scoreNumber}>
+            {this.props.event.artists[0] && this.props.event.artists[0].spotify.popularity ? this.props.event.artists[0].spotify.popularity : 69}
+          </Text>
         </View>
       </View>
       </TouchableHighlight>

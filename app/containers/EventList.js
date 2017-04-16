@@ -100,8 +100,11 @@ class EventList extends Component {
       return(<ActivityIndicator size='large' style={{height:80}} />)
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
       return (
-        <View style={styles.container}>
-          <Text>Error, please try again</Text>
+        <View style={{
+          display: 'flex',
+          paddingTop: 22,
+        }}>
+          <Text style={{textAlign: 'center'}}>Error, please try again</Text>
         </View>
       )
     } else {
