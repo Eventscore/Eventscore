@@ -23,6 +23,18 @@ export default function eventsReducer(state = {}, action) {
       return Object.assign({}, state, {
         geolocation: action.geolocation
       });
+    case 'REQUEST_EVENTS_FILTER':
+      return Object.assign({}, state, {
+        keyword: action.keyword,
+        genre: action.genre,
+        status: action.status
+      });
+    case 'REQUEST_EVENTS_FILTER_FAILED':
+      return Object.assign({}, state, {
+        keyword: action.keyword,
+        genre: action.genre,
+        status: action.status
+      });      
     default:
       return state;
   }

@@ -13,19 +13,24 @@ import {
   TouchableHighlight,
   TouchableOpacity, 
   StyleSheet,
+  Dimensions,  
 } from 'react-native';
+
+import NavBar from './NavBar';
 import Search from './Search';
 import Filter from './Filter';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    display: 'flex',
-    marginTop: 20,
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-  }
-});
+const { width , height } = Dimensions.get("window");
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     display: 'flex',
+//     marginTop: 20,
+//     alignItems: 'center',
+//     backgroundColor: '#DCDCDC',
+//   }
+// });
 
 class Home extends Component {
   componentDidMount() {
@@ -35,12 +40,24 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Search />
-        <Filter />
+        <NavBar />
+        <ScrollView style={styles.homeBodyContainer}>
+          <Text style={{color: '#FFF', fontSize: 25}}>Something amazing is going to be here... Just be patient</Text>
+        </ScrollView>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#1bdafc',
+  },
+  homeBodyContainer: {
+    flex: 1,
+  }
+});
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);

@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
 const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
+import NavBar from './containers/NavBar';
 import Search from './containers/Search';
 import Filter from './containers/Filter';
 import Landing from './containers/Landing';
@@ -52,6 +53,7 @@ const scenes = Actions.create(
       <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>
     </Scene>
     <Scene key="eventview" component={EventView} hideNavBar/>
+    <Scene key="filter" component={Filter} hideNavBar/>
   </Scene>
 );
 
