@@ -70,14 +70,23 @@ class EventView extends Component {
             <Text style={styles.date}>{date}</Text>
           </View>
           <View style={styles.eventInfo}>
-            <Text style={styles.artist}>{this.props.eventsReducers.currEvent.artists[0] ? this.props.eventsReducers.currEvent.artists[0].name : 'Rum Ham'}</Text>
+            <Text style={styles.artist}>
+              {this.props.eventsReducers.currEvent.artists[0] ? this.props.eventsReducers.currEvent.artists[0].name : 'Rum Ham'}
+            </Text>
             <Text style={styles.headline}>{this.props.eventsReducers.currEvent.name}</Text>
-            <Text style={styles.timeVenue}>{timeValue} @ {this.props.eventsReducers.currEvent.venue ? this.props.eventsReducers.currEvent.venue : 'Wrigley Field'}</Text>
-            <Text style={styles.location}>{this.props.eventsReducers.currEvent.city ? this.props.eventsReducers.currEvent.city : 'Chicago'}, {this.props.eventsReducers.currEvent.state ? this.props.eventsReducers.currEvent.state : 'IL'}</Text>
+            <Text style={styles.timeVenue}>
+              {timeValue} @ {this.props.eventsReducers.currEvent.venue ? this.props.eventsReducers.currEvent.venue : 'Wrigley Field'}
+            </Text>
+            <Text style={styles.location}>
+              {this.props.eventsReducers.currEvent.city ? this.props.eventsReducers.currEvent.city : 'Chicago'}, 
+              {this.props.eventsReducers.currEvent.state ? this.props.eventsReducers.currEvent.state : 'IL'}
+            </Text>
           </View>
           <View style={styles.scoreBox}>
             <Text style={styles.score}>Score:</Text>
-            <Text style={styles.scoreNumber}>{this.props.eventsReducers.currEvent.score !== 0 ? this.props.eventsReducers.currEvent.score : Math.floor(Math.random() * 100)}</Text>
+            <Text style={styles.scoreNumber}>
+              {this.props.eventsReducers.currEvent.artists[0] && this.props.eventsReducers.currEvent.artists[0].spotify.popularity ? this.props.eventsReducers.currEvent.artists[0].spotify.popularity : 69}
+            </Text>
           </View>
         </View>
         <Graph/>  

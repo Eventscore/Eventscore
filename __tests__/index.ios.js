@@ -10,3 +10,10 @@ it('renders correctly', () => {
     <Index />
   );
 });
+
+it('renders correctly', () => {
+  const tree = renderer.create(
+    <EventList />
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
+});
