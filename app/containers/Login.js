@@ -40,6 +40,7 @@ class Login extends Component {
     if(this.props.loginReducers.status === 'success') {
       {Actions.rootTabBar({type: ActionConst.POP_AND_REPLACE})}
     } else {
+      //TODO: Create some sort of visual representation of a failure
       console.log('I failed');
     }
   }

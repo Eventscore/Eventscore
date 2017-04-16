@@ -19,6 +19,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 const { width , height } = Dimensions.get("window");
 const background = require("../assets/image/login1_bg.png");
+import FilterItemGenre from './FilterItemGenre'
 
 class Filter extends Component {
   constructor(props) {
@@ -27,17 +28,19 @@ class Filter extends Component {
     const genreList = ['pop', 'hip hop', 'rock', 'soul', 'jazz'];
     this.state = {
       keyword: '',
-      genreList: ds.cloneWithRows(genreList)
+      genreList: ds.cloneWithRows(genreList),
+      loading: true,
+      cannotGetLocation: false      
     }
   }
 
   fetchEventsByKeywordRedux(){
     let keyword = this.state.keyword || null;
     // this.fetchEventByKeyword(keyword);
-    console.log(keyword);
   }
 
   render() {
+    console.log('filter: ', this);
     return (
       <View style={styles.container}>
         <View style={styles.headerSearchContainer}>
@@ -77,42 +80,17 @@ class Filter extends Component {
           </Image>
         </View>
 
-        <ListView style={styles.filterOptionContainer}
+        <View style={styles.filterOptionContainer}>
+        <ListView
           dataSource={this.state.genreList}
-          renderRow={ (genre) => <FilterItem genre={genre}/>}
+          renderRow={ (genre) => <FilterItemGenre genre={genre} />}
         />
+        </View>
 
       </View>
     );
   }
 }
-
-var FilterItem = React.createClass({
-  fetchEventsByGenreRedux(){
-    this.setState({genre: this.props.genre}, ()=> {
-      let keyword = this.props.keyword || null;
-      let genre = this.props.genre || null;
-      // this.fetchEventByKeyword(keyword, genre)});
-      console.log('genre:', this.props.genre);
-    });
-  },
-
-  render(){
-    return(
-      <View style={styles.filterOptionGenre}>
-        <TouchableOpacity style={styles.filterOptionGenre} onPress={() => this.fetchEventsByGenreRedux()} value={this.props.genre}>
-          <Image source={background} 
-          style={styles.filterOptionGenre} 
-          resizeMode="cover">
-            <View style={styles.genreTextContainer}>
-              <Text style={styles.genreTextTitle}>{this.props.genre}</Text>
-            </View>
-          </Image>     
-        </TouchableOpacity>
-      </View>
-    )
-  }
-})
 
 const styles = StyleSheet.create({
   container: {
@@ -181,28 +159,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
   },
-  filterOptionContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-  filterOptionGenre: {
-    // display: 'flex',
-    margin: 3,
-    width: 75,
-    height: 75,
-  },
-  genreTextContainer: {
-    // display: 'flex',
-    // justifyContent: 'center'
-  },
-  genreTextTitle: {
-    color: '#FFF',
-  }
 });
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Filter);
+export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers}}, mapDispatchToProps)(Filter);
