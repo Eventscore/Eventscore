@@ -31,34 +31,30 @@ export function fetchNearbyEvents(long, lat) {
   }
 }
 
-export function fetchEventByKeyword(keyword, location, priceRange, genre) {
+export function fetchEventByKeyword(keyword, genre) {
   return (dispatch, getState) => {
     const params = [
     `keyword/${encodeuRIComponent(keyword)}`,
-    `location/${encodeuRIComponent(location)}`,
-    `priceRange/${encodeuRIComponent(priceRange)}`,
     `genre/${encodeuRIComponent(genre)}`,
     ];
     return Api.get(`/api/events/${params.join('/')}`).then(res => {
       dispatch({
         type: types.REQUEST_EVENTS_FILTER,
         keyword: keyword,
-        location: location,
-        priceRange: priceRange,
         genre: genre,
         receivedAt: Date.now(),
         events: res,
+        status: 'success',
         res: res
       });
     }).catch( (ex) => {
       dispatch({
         type: types.REQUEST_EVENTS_FILTER_FAILED,
         keyword: keyword,
-        location: location,
-        priceRange: priceRange,
         genre: genre,
         receivedAt: Date.now(),
         events: res,
+        status: 'error',
         res: ex        
       })
     })
