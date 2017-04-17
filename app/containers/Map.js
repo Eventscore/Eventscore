@@ -1,5 +1,9 @@
 import MapView from 'react-native-maps';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../actions';
+
 import {
   View,
   Text,
@@ -7,37 +11,25 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
-import { connect } from 'react-redux';
-
-
-
-  // initialRegion={{
-  //   latitude: 37.78825,
-  //   longitude: -122.4324,
-  //   latitudeDelta: 0.0922,
-  //   longitudeDelta: 0.0421,
-  // }}
-
 
 const { width, height } = Dimensions.get('window');
-
 const ASPECT_RATIO = width / height;
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
-const LATITUDE_DELTA = 0.01;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const TITLE = 'Beyonce';
-const DESCRIPTION = 'Levi Stadium';
-
-let coords = {
-  latitude: LATITUDE,
-  longitude: LONGITUDE,
-  latitudeDelta: LATITUDE_DELTA,
-  longitudeDelta: LONGITUDE_DELTA
-};
 
 class LocationMap extends Component {
   render() {
+    const event = this.props.eventsReducers.currEvent;
+    const LATITUDE = event.location.coordinates[1];
+    const LONGITUDE = event.location.coordinates[0];
+    const LATITUDE_DELTA = 0.01;
+    const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+    let coords = {
+      latitude: LATITUDE,
+      longitude: LONGITUDE,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA
+    };
+    const TITLE = event.artists[0] ? event.artists[0].name : '';
+    const DESCRIPTION = event.venue;
     return (
       <View style={styles.container}>
         <MapView
@@ -86,4 +78,9 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(({routes}) => ({routes}))(LocationMap);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+// export default EventView;
+export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(LocationMap);
