@@ -31,7 +31,7 @@ class EventView extends Component {
   }
 
   goBackToEventList() {
-    {Actions.rootTabBar({type: ActionConst.BACK})}
+    {Actions.event({type: ActionConst.BACK})}
   }
 
   render() {

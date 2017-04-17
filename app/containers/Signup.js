@@ -42,7 +42,7 @@ class Signup extends Component {
 
   validateSignup(){
     if(this.props.signupReducers.status === 'success') {
-      {Actions.rootTabBar({type: ActionConst.POP_AND_REPLACE})}
+      {Actions.home()}
     } else {
       //TODO: Create some sort of visual representation of a failure
       console.log('I failed');

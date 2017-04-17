@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 import NavBar from './NavBar';
+import TabBar from './TabBar';
 import Search from './Search';
 import Filter from './Filter';
 
@@ -44,6 +45,7 @@ class Home extends Component {
         <ScrollView style={styles.homeBodyContainer}>
           <Text style={{color: '#FFF', fontSize: 25}}>Something amazing is going to be here... Just be patient</Text>
         </ScrollView>
+        <TabBar />
       </View>
     );
   }

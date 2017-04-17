@@ -25,9 +25,6 @@ class NavBar extends Component {
     }
   }
 
-  //TODO: Create Options View > Left NavBar Icon
-  //TODO: Create Search Filter View > Right NavBar Icon
-
   //Menu Button
   // <TouchableOpacity style={styles.navLeftIconButton} onPress={() => {Actions.home()}}>
   //   <Icon name='bars' style={styles.navLeftIconView} size={30} color="white" resizeMode="contain" />
@@ -55,15 +52,14 @@ class NavBar extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
   },
   navBarContainer: {
-    flex: 1,
-    height: 30,
+    display: 'flex',
+    height: 40,
     padding: 5,
     marginTop: 20, 
     flexDirection: 'row',
-    flexWrap: 'nowrap',
+    // flexWrap: 'nowrap',
     justifyContent: 'space-between',
   },
   navLeftContainer: {
