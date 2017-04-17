@@ -22,7 +22,7 @@ class EventListItem extends Component {
   }
 
   pressListItem() {
-    {Actions.eventview({type: ActionConst.PUSH})};
+    {Actions.eventview()};
     this.props.changeCurrEvent(this.props.event);
   }
 

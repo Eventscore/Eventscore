@@ -3,7 +3,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { Router, Scene, Actions, Switch } from 'react-native-router-flux';
+import { Router, Scene, Actions, Switch, ActionConst } from 'react-native-router-flux';
 import { connect, Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { ActionCreators } from './actions/index';
@@ -42,20 +42,11 @@ const scenes = Actions.create(
     <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar />    
     <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
-    <Scene
-      key="rootTabBar"
-      tabs
-      tabBarStyle={{backgroundColor: '#ffffff'}}
-      type="replace"
-      initial
-    >
-      <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar/>
-      <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar/>
-      <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar/>
-    </Scene>
-    <Scene key="eventview" component={EventView} hideNavBar/>
-    <Scene key="filter" component={Filter} hideNavBar/>
-    <Scene key="eventlistmapworking" component={EventListMapWorking} title="ListMap" hideNavBar/>
+    <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar initial />
+    <Scene key="filter" component={Filter} title="Search" icon={TabIcon} hideNavBar />
+    <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar />
+    <Scene key="eventview" component={EventView} hideNavBar />
+    <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar />
   </Scene>
 );
 

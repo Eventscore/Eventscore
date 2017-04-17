@@ -28,15 +28,30 @@ class Filter extends Component {
     const genreList = ['pop', 'hip hop', 'rock', 'soul', 'jazz', 'electronic'];
     this.state = {
       keyword: '',
-      genreList: ds.cloneWithRows(genreList),
-      loading: true,
-      cannotGetLocation: false      
+      genreList: ds.cloneWithRows(genreList),    
     }
   }
-
-  fetchEventsByKeywordRedux(){
+  
+  async fetchEventsByKeywordRedux(){
     let keyword = this.state.keyword || null;
-    // this.fetchEventByKeyword(keyword);
+    let genre = this.props.genre || null;
+    let getLocation = await this.props.getLocation();
+    this.getEvents(keyword, genre);
+  }
+
+  getEvents(...args){
+    // this.props.fetchEventByKeyword(keyword, genre)});
+    this.props.fetchEventByKeyword(
+      keyword,
+      genre,
+      this.props.eventsReducers.geolocation.coords.longitude,
+      this.props.eventsReducers.geolocation.coords.latitude
+    ).then(() => {
+      {Actions.event()}
+    }).catch((error) => {
+      console.log(error);
+      //TODO: Include some sort of visual illustration that the call failed
+    })    
   }
 
   render() {
@@ -53,6 +68,7 @@ class Filter extends Component {
                   <TouchableOpacity style={styles.navLeftIconButton} onPress={() => {Actions.pop()}}>
                     <Icon name='angle-left' style={styles.navLeftIconView} size={30} color="white" resizeMode="contain" />
                   </TouchableOpacity>
+
                 </View>
               </View>
               <View style={styles.navRightContainer}>
