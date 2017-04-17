@@ -22,25 +22,27 @@ const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.05;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-const LATITUDE = 37.78825;
-const LONGITUDE = -122.4324;
-const TITLE = 'Beyonce';
-const LOCATION = 'Levi Stadium';
-let coords = {
-  latitude: LATITUDE - .005,
-  longitude: LONGITUDE - .005,
-};
-let coords2 = {
-  latitude: LATITUDE + .005,
-  longitude: LONGITUDE + .005,
-};
-let coordsArr = [{coords: coords, title: TITLE, location: LOCATION}, {coords: coords2, title: TITLE + '1', location: LOCATION}];
+      // this.props.eventsReducers.geolocation.coords.longitude,
+      // this.props.eventsReducers.geolocation.coords.latitude
 
 class EventListMapWorking extends Component {
   state = {
     listSwitch: true
   };
   render() {
+    const LATITUDE = this.props.eventsReducers.geolocation.coords.latitude;
+    const LONGITUDE = this.props.eventsReducers.geolocation.coords.longitude;
+    const TITLE = 'Beyonce';
+    const LOCATION = 'Levi Stadium';
+    let coords = {
+      latitude: LATITUDE - .005,
+      longitude: LONGITUDE - .005,
+    };
+    let coords2 = {
+      latitude: LATITUDE + .005,
+      longitude: LONGITUDE + .005,
+    };
+    let coordsArr = [{coords: coords, title: TITLE, location: LOCATION}, {coords: coords2, title: TITLE + '1', location: LOCATION}];
     return (
       <View style={{marginTop: 20}}>
       <NavBar />
@@ -114,10 +116,10 @@ const styles = StyleSheet.create({
   }
 });
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(ActionCreators, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
 
 // export default connect(({routes}) => ({routes}), mapDispatchToProps)(EventListMap);
-
-export default connect(({routes}) => ({routes}))(EventListMapWorking);
+export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(EventListMapWorking);
+// export default connect(({routes}) => ({routes}))(EventListMapWorking);
