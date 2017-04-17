@@ -51,7 +51,7 @@ class EventListMapWorking extends Component {
           <Switch
             onValueChange={(value) => {
               this.setState({listSwitch: value});
-              Actions.rootTabBar();
+              Actions.event();
             }}
             value={this.state.listSwitch}
           />

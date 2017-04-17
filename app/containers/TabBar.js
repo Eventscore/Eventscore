@@ -50,6 +50,14 @@ class TabBar extends Component {
               </TouchableOpacity>            
             </View>
           </View>
+          <View style={styles.tabContainer}>
+            <View style={styles.tabIconView}>
+              <TouchableOpacity style={styles.iconButton} onPress={() => {Actions.user()}}>
+                <Icon name='user' style={styles.tabIconView} size={30} color="white" resizeMode="contain" />
+                <Text style={styles.tabIconName}>User</Text>
+              </TouchableOpacity>            
+            </View>
+          </View>
         </View>
       </View>
     );
