@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
+import NavBar from './NavBar';
+
 const {
   Image,
   ListView,
