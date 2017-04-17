@@ -14,7 +14,6 @@ import { bindActionCreators } from 'redux';
 // const myConnectedMainComponent = connect()(Home);
 // const myConnectedLoginComponent = connect()(Login);
 
-
 //Include initialState inside configureStore as param
 const store = configureStore();
 const RouterWithRedux = connect()(Router);

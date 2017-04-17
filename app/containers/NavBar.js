@@ -29,19 +29,25 @@ class NavBar extends Component {
   // <TouchableOpacity style={styles.navLeftIconButton} onPress={() => {Actions.home()}}>
   //   <Icon name='bars' style={styles.navLeftIconView} size={30} color="white" resizeMode="contain" />
   // </TouchableOpacity>
-  
+
   render() {
+    console.log(this);
+    // const isHome = this.props.routes.scene.name !== 'home';
+    // console.log(isHome);
     return (
       <View style={styles.container}>
         <View style={styles.navBarContainer}>
           <View style={styles.navLeftContainer}>
             <View style={styles.navLeftIconView}>
+              <TouchableOpacity style={styles.navRightIconButton} onPress={() => {Actions.pop()}}>
+                <Icon name='arrow-left' style={styles.navRightIconView} size={30} color="#dbdfe0" resizeMode="contain" />  
+              </TouchableOpacity>             
             </View>
           </View>        
           <View style={styles.navRightContainer}>
             <View style={styles.navRightIconView}>
               <TouchableOpacity style={styles.navRightIconButton} onPress={() => {Actions.filter()}}>
-                <Icon name='search' style={styles.navRightIconView} size={30} color="white" resizeMode="contain" />  
+                <Icon name='search' style={styles.navRightIconView} size={30} color="#dbdfe0" resizeMode="contain" />  
               </TouchableOpacity>
             </View>        
           </View>
