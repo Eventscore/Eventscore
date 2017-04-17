@@ -13,8 +13,8 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
 import EventListMap from './EventListMap';
-
-const serverDomain = 'http://localhost:1337/api/events';
+import NavBar from './NavBar';
+import TabBar from './TabBar';
 
 class EventList extends Component {
   constructor() {
@@ -27,45 +27,10 @@ class EventList extends Component {
     };
   }
 
-  // geolocation with standard react state
-  // getLocation() {
-  //   // get locations
-  //   this.setState({loading: true});
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       // console.log('position: ', position);
-  //       // this.setState({geolocation: position});
-  //       // once location is received then fetch nearby events
-  //       this.props.fetchNearbyEvents(position.coords.longitude, position.coords.latitude)
-  //       .then(() => {
-  //         // then set eventlist state to fetched events and set loading state to false
-  //         // datasource of list depends on eventlist state
-  //         this.setState({
-  //           eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
-  //           loading: false
-  //         });
-  //       });
-  //       // var initialPosition = JSON.stringify(position);
-  //     },
-  //     (error) => alert(JSON.stringify(error)),
-  //     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-  //   )
-  //   // this.watchID = navigator.geolocation.watchPosition((position) => {
-  //   //   var lastPosition = JSON.stringify(position);
-  //   //   this.setState({lastPosition});
-  //   // });
-  // }
-
   searchPressed() {
     this.setState({loading: true});
     this.props.getLocation();
     this.getEvents();
-    // this.props.getLocation().then(() => {
-    //   this.getEvents();
-    // });
-    // .then(() => {
-    //   this.props.getLocation();
-    // })
   }
 
   getEvents() {
@@ -97,31 +62,42 @@ class EventList extends Component {
 
   render() {
     if (this.state.loading) {
+      console.log('loading');
       return (
         <View style={styles.container}>
-        <ActivityIndicator size='large' style={{height:80}} />
+          <NavBar />
+          <View style={styles.eventContainer}>
+            <ActivityIndicator size='large' style={{height:80}} />
+          </View>
+          <TabBar />
         </View>
       )
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
+      console.log('cant get user geolocation');
       return (
-        <View style={{
-          display: 'flex',
-          paddingTop: 22,
-        }}>
-          <Text style={{textAlign: 'center'}}>Error, please try again</Text>
+        <View style={styles.container}>
+          <NavBar />
+          <View style={styles.eventContainer}>
+            <Text style={{textAlign: 'center'}}>Error, please try again</Text>
+          </View>
         </View>
       )
     } else {
+      console.log('else');
       return (
         <View style={styles.container}>
-          <TouchableHighlight onPress={ () => this.searchPressed() }>
-            <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
-          </TouchableHighlight>
-        <ListView
-          dataSource={this.state.eventList}
-          // dataSource={this.props.eventsReducers.events}
-          renderRow={(event) => <EventListItem key={event._id} event={event} />}
-        />
+          <NavBar />
+          <View style={styles.eventContainer}>
+            <TouchableHighlight onPress={ () => this.searchPressed() }>
+              <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
+            </TouchableHighlight>
+            <ListView
+              dataSource={this.state.eventList}
+              // dataSource={this.props.eventsReducers.events}
+              renderRow={(event) => <EventListItem key={event._id} event={event} />}
+            />
+          </View>
+          <TabBar />
         </View>
       )
     }
@@ -137,12 +113,14 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
+    
+  },
+  eventContainer: {
     // backgroundColor: '#4682B4',
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     display: 'flex',
-    paddingTop: 22,
-    paddingBottom: 50
+    // paddingTop: 20,
   }
 });
 
