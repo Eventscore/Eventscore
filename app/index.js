@@ -19,7 +19,6 @@ const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
 import NavBar from './containers/NavBar';
-import Search from './containers/Search';
 import Filter from './containers/Filter';
 import Landing from './containers/Landing';
 import Home from './containers/Home';
@@ -30,22 +29,16 @@ import EventView from './containers/EventView';
 import EventList from './containers/EventList';
 import EventListMapWorking from './containers/EventListMapWorking';
 
-const TabIcon = ({ selected, title }) => {
-  return (
-    <Text style={{color: selected ? 'black' : 'gray'}}>{title}</Text>
-  );
-};
-
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar />    
+    <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar initial />    
     <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
-    <Scene key="home" component={Home} title="Home" icon={TabIcon} hideNavBar initial />
-    <Scene key="filter" component={Filter} title="Search" icon={TabIcon} hideNavBar />
-    <Scene key="event" component={EventList} title="Events" icon={TabIcon} hideNavBar />
+    <Scene key="home" component={Home} title="Home" hideNavBar />
+    <Scene key="filter" component={Filter} title="Search" hideNavBar />
+    <Scene key="event" component={EventList} title="Events" hideNavBar />
     <Scene key="eventview" component={EventView} hideNavBar />
-    <Scene key="user" component={User} title="User" icon={TabIcon} hideNavBar />
+    <Scene key="user" component={User} title="User" hideNavBar />
   </Scene>
 );
 
@@ -58,11 +51,3 @@ export default class App extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  tarBarStyle: {
-    backgroundColor: '#FFFFFF',
-    opacity: 0.5,
-  }
-});
-

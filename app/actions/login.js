@@ -74,10 +74,3 @@ export function invokeSignup({ name, username, password, email }) {
     });
   }
 }
-
-export function addCount (count){
-  return {
-    type: types.ADD_COUNT,
-    count
-  }
-}

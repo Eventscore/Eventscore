@@ -12,7 +12,9 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import Search from './Search';
+
+import NavBar from './NavBar';
+import TabBar from './TabBar';
 
 const { width, height } = Dimensions.get('window');
 
@@ -41,7 +43,7 @@ class EventListMapWorking extends Component {
   render() {
     return (
       <View style={{marginTop: 20}}>
-      <Search />
+      <NavBar />
       <View style={styles.container}>
         <Text style={styles.switch}>List 
           <Switch

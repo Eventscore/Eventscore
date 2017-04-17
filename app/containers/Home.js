@@ -18,7 +18,6 @@ import {
 
 import NavBar from './NavBar';
 import TabBar from './TabBar';
-import Search from './Search';
 import Filter from './Filter';
 
 const { width , height } = Dimensions.get("window");
@@ -65,4 +64,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}; }, mapDispatchToProps)(Home);
+export default connect(({routes, loginReducers, signupReducers, eventsReducers}) => { return {routes, loginReducers, signupReducers, eventsReducers}; }, mapDispatchToProps)(Home);

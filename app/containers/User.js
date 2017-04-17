@@ -17,12 +17,14 @@ import Graph from './Graph';
 import LocationMap from './Map';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-
+import NavBar from './NavBar';
+import TabBar from './TabBar';
 
 class User extends Component {
   render() {
     return (
       <View style={styles.container}>
+      <NavBar />
         <Text style={styles.welcome}>
           { `This is the ${ this.props.title }` }
         </Text>
@@ -83,4 +85,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, signupReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, signupReducers, eventsReducers, addCountExample}; }, mapDispatchToProps)(User);
+export default connect(({routes, loginReducers, signupReducers, eventsReducers}) => { return {routes, loginReducers, signupReducers, eventsReducers}; }, mapDispatchToProps)(User);
