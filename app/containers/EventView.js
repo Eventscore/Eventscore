@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import Graph from './Graph';
+import LocationMap from './Map';
 
 const {
   Image,
@@ -89,6 +90,7 @@ class EventView extends Component {
             </Text>
           </View>
         </View>
+        <LocationMap />
         <Graph/>  
       </View>
     );
