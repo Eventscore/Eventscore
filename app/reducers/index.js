@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import routes from './routes';
-import addCountExample from './addCountExample';
 import loginReducers from './login';
 import signupReducers from './signup';
 import eventsReducers from './events';
@@ -8,7 +7,6 @@ import eventsReducers from './events';
 // ... other reducers
 
 export default combineReducers({
-  addCountExample,
   loginReducers,
   signupReducers,
   eventsReducers,

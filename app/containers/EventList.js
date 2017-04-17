@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
-import EventListMap from './EventListMap';
 import NavBar from './NavBar';
 import TabBar from './TabBar';
 

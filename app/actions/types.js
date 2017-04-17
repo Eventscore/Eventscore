@@ -1,6 +1,3 @@
-//example
-export const ADD_COUNT = 'ADD_COUNT';
-
 export const INVOKE_LOGIN = 'INVOKE_LOGIN';
 export const INVOKE_FAILED_LOGIN = 'INVOKE_FAILED_LOGIN';
 

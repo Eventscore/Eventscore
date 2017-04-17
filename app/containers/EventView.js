@@ -7,6 +7,9 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import Graph from './Graph';
 import LocationMap from './Map';
 
+import NavBar from './NavBar';
+import TabBar from './TabBar';
+
 const {
   Image,
   ListView,
@@ -16,8 +19,6 @@ const {
   View,
   Button
 } = ReactNative;
-
-import NavBar from './NavBar';
 
 class EventView extends Component {
   constructor() {
@@ -188,4 +189,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export default EventView;
-export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample} }, mapDispatchToProps)(EventView);
+export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers} }, mapDispatchToProps)(EventView);
