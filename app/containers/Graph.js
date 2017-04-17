@@ -25,22 +25,6 @@ const d3 = {
   shape,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'blue',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    // margin: 10,
-    // color: '#ffffff',
-  }
-});
-
 const data = [
   {'weight': 1, 'name': 'Spotify Artist Ranking', 'score': 60},
   {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
@@ -89,7 +73,7 @@ class Graph extends Component {
 
   _createPieChart(index, item) {
 
-    console.log('val', this._value);
+    // console.log('val', this._value);
     let arcs = d3.shape.pie()
       // .value(this._value)
       .value(this._value)
@@ -137,7 +121,6 @@ class Graph extends Component {
         <Group x={width/2} y={propsradius + margin}> 
         {
           data.map( (item, index) => 
-            // {console.log(item)}
             (<PiePiece
               key={index}
               color={this._color(index)}
@@ -149,17 +132,10 @@ class Graph extends Component {
 
 
         </Surface>
-
-
-
-
-
-
-
         <View style={{position: 'absolute', top: propsradius + margin - 15}}>
-          <Text style={[styles.welcome, {}]}>{eventScore}</Text>
+          <Text style={[styles.scoreStyle, {}]}>{eventScore}</Text>
         </View>
-        <View style={{position: 'absolute', top: height}}>
+        <View>
           {
             data.map( (item, index) =>
             // {
@@ -190,5 +166,17 @@ class Graph extends Component {
               //   </TouchableWithoutFeedback>
               // )
         
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    // backgroundColor: '#EEE', // gray background
+    margin: 3,
+  },
+  scoreStyle: {
+    fontSize: 20,
+    // color: '#ffffff', // white color
+  }
+});
 
 export default connect(({routes}) => ({routes}))(Graph);

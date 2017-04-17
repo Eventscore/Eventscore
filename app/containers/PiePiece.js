@@ -26,7 +26,7 @@ class PiePiece extends Component {
     super(props);
   }   
   render () {
-    console.log('d', this.props.d);
+    // console.log('d', this.props.d);
     return (
         <Shape
           d={this.props.d} // path
