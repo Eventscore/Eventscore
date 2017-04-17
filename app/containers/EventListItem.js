@@ -58,6 +58,14 @@ class EventListItem extends Component {
     timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
     timeValue += (hours >= 12) ? "PM" : "AM";  // get AM/PM
 
+    const {
+      artists,
+      name,
+      venue,
+      city,
+      state
+    } = this.props.event;
+
     return (
       <TouchableHighlight onPress={() => this.pressListItem()}>
       <View style={styles.container}>
@@ -67,20 +75,20 @@ class EventListItem extends Component {
         </View>
         <View style={styles.eventInfo}>
           <Text style={styles.artist}>
-            {this.props.event.artists[0] ? this.props.event.artists[0].name : 'Rum Ham'}
+            {artists[0] ? artists[0].name : 'Rum Ham'}
           </Text>
-          <Text style={styles.headline}>{this.props.event.name}</Text>
+          <Text style={styles.headline}>{name}</Text>
           <Text style={styles.timeVenue}>
-            {timeValue} @ {this.props.event.venue ? this.props.event.venue : 'Wrigley Field'}
+            {timeValue} @ {venue ? venue : 'Wrigley Field'}
           </Text>
           <Text style={styles.location}>
-            {this.props.event.city ? this.props.event.city : 'Chicago'}, {this.props.event.state ? this.props.event.state : 'IL'}
+            {city ? city : 'Chicago'}, {state ? state : 'IL'}
           </Text>
         </View>
         <View style={styles.scoreBox}>
           <Text style={styles.score}>Score:</Text>
           <Text style={styles.scoreNumber}>
-            {this.props.event.artists[0] && this.props.event.artists[0].spotify.popularity ? this.props.event.artists[0].spotify.popularity : 69}
+            {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
           </Text>
         </View>
       </View>
