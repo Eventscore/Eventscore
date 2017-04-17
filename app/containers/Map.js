@@ -66,7 +66,7 @@ class LocationMap extends Component {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    marginTop: 50,
+    // marginTop: 50,
     alignItems: 'center',
     // backgroundColor: 'gold',
     // justifyContent: 'center',
