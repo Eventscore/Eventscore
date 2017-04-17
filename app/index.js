@@ -29,6 +29,7 @@ import Signup from './containers/Signup';
 import User from './containers/User';
 import EventView from './containers/EventView';
 import EventList from './containers/EventList';
+import EventListMapWorking from './containers/EventListMapWorking';
 
 const TabIcon = ({ selected, title }) => {
   return (
@@ -54,6 +55,7 @@ const scenes = Actions.create(
     </Scene>
     <Scene key="eventview" component={EventView} hideNavBar/>
     <Scene key="filter" component={Filter} hideNavBar/>
+    <Scene key="eventlistmapworking" component={EventListMapWorking} title="ListMap" hideNavBar/>
   </Scene>
 );
 
