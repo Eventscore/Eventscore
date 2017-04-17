@@ -165,7 +165,7 @@ class Graph extends Component {
             // {
               // var fontWeight = this.state.highlightedIndex == index ? 'bold' : 'normal';
               
-                (<TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
+                (<TouchableWithoutFeedback key={index}>
                   <View>
                     <Text style={[styles.label, {color: this._color(index), fontWeight: 'normal'}]}>{this._label(item)}: {item.score}%</Text>
                   </View>
@@ -182,6 +182,13 @@ class Graph extends Component {
   }
 
 }
+
+              //   (<TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
+              //     <View>
+              //       <Text style={[styles.label, {color: this._color(index), fontWeight: 'normal'}]}>{this._label(item)}: {item.score}%</Text>
+              //     </View>
+              //   </TouchableWithoutFeedback>
+              // )
         
 
 export default connect(({routes}) => ({routes}))(Graph);
