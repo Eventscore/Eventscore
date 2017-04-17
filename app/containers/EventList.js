@@ -97,7 +97,11 @@ class EventList extends Component {
 
   render() {
     if (this.state.loading) {
-      return(<ActivityIndicator size='large' style={{height:80}} />)
+      return (
+        <View style={styles.container}>
+        <ActivityIndicator size='large' style={{height:80}} />
+        </View>
+      )
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
       return (
         <View style={{

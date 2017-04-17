@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   filterOptionGenre: {
     // display: 'flex',
     // flex: 1,
-    margin: 3,
+    // margin: 5,
     width: 125,
     height: 125,
   },

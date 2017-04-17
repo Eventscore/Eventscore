@@ -25,7 +25,7 @@ class Filter extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const genreList = ['pop', 'hip hop', 'rock', 'soul', 'jazz'];
+    const genreList = ['pop', 'hip hop', 'rock', 'soul', 'jazz', 'electronic'];
     this.state = {
       keyword: '',
       genreList: ds.cloneWithRows(genreList),
@@ -82,6 +82,7 @@ class Filter extends Component {
 
         <View style={styles.filterOptionContainer}>
         <ListView
+          contentContainerStyle={styles.list}
           dataSource={this.state.genreList}
           renderRow={ (genre) => <FilterItemGenre genre={genre} />}
         />
@@ -93,6 +94,12 @@ class Filter extends Component {
 }
 
 const styles = StyleSheet.create({
+  list: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    margin: 12
+  },
   container: {
     flex: 1,
     backgroundColor: '#393a3d',
