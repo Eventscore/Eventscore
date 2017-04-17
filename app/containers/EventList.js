@@ -68,6 +68,7 @@ class EventList extends Component {
           <View style={styles.eventContainer}>
             <ActivityIndicator size='large' style={{height:80}} />
           </View>
+          <TabBar />
         </View>
       )
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
@@ -78,6 +79,7 @@ class EventList extends Component {
           <View style={styles.eventContainer}>
             <Text style={{textAlign: 'center'}}>Error, please try again</Text>
           </View>
+          <TabBar />
         </View>
       )
     } else {
@@ -95,6 +97,7 @@ class EventList extends Component {
               renderRow={(event) => <EventListItem key={event._id} event={event} />}
             />
           </View>
+          <TabBar />
         </View>
       )
     }
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
-    
+
   },
   eventContainer: {
     // backgroundColor: '#4682B4',
