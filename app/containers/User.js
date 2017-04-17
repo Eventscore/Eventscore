@@ -10,8 +10,6 @@ import {
   TouchableHighlight,
   TouchableOpacity, 
   StyleSheet,
-  ScrollView,
-  TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
