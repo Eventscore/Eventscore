@@ -17,7 +17,7 @@ const {
   Button
 } = ReactNative;
 
-
+import NavBar from './NavBar';
 
 class EventView extends Component {
   constructor() {
@@ -62,9 +62,8 @@ class EventView extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.goBackToEventList}>
-            <Text style={styles.backButton}>Back To Events!</Text>
-        </TouchableHighlight>
+      <NavBar />
+      <View style={styles.eventViewContainer}>
         <View style={styles.eventContainer}>
           <View style={styles.dateBox}>
             <Text style={styles.weekday}>{day}</Text>
@@ -91,7 +90,8 @@ class EventView extends Component {
           </View>
         </View>
         <LocationMap />
-        <Graph/>  
+        <Graph/> 
+      </View> 
       </View>
     );
   }
@@ -106,6 +106,8 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
+  },
+  eventViewContainer: {
     // backgroundColor: '#4682B4',
     // flex: 1,
     justifyContent: 'center',

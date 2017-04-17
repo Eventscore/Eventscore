@@ -69,7 +69,6 @@ class EventList extends Component {
           <View style={styles.eventContainer}>
             <ActivityIndicator size='large' style={{height:80}} />
           </View>
-          <TabBar />
         </View>
       )
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
@@ -97,7 +96,6 @@ class EventList extends Component {
               renderRow={(event) => <EventListItem key={event._id} event={event} />}
             />
           </View>
-          <TabBar />
         </View>
       )
     }
