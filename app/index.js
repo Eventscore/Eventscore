@@ -39,7 +39,7 @@ const scenes = Actions.create(
     <Scene key="event" component={EventList} title="Events" hideNavBar />
     <Scene key="eventview" component={EventView} hideNavBar />
     <Scene key="user" component={User} title="User" hideNavBar />
-    <Scene key="eventlistmapworking" component={EventListMapWorking} title="EventListMapWorking" icon={TabIcon} hideNavBar />
+    <Scene key="eventlistmapworking" component={EventListMapWorking} title="EventListMapWorking" hideNavBar />
   </Scene>
 );
 
