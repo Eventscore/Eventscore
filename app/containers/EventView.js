@@ -61,6 +61,14 @@ class EventView extends Component {
     timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
     timeValue += (hours >= 12) ? "PM" : "AM";  // get AM/PM
 
+    const {
+      artists,
+      name,
+      venue,
+      city,
+      state
+    } = this.props.eventsReducers.currEvent;
+
     return (
       <View style={styles.container}>
       <NavBar />
@@ -72,21 +80,21 @@ class EventView extends Component {
           </View>
           <View style={styles.eventInfo}>
             <Text style={styles.artist}>
-              {this.props.eventsReducers.currEvent.artists[0] ? this.props.eventsReducers.currEvent.artists[0].name : 'Rum Ham'}
+              {artists[0] ? artists[0].name : 'Rum Ham'}
             </Text>
-            <Text style={styles.headline}>{this.props.eventsReducers.currEvent.name}</Text>
+            <Text style={styles.headline}>{name}</Text>
             <Text style={styles.timeVenue}>
-              {timeValue} @ {this.props.eventsReducers.currEvent.venue ? this.props.eventsReducers.currEvent.venue : 'Wrigley Field'}
+              {timeValue} @ {venue ? venue : 'Wrigley Field'}
             </Text>
             <Text style={styles.location}>
-              {this.props.eventsReducers.currEvent.city ? this.props.eventsReducers.currEvent.city : 'Chicago'}, 
-              {this.props.eventsReducers.currEvent.state ? this.props.eventsReducers.currEvent.state : 'IL'}
+              {city ? city : 'Chicago'}, 
+              {state ? state : 'IL'}
             </Text>
           </View>
           <View style={styles.scoreBox}>
             <Text style={styles.score}>Score:</Text>
             <Text style={styles.scoreNumber}>
-              {this.props.eventsReducers.currEvent.artists[0] && this.props.eventsReducers.currEvent.artists[0].spotify.popularity ? this.props.eventsReducers.currEvent.artists[0].spotify.popularity : 69}
+              {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
             </Text>
           </View>
         </View>
@@ -175,14 +183,6 @@ const styles = StyleSheet.create({
     fontSize: 18
   }
 });
-
-// const styles = StyleSheet.create({
-//   titleText: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     textAlign: 'center'
-//   },
-// });
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
