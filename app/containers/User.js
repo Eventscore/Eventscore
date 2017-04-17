@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { ActionCreators } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import {
-  ScrollView,
   View,
   TextInput,
   Text,
@@ -13,15 +12,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import Graph from './Graph';
-import LocationMap from './Map';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import NavBar from './NavBar';
 import TabBar from './TabBar';
 
 class User extends Component {
   render() {
+    const user = this.props.loginReducers;
     return (
       <View style={styles.container}>
       <NavBar />
@@ -32,23 +29,15 @@ class User extends Component {
           onPress={() => Actions.pop()}>
           Close User
         </Text>
-
-        <ScrollView
-          style={StyleSheet.absoluteFill}
-          contentContainerStyle={styles.scrollview}
-        >
-          <LocationMap/>
-          <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmapworking({type: ActionConst.PUSH})}}>
-            <Icon name='chevron-right' size={15} style={styles.chevronLeft} />   
-            <Text style={styles.buttonText}> BigMap </Text>
-          </TouchableOpacity>
-          <Graph/>
-        </ScrollView>
+        <Text> Name: {user.username} </Text>
+        <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmapworking({type: ActionConst.PUSH})}}>
+          <Icon name='chevron-right' size={15} style={styles.chevronLeft} />   
+          <Text style={styles.buttonText}> BigMap </Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -64,10 +53,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: '#ffffff',
-  },
-  scrollview: {
-    alignItems: 'center',
-    paddingVertical: 100,
   },
   button: {
     padding: 5,
