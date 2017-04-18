@@ -12,15 +12,12 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity, 
-  StyleSheet,
-  Dimensions,  
+  StyleSheet
 } from 'react-native';
 
 import NavBar from './NavBar';
 import TabBar from './TabBar';
 import Filter from './Filter';
-
-const { width , height } = Dimensions.get("window");
 
 // const styles = StyleSheet.create({
 //   container: {
