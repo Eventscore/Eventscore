@@ -9,25 +9,26 @@ import {
   TouchableHighlight,
   TouchableOpacity, 
   StyleSheet,
-  Dimensions
+  ScrollView
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
 import NavBar from './NavBar';
 import TabBar from './TabBar';
 
-const { width , height } = Dimensions.get("window");
-
 class User extends Component {
   render() {
     const user = this.props.loginReducers;
     return (
       <View style={styles.container}>
-      <NavBar />
-        <Text style={styles.welcome}> Name: {user.username} </Text>
-        <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmapworking({type: ActionConst.PUSH})}}>
-          <Text style={styles.buttonText}> BigMap </Text>
-        </TouchableOpacity>
+        <NavBar />
+        <ScrollView style={styles.scrollView}>
+          <Text style={styles.welcome}> Name: {user.username} </Text>
+          <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmapworking({type: ActionConst.PUSH})}}>
+            <Text style={styles.buttonText}> BigMap </Text>
+          </TouchableOpacity>
+        </ScrollView>
+        <TabBar />
       </View>
     );
   }
@@ -38,6 +39,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     backgroundColor: 'gold',
+  },
+  scrollView: {
+    flex: 1,
   },
   welcome: {
     fontSize: 20,

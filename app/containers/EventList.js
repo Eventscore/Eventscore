@@ -60,47 +60,85 @@ class EventList extends Component {
   }
 
   render() {
+    let listRender = null;
     if (this.state.loading) {
       console.log('loading');
-      return (
-        <View style={styles.container}>
-          <NavBar />
-          <View style={styles.eventContainer}>
-            <ActivityIndicator size='large' style={{height:80}} />
-          </View>
-          <TabBar />
-        </View>
-      )
+      listRender = 
+        <View style={styles.eventContainer}>
+          <ActivityIndicator size='large' style={{height:80}} />
+        </View>;
     } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
       console.log('cant get user geolocation');
-      return (
-        <View style={styles.container}>
-          <NavBar />
-          <View style={styles.eventContainer}>
-            <Text style={{textAlign: 'center'}}>Error, please try again</Text>
-          </View>
-          <TabBar />
-        </View>
-      )
+      listRender = 
+        <View style={styles.eventContainer}>
+          <Text style={{textAlign: 'center'}}>Error, please try again</Text>
+        </View>;
     } else {
       console.log('else');
-      return (
-        <View style={styles.container}>
-          <NavBar />
-          <View style={styles.eventContainer}>
-            <TouchableHighlight onPress={ () => this.searchPressed() }>
-              <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
-            </TouchableHighlight>
-            <ListView
-              dataSource={this.state.eventList}
-              // dataSource={this.props.eventsReducers.events}
-              renderRow={(event) => <EventListItem key={event._id} event={event} />}
-            />
-          </View>
-          <TabBar />
-        </View>
-      )
+      listRender = 
+        <View style={styles.eventContainer}>
+          <TouchableHighlight onPress={ () => this.searchPressed() }>
+          <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
+          </TouchableHighlight>
+          <ListView
+            dataSource={this.state.eventList}
+            // dataSource={this.props.eventsReducers.events}
+            renderRow={(event) => <EventListItem key={event._id} event={event} />}
+          />
+        </View>;
     }
+
+    return (
+      <View style={styles.container}>
+        <NavBar />
+        {listRender}
+        <TabBar />
+      </View>
+    );
+
+    // OLD RENDER // TO BE DELETED AFTER CODE REVIEW
+    // if (this.state.loading) {
+    //   console.log('loading');
+    //   return (
+    //     <View style={styles.container}>
+    //       <NavBar />
+    //       <View style={styles.eventContainer}>
+    //         <ActivityIndicator size='large' style={{height:80}} />
+    //       </View>
+    //       <TabBar />
+    //     </View>
+    //   )
+    // } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
+    //   console.log('cant get user geolocation');
+    //   return (
+    //     <View style={styles.container}>
+    //       <NavBar />
+    //       <View style={styles.eventContainer}>
+    //         <Text style={{textAlign: 'center'}}>Error, please try again</Text>
+    //       </View>
+    //       <TabBar />
+    //     </View>
+    //   )
+    // } else {
+    //   console.log('else');
+    //   return (
+    //     <View style={styles.container}>
+    //       <NavBar />
+    //       <View style={styles.eventContainer}>
+    //         <TouchableHighlight onPress={ () => this.searchPressed() }>
+    //           <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
+    //         </TouchableHighlight>
+    //         <ListView
+    //           dataSource={this.state.eventList}
+    //           // dataSource={this.props.eventsReducers.events}
+    //           renderRow={(event) => <EventListItem key={event._id} event={event} />}
+    //         />
+    //       </View>
+    //       <TabBar />
+    //     </View>
+    //   )
+    // }
+
   }
 }
 
@@ -113,11 +151,11 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
-
+    flex: 1
   },
   eventContainer: {
     // backgroundColor: '#4682B4',
-    // flex: 1,
+    flex: 1,
     justifyContent: 'center',
     display: 'flex',
     // paddingTop: 20,

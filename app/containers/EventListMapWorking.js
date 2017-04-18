@@ -18,7 +18,7 @@ import TabBar from './TabBar';
 
 const { width, height } = Dimensions.get('window');
 
-const ASPECT_RATIO = width / height;
+const ASPECT_RATIO = width / (height);// - 200); // 100 = 60 + 40 (height of nav and tab) // however like 500 really makes an impact
 const LATITUDE_DELTA = 0.05;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
@@ -44,56 +44,59 @@ class EventListMapWorking extends Component {
     };
     let coordsArr = [{coords: coords, title: TITLE, location: LOCATION}, {coords: coords2, title: TITLE + '1', location: LOCATION}];
     return (
-      <View style={{marginTop: 20}}>
-      <NavBar />
       <View style={styles.container}>
-        <Text style={styles.switch}>List 
-          <Switch
-            onValueChange={(value) => {
-              this.setState({listSwitch: value});
-              Actions.event();
-            }}
-            value={this.state.listSwitch}
-          />
-           Map
-        </Text>
-        <MapView
-          style={styles.map}
-
-          provider={this.props.provider}
-
-          // scrollEnabled={false}
-          // zoomEnabled={false}
-          // pitchEnabled={false}
-          // rotateEnabled={false}
-
-          initialRegion={{
-            latitude: LATITUDE,
-            longitude: LONGITUDE,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA
-          }}
-        >
-          {coordsArr.map(marker => (
-            <MapView.Marker
-              title={marker.title}
-              description={marker.location}
-              coordinate={marker.coords}
-              key={marker.title}
+        <NavBar />
+        <View style={styles.scrollview}>
+          <Text style={styles.switch}>
+            List 
+            <Switch
+              onValueChange={(value) => {
+                this.setState({listSwitch: value});
+                Actions.event();
+              }}
+              value={this.state.listSwitch}
             />
-          ))}
-        </MapView>
-      </View></View>
+            Map
+          </Text>
+          <MapView
+            style={styles.map}
+
+            provider={this.props.provider}
+
+            // scrollEnabled={false}
+            // zoomEnabled={false}
+            // pitchEnabled={false}
+            // rotateEnabled={false}
+
+            initialRegion={{
+              latitude: LATITUDE,
+              longitude: LONGITUDE,
+              latitudeDelta: LATITUDE_DELTA,
+              longitudeDelta: LONGITUDE_DELTA
+            }}
+          >
+            {coordsArr.map(marker => (
+              <MapView.Marker
+                title={marker.title}
+                description={marker.location}
+                coordinate={marker.coords}
+                key={marker.title}
+              />
+            ))}
+          </MapView>
+        </View>
+        <TabBar/>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    // display: 'flex',
+    display: 'flex',
     // marginTop: 20,
-    alignItems: 'center',
-    // flex: 1,
+    // alignItems: 'center',
+    flex: 1,
     // backgroundColor: 'gold',
     // justifyContent: 'center',
   },
@@ -104,15 +107,20 @@ const styles = StyleSheet.create({
   // },
   scrollview: {
     alignItems: 'center',
-    paddingVertical: 40,
+    // justifyContent: 'center',
+    // paddingVertical: 40,
+    flex: 1,
+    display: 'flex'
   },
   map: {
     width: width,
     height: height,
   },
   switch: {
-    fontSize: 20,
     marginTop: 5,
+    fontSize: 20,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   }
 });
 
