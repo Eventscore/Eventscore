@@ -43,7 +43,14 @@ class NavBar extends Component {
                 <Icon name='arrow-left' style={styles.navRightIconView} size={30} color="#dbdfe0" resizeMode="contain" />  
               </TouchableOpacity>             
             </View>
-          </View>        
+          </View>    
+          <View>
+            <View>
+              <TouchableOpacity onPress={() => {Actions.home()}}>
+                <Text style={styles.eventScoreTitleStyle}>EventScore</Text>  
+              </TouchableOpacity>
+            </View>        
+          </View>    
           <View style={styles.navRightContainer}>
             <View style={styles.navRightIconView}>
               <TouchableOpacity style={styles.navRightIconButton} onPress={() => {Actions.filter()}}>
@@ -85,8 +92,11 @@ const styles = StyleSheet.create({
   },
   navRightIconButton: {
     backgroundColor: 'transparent',    
-
   },  
+  eventScoreTitleStyle: {
+    color: '#dbdfe0',
+    fontSize: 35
+  }
 });
 
 function mapDispatchToProps(dispatch){
