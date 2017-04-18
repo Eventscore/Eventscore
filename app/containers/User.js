@@ -9,12 +9,14 @@ import {
   TouchableHighlight,
   TouchableOpacity, 
   StyleSheet,
+  Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions, ActionConst } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import NavBar from './NavBar';
 import TabBar from './TabBar';
+
+const { width , height } = Dimensions.get("window");
 
 class User extends Component {
   render() {
@@ -22,16 +24,8 @@ class User extends Component {
     return (
       <View style={styles.container}>
       <NavBar />
-        <Text style={styles.welcome}>
-          { `This is the ${ this.props.title }` }
-        </Text>
-        <Text style={styles.welcome}
-          onPress={() => Actions.pop()}>
-          Close User
-        </Text>
-        <Text> Name: {user.username} </Text>
+        <Text style={styles.welcome}> Name: {user.username} </Text>
         <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmapworking({type: ActionConst.PUSH})}}>
-          <Icon name='chevron-right' size={15} style={styles.chevronLeft} />   
           <Text style={styles.buttonText}> BigMap </Text>
         </TouchableOpacity>
       </View>
@@ -43,26 +37,20 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    marginTop: 20,
-    alignItems: 'center',
     backgroundColor: 'gold',
-    // justifyContent: 'center',
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
     color: '#ffffff',
   },
   button: {
     padding: 5,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: 'black', 
+    backgroundColor: 'black'
   },
   buttonText: {
     color: 'white',
-    alignSelf: 'center',
   },
 });
 
