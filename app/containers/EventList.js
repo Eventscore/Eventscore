@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React, { Component } from 'react';
 import {
   Image,
   ListView,
@@ -6,12 +6,14 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  Switch
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
+import EventListMap from './EventListMap';
 import NavBar from './NavBar';
 import TabBar from './TabBar';
 
@@ -22,7 +24,8 @@ class EventList extends Component {
     this.state = {
       eventList: ds.cloneWithRows([]),
       loading: true,
-      cannotGetLocation: false
+      cannotGetLocation: false,
+      listSwitch: false
     };
   }
 
@@ -49,7 +52,7 @@ class EventList extends Component {
         cannotGetLocation: true
         // eventList: this.state.eventList.cloneWithRows([{name: 'Rum Ham'}]),
       });
-    })
+    });
   }
 
   componentWillMount() {
@@ -59,26 +62,17 @@ class EventList extends Component {
   componentDidMount() {
   }
 
+
+
   render() {
-    let listRender = null;
-    if (this.state.loading) {
-      console.log('loading');
-      listRender = 
-        <View style={styles.eventContainer}>
-          <ActivityIndicator size='large' style={{height:80}} />
-        </View>;
-    } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
-      console.log('cant get user geolocation');
-      listRender = 
-        <View style={styles.eventContainer}>
-          <Text style={{textAlign: 'center'}}>Error, please try again</Text>
-        </View>;
+    let list = null;
+    if (this.state.listSwitch) {
+      list = <EventListMap />;
     } else {
-      console.log('else');
-      listRender = 
+      list = 
         <View style={styles.eventContainer}>
           <TouchableHighlight onPress={ () => this.searchPressed() }>
-          <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
+            <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
           </TouchableHighlight>
           <ListView
             dataSource={this.state.eventList}
@@ -88,10 +82,44 @@ class EventList extends Component {
         </View>;
     }
 
+    let listPageRender = null;
+    if (this.state.loading) {
+      console.log('loading');
+      listPageRender = 
+        <View style={styles.eventContainer}>
+          <ActivityIndicator size='large' style={{height: 80}} />
+        </View>;
+    } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
+      console.log('cant get user geolocation');
+      listPageRender = 
+        <View style={styles.eventContainer}>
+          <Text style={{textAlign: 'center'}}>Error, please try again</Text>
+        </View>;
+    } else {
+      console.log('else');
+      listPageRender = 
+        <View style={styles.eventContainer}>
+          <View style={styles.switchContainer}>
+            <Text style={styles.switch}>
+              List 
+              <Switch
+                onValueChange={(value) => {
+                  this.setState({listSwitch: value});
+                  // Actions.event();  // should render correctly
+                }}
+                value={this.state.listSwitch}
+              />
+              Map
+            </Text>
+          </View>
+          {list}
+        </View>;
+    }
+
     return (
       <View style={styles.container}>
         <NavBar />
-        {listRender}
+        {listPageRender}
         <TabBar />
       </View>
     );
@@ -158,11 +186,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     display: 'flex',
+    // alignItems: 'center', // should center things but doesnt???? // probably should make a new view 
     // paddingTop: 20,
+  },
+  switch: {
+    marginTop: 5,
+    fontSize: 20,
+  },
+  switchContainer: {
+    // display: 'flex',
+    // flex: 1,
+    alignItems: 'center'
   }
 });
 
-function mapDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
