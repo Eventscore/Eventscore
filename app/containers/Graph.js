@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
+import { ActionCreators } from '../actions';
 import ReactNative, {ART, TouchableWithoutFeedback} from 'react-native';
 import PiePiece from './PiePiece';
 
@@ -24,25 +26,6 @@ const d3 = {
   scale,
   shape,
 };
-
-const data = [
-  {'weight': 1, 'name': 'Spotify Artist Ranking', 'score': 60},
-  {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
-  {'weight': 1.5, 'name': 'SeatGeek Score', 'score': 75},
-  {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
-  {'weight': 2, 'name': 'Beyonce test', 'score': 100},
-  {'weight': .5, 'name': 'Misc', 'score': 80},
-];
-
-const eventScore = 
-  Math.round(
-  data.reduce(function(a, b) {
-    return a + (b.score * b.weight); 
-  }, 0) / 
-  data.reduce(function(a, b) { 
-    return a + b.weight; 
-  }, 0)
-  );
 
 const colors = [
   '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
@@ -71,7 +54,11 @@ class Graph extends Component {
     return colors[index % colors.length]; 
   }
 
-  _createPieChart(index, item) {
+
+
+  
+
+  _createPieChart(index, item, data) {
 
     // console.log('val', this._value);
     let arcs = d3.shape.pie()
@@ -102,6 +89,31 @@ class Graph extends Component {
   }
 
   render () {
+    console.log('event red', this.props.eventsReducers.currEvent);
+    const event = this.props.eventsReducers.currEvent;
+    let data = [ // const??? had changed from const to let
+      // {'weight': 1, 'name': 'Spotify Artist Ranking', 'score': 60},
+      // {'weight': 1.5, 'name': 'SeatGeek Score', 'score': 75},
+      {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
+      {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
+      {'weight': 2, 'name': 'Beyonce test', 'score': 100},
+      {'weight': .5, 'name': 'Misc', 'score': 80},
+    ];
+    // GET FOR ALL ARTISTS BUT NEED TO REMOVE DUPLICATES!
+    if (event.artists[0] !== undefined) {
+      data.push({'weight': 1, 'name': 'Spotify Artist Ranking (true) ' + event.artists[0].name, 'score': event.artists[0].spotify.popularity});
+      data.push({'weight': 1, 'name': 'SeatGeek Score (true) ' + event.artists[0].name, 'score': event.artists[0].score * 100});
+    }
+
+    const eventScore = 
+      Math.round(
+      data.reduce(function(a, b) {
+        return a + (b.score * b.weight); 
+      }, 0) / 
+      data.reduce(function(a, b) { 
+        return a + b.weight; 
+      }, 0)
+      );
     return (
       <View style={styles.container}>
 
@@ -113,7 +125,7 @@ class Graph extends Component {
             (<PiePiece
               key={index}
               color={'rgba(0,0,0,0)'} // white is #ffffff
-              d={this._createPieChart(index, item)[1]}  
+              d={this._createPieChart(index, item, data)[1]}  
             />)
           )
         }
@@ -124,7 +136,7 @@ class Graph extends Component {
             (<PiePiece
               key={index}
               color={this._color(index)}
-              d={this._createPieChart(index, item)[0]}  
+              d={this._createPieChart(index, item, data)[0]}  
             />)
           )
         }
@@ -179,4 +191,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(({routes}) => ({routes}))(Graph);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(Graph);
