@@ -38,8 +38,8 @@ class EventList extends Component {
   getEvents() {
     this.setState({cannotGetLocation: false});
     this.props.fetchNearbyEvents(
-      this.props.eventsReducers.geolocation.coords.longitude,
-      this.props.eventsReducers.geolocation.coords.latitude
+      this.props.locationReducers.geolocation.coords.longitude,
+      this.props.locationReducers.geolocation.coords.latitude
     ).then(() => {
       this.setState({
         eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
@@ -152,4 +152,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers}}, mapDispatchToProps)(EventList);
+export default connect(({routes, loginReducers, eventsReducers, locationReducers}) => { return {routes, loginReducers, eventsReducers, locationReducers}}, mapDispatchToProps)(EventList);

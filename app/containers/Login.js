@@ -45,6 +45,10 @@ class Login extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getLocation();
+  }
+
   // Back Button Render
   // <View style={styles.headerIconView}>
   //   <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>
@@ -216,4 +220,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers, addCountExample}) => { return {routes, loginReducers, eventsReducers, addCountExample}}, mapDispatchToProps)(Login);
+export default connect(({routes, loginReducers, eventsReducers, locationReducers}) => { return {routes, loginReducers, eventsReducers, locationReducers}}, mapDispatchToProps)(Login);
