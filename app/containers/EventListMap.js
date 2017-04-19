@@ -18,25 +18,12 @@ const ASPECT_RATIO = width / (height);// - 200); // 100 = 60 + 40 (height of nav
 const LATITUDE_DELTA = 0.5;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-      // this.props.eventsReducers.geolocation.coords.longitude,
-      // this.props.eventsReducers.geolocation.coords.latitude
-
 class EventListMap extends Component {
   render() {
     const LATITUDE = this.props.eventsReducers.geolocation.coords.latitude;
     const LONGITUDE = this.props.eventsReducers.geolocation.coords.longitude;
     const TITLE = 'Beyonce';
     const LOCATION = 'Levi Stadium';
-    let coords = {
-      latitude: LATITUDE - .005,
-      longitude: LONGITUDE - .005,
-    };
-    let coords2 = {
-      latitude: LATITUDE + .005,
-      longitude: LONGITUDE + .005,
-    };
-    // let coordsArr = [{coords: coords, title: TITLE, location: LOCATION}, {coords: coords2, title: TITLE + '1', location: LOCATION}];
-      {console.log('edwin events', this.props.eventsReducers.events)}
     let coordsArr = this.props.eventsReducers.events.map(function(event) {
       return {
         coords: {latitude: event.location.coordinates[1], longitude: event.location.coordinates[0]}, 
@@ -83,16 +70,10 @@ class EventListMap extends Component {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    // marginTop: 20,
-    // alignItems: 'center',
     flex: 1,
-    // backgroundColor: 'gold',
-    // justifyContent: 'center',
   },
   scrollview: {
     alignItems: 'center',
-    // justifyContent: 'center',
-    // paddingVertical: 40,
     flex: 1,
     display: 'flex'
   },
@@ -106,4 +87,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(EventListMap);
+export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers}; }, mapDispatchToProps)(EventListMap);
