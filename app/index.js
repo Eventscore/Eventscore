@@ -28,6 +28,7 @@ import User from './containers/User';
 import EventView from './containers/EventView';
 import EventList from './containers/EventList';
 import EventListMapWorking from './containers/EventListMapWorking';
+import EventListMap from './containers/EventListMap';
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -40,6 +41,7 @@ const scenes = Actions.create(
     <Scene key="eventview" component={EventView} hideNavBar />
     <Scene key="user" component={User} title="User" hideNavBar />
     <Scene key="eventlistmapworking" component={EventListMapWorking} title="EventListMapWorking" hideNavBar />
+    <Scene key="eventlistmap" component={EventListMap} title="EventListMap" hideNavBar />
   </Scene>
 );
 

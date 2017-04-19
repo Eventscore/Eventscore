@@ -27,6 +27,9 @@ class User extends Component {
           <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmapworking({type: ActionConst.PUSH})}}>
             <Text style={styles.buttonText}> BigMap </Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => {Actions.eventlistmap({type: ActionConst.PUSH})}}>
+            <Text style={styles.buttonText}> Map2 </Text>
+          </TouchableOpacity>
         </ScrollView>
         <TabBar />
       </View>
