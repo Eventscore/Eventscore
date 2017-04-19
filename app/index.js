@@ -24,10 +24,8 @@ import Landing from './containers/Landing';
 import Home from './containers/Home';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
-import User from './containers/User';
 import EventView from './containers/EventView';
 import EventList from './containers/EventList';
-import EventListMapWorking from './containers/EventListMapWorking';
 import EventListMap from './containers/EventListMap';
 
 const scenes = Actions.create(
@@ -39,8 +37,6 @@ const scenes = Actions.create(
     <Scene key="filter" component={Filter} title="Search" hideNavBar />
     <Scene key="event" component={EventList} title="Events" hideNavBar />
     <Scene key="eventview" component={EventView} hideNavBar />
-    <Scene key="user" component={User} title="User" hideNavBar />
-    <Scene key="eventlistmapworking" component={EventListMapWorking} title="EventListMapWorking" hideNavBar />
     <Scene key="eventlistmap" component={EventListMap} title="EventListMap" hideNavBar />
   </Scene>
 );
