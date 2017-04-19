@@ -17,7 +17,8 @@ const {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  ScrollView
 } = ReactNative;
 
 class EventView extends Component {
@@ -72,6 +73,7 @@ class EventView extends Component {
     return (
       <View style={styles.container}>
       <NavBar />
+      <ScrollView style={styles.scroll}>
       <View style={styles.eventViewContainer}>
         <View style={styles.eventContainer}>
           <View style={styles.dateBox}>
@@ -100,7 +102,9 @@ class EventView extends Component {
         </View>
         <LocationMap />
         <Graph/> 
-      </View> 
+      </View>
+      </ScrollView>
+      <TabBar /> 
       </View>
     );
   }
@@ -115,6 +119,7 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
+    flex: 1
   },
   eventViewContainer: {
     // backgroundColor: '#4682B4',
@@ -181,6 +186,9 @@ const styles = StyleSheet.create({
   scoreNumber:{
     textAlign: 'center',
     fontSize: 18
+  },
+  scroll:{
+    flex: 1
   }
 });
 
