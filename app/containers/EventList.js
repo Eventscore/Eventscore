@@ -62,8 +62,6 @@ class EventList extends Component {
   componentDidMount() {
   }
 
-
-
   render() {
     let list = null;
     if (this.state.listSwitch) {
@@ -105,7 +103,6 @@ class EventList extends Component {
               <Switch
                 onValueChange={(value) => {
                   this.setState({listSwitch: value});
-                  // Actions.event();  // should render correctly
                 }}
                 value={this.state.listSwitch}
               />
@@ -123,50 +120,6 @@ class EventList extends Component {
         <TabBar />
       </View>
     );
-
-    // OLD RENDER // TO BE DELETED AFTER CODE REVIEW
-    // if (this.state.loading) {
-    //   console.log('loading');
-    //   return (
-    //     <View style={styles.container}>
-    //       <NavBar />
-    //       <View style={styles.eventContainer}>
-    //         <ActivityIndicator size='large' style={{height:80}} />
-    //       </View>
-    //       <TabBar />
-    //     </View>
-    //   )
-    // } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
-    //   console.log('cant get user geolocation');
-    //   return (
-    //     <View style={styles.container}>
-    //       <NavBar />
-    //       <View style={styles.eventContainer}>
-    //         <Text style={{textAlign: 'center'}}>Error, please try again</Text>
-    //       </View>
-    //       <TabBar />
-    //     </View>
-    //   )
-    // } else {
-    //   console.log('else');
-    //   return (
-    //     <View style={styles.container}>
-    //       <NavBar />
-    //       <View style={styles.eventContainer}>
-    //         <TouchableHighlight onPress={ () => this.searchPressed() }>
-    //           <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
-    //         </TouchableHighlight>
-    //         <ListView
-    //           dataSource={this.state.eventList}
-    //           // dataSource={this.props.eventsReducers.events}
-    //           renderRow={(event) => <EventListItem key={event._id} event={event} />}
-    //         />
-    //       </View>
-    //       <TabBar />
-    //     </View>
-    //   )
-    // }
-
   }
 }
 
@@ -182,20 +135,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   eventContainer: {
-    // backgroundColor: '#4682B4',
     flex: 1,
     justifyContent: 'center',
     display: 'flex',
-    // alignItems: 'center', // should center things but doesnt???? // probably should make a new view 
-    // paddingTop: 20,
   },
   switch: {
     marginTop: 5,
     fontSize: 20,
   },
   switchContainer: {
-    // display: 'flex',
-    // flex: 1,
     alignItems: 'center'
   }
 });
