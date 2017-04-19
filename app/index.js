@@ -26,7 +26,6 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import EventView from './containers/EventView';
 import EventList from './containers/EventList';
-import EventListMap from './containers/EventListMap';
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -37,7 +36,6 @@ const scenes = Actions.create(
     <Scene key="filter" component={Filter} title="Search" hideNavBar />
     <Scene key="event" component={EventList} title="Events" hideNavBar />
     <Scene key="eventview" component={EventView} hideNavBar />
-    <Scene key="eventlistmap" component={EventListMap} title="EventListMap" hideNavBar />
   </Scene>
 );
 
