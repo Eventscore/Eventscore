@@ -23,43 +23,39 @@ class EventList extends Component {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       eventList: ds.cloneWithRows([]),
-      loading: true,
-      cannotGetLocation: false,
       listSwitch: false
     };
   }
 
   searchPressed() {
-    this.setState({loading: true});
-    this.props.getLocation();
-    this.getEvents();
+    this.getNearbyEvents();
   }
 
-  getEvents() {
-    this.setState({cannotGetLocation: false});
+  async getNearbyEvents() {
+    let getLocation = await this.props.getLocation();
     this.props.fetchNearbyEvents(
       this.props.locationReducers.geolocation.coords.longitude,
       this.props.locationReducers.geolocation.coords.latitude
     ).then(() => {
       this.setState({
         eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
-        loading: false
       });
     }).catch((error) => {
       console.log(error);
-      this.setState({
-        loading: false,
-        cannotGetLocation: true
-        // eventList: this.state.eventList.cloneWithRows([{name: 'Rum Ham'}]),
-      });
     });
   }
 
   componentWillMount() {
-    this.getEvents();
   }
 
   componentDidMount() {
+    if (!this.props.eventsReducers.events) {
+      this.getNearbyEvents();
+    } else {
+      this.setState({
+          eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
+      });
+    }
   }
 
   render() {
@@ -74,27 +70,26 @@ class EventList extends Component {
           </TouchableHighlight>
           <ListView
             dataSource={this.state.eventList}
-            // dataSource={this.props.eventsReducers.events}
             renderRow={(event) => <EventListItem key={event._id} event={event} />}
           />
         </View>;
     }
 
     let listPageRender = null;
-    if (this.state.loading) {
-      console.log('loading');
+    if (this.props.eventsReducers.loadingEvents) {
       listPageRender = 
         <View style={styles.eventContainer}>
           <ActivityIndicator size='large' style={{height: 80}} />
         </View>;
-    } else if (this.state.cannotGetLocation) { // if cannot get user geolocation
-      console.log('cant get user geolocation');
+    } else if (this.props.eventsReducers.cannotGetEvents) { // if cannot get user geolocation
       listPageRender = 
         <View style={styles.eventContainer}>
+          <TouchableHighlight onPress={ () => this.searchPressed() }>
+            <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
+          </TouchableHighlight>
           <Text style={{textAlign: 'center'}}>Error, please try again</Text>
         </View>;
-    } else {
-      console.log('else');
+    } else if (this.props.eventsReducers.events) {
       listPageRender = 
         <View style={styles.eventContainer}>
           <View style={styles.switchContainer}>
@@ -110,6 +105,10 @@ class EventList extends Component {
             </Text>
           </View>
           {list}
+        </View>;
+    } else {
+      listPageRender = 
+        <View style={styles.eventContainer}>
         </View>;
     }
 

@@ -1,27 +1,25 @@
 export default function eventsReducer(state = {}, action) {  
   switch (action.type) {
     case 'REQUEST_EVENTS':
-      return state;
+      return Object.assign({}, state, {
+        loadingEvents: action.loadingEvents
+      });
     case 'RECEIVE_EVENTS':
       return Object.assign({}, state, {
-        events: action.events
+        events: action.events,
+        loadingEvents: action.loadingEvents,
+        cannotGetEvents: action.cannotGetEvents
       });
     case 'RECEIVE_EVENTS_FAILED':
       return Object.assign({}, state, {
-        events: action.events
+        events: action.events,
+        loadingEvents: action.loadingEvents,
+        cannotGetEvents: action.cannotGetEvents
       });
     // ...other actions
     case 'CHANGE_CURR_EVENT':
       return Object.assign({}, state, {
         currEvent: action.currEvent
-      });
-    case 'GET_LOCATION':
-      return Object.assign({}, state, {
-        geolocation: action.geolocation
-      });
-    case 'GET_LOCATION_FAILED':
-      return Object.assign({}, state, {
-        geolocation: action.geolocation
       });
     case 'REQUEST_EVENTS_FILTER':
       return Object.assign({}, state, {

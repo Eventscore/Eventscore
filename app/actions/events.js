@@ -9,6 +9,10 @@ export function fetchNearbyEvents(long, lat) {
       `longitude/${encodeURIComponent(long)}`,
       `latitude/${encodeURIComponent(lat)}`
     ];
+    dispatch({
+      type: types.REQUEST_EVENTS,
+      loadingEvents: true
+    })
     return Api.get(`/api/events/${params.join('/')}`).then(res => {
       dispatch({
         type: types.RECEIVE_EVENTS,
@@ -16,7 +20,9 @@ export function fetchNearbyEvents(long, lat) {
         lat: lat,
         events: res,
         receivedAt: Date.now(),
-        res: res
+        res: res,
+        cannotGetEvents: false,
+        loadingEvents: false
       });
     }).catch( (ex) => {
       dispatch({
@@ -25,7 +31,9 @@ export function fetchNearbyEvents(long, lat) {
         lat: lat,
         events: null,
         receivedAt: Date.now(),        
-        res: ex
+        res: ex,
+        cannotGetEvents: true,
+        loadingEvents: false
       });
     });
   }
@@ -65,27 +73,5 @@ export function changeCurrEvent(event) {
   return {
     type: types.CHANGE_CURR_EVENT,
     currEvent: event
-  }
-}
-
-// location action
-export function getLocation() {
-  return (dispatch, getState) => {
-    return navigator.geolocation.getCurrentPosition(
-      (position) => {
-        // console.log('position: ', position);
-        dispatch({
-          type: types.GET_LOCATION,
-          geolocation: position
-        })
-      }, (error) => {
-        alert(JSON.stringify(error));
-        dispatch({
-          type: types.GET_LOCATION_FAILED,
-          geolocation: null
-        })
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000
-    });
   }
 }
