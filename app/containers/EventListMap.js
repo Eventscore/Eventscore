@@ -20,8 +20,8 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class EventListMap extends Component {
   render() {
-    const LATITUDE = this.props.eventsReducers.geolocation.coords.latitude;
-    const LONGITUDE = this.props.eventsReducers.geolocation.coords.longitude;
+    const LATITUDE = this.props.locationReducers.geolocation.coords.latitude;
+    const LONGITUDE = this.props.locationReducers.geolocation.coords.longitude;
     const TITLE = 'Beyonce';
     const LOCATION = 'Levi Stadium';
     let coordsArr = this.props.eventsReducers.events.map(function(event) {
@@ -87,4 +87,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers}; }, mapDispatchToProps)(EventListMap);
+export default connect(({routes, eventsReducers, locationReducers}) => { return {routes, eventsReducers, locationReducers}; }, mapDispatchToProps)(EventListMap);

@@ -45,10 +45,6 @@ class Login extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.getLocation();
-  }
-
   // Back Button Render
   // <View style={styles.headerIconView}>
   //   <TouchableOpacity style={styles.headerBackButtonView} onPress={() => {Actions.pop()}}>

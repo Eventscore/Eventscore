@@ -30,14 +30,6 @@ import Filter from './Filter';
 // });
 
 class Home extends Component {
-  componentDidMount() {
-    // get location
-    // this.props.getLocation();
-    // this.props.fetchNearbyEvents(
-    //   this.props.eventsReducers.geolocation.coords.longitude,
-    //   this.props.eventsReducers.geolocation.coords.latitude
-    // );
-  }
   render() {
     return (
       <View style={styles.container}>
