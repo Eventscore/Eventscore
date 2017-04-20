@@ -44,8 +44,8 @@ class Filter extends Component {
     this.props.fetchEventByKeyword(
       keyword,
       genre,
-      this.props.eventsReducers.geolocation.coords.longitude,
-      this.props.eventsReducers.geolocation.coords.latitude
+      this.props.locationReducers.geolocation.coords.longitude,
+      this.props.locationReducers.geolocation.coords.latitude
     ).then(() => {
       {Actions.event()}
     }).catch((error) => {
@@ -55,7 +55,6 @@ class Filter extends Component {
   }
 
   render() {
-    console.log('filter: ', this);
     return (
       <View style={styles.container}>
         <View style={styles.headerSearchContainer}>
@@ -188,4 +187,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers}}, mapDispatchToProps)(Filter);
+export default connect(({routes, loginReducers, locationReducers, eventReducers}) => { return {routes, loginReducers, locationReducers, eventReducers}}, mapDispatchToProps)(Filter);
