@@ -30,8 +30,8 @@ var FilterItemGenre = React.createClass({
   getEvents(...args){
     // this.props.fetchEventByKeyword(keyword, genre)});
     this.props.fetchNearbyEvents(
-      this.props.eventsReducers.geolocation.coords.longitude,
-      this.props.eventsReducers.geolocation.coords.latitude
+      this.props.locationReducers.geolocation.coords.longitude,
+      this.props.locationReducers.geolocation.coords.latitude
     ).then(() => {
       {Actions.event()}
     }).catch((error) => {
@@ -82,4 +82,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers}}, mapDispatchToProps)(FilterItemGenre);
+export default connect(({routes, loginReducers, eventsReducers, locationReducers}) => { return {routes, loginReducers, eventsReducers, locationReducers}}, mapDispatchToProps)(FilterItemGenre);
