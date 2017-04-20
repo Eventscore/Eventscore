@@ -48,15 +48,15 @@ class Graph extends Component {
     this._createPieChart = this._createPieChart.bind(this);
     this._onPieItemSelected = this._onPieItemSelected.bind(this);
   }  
-  _value(item) { return item.weight; }
-  _label(item) { return item.name; }
+  _value(item) { 
+    return item.weight; 
+  }
+  _label(item) { 
+    return item.name; 
+  }
   _color(index) { 
     return colors[index % colors.length]; 
   }
-
-
-
-  
 
   _createPieChart(index, item, data) {
 
@@ -68,7 +68,7 @@ class Graph extends Component {
 
     let arc = d3.shape.arc()
       .outerRadius(( propsradius - innerRadius)*item.score/100 + innerRadius)  // Radius of the pie 
-      .padAngle(.05)    // Angle between sections
+      .padAngle(.04)    // Angle between sections
       .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
       // (arcs[index]);
 
@@ -88,22 +88,32 @@ class Graph extends Component {
     this.props.onItemSelected(index);
   }
 
+
   render () {
+    let _round = (num) => Math.round(100 * num) / 100; 
     console.log('event red', this.props.eventsReducers.currEvent);
     const event = this.props.eventsReducers.currEvent;
     let data = [ // const??? had changed from const to let
       // {'weight': 1, 'name': 'Spotify Artist Ranking', 'score': 60},
       // {'weight': 1.5, 'name': 'SeatGeek Score', 'score': 75},
-      {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
-      {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
-      {'weight': 2, 'name': 'Beyonce test', 'score': 100},
-      {'weight': .5, 'name': 'Misc', 'score': 80},
+      // {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
+      // {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
+      {'weight': .3, 'name': 'Beyonce test', 'score': 100},
+      // {'weight': .5, 'name': 'Misc', 'score': 80},
     ];
     // GET FOR ALL ARTISTS BUT NEED TO REMOVE DUPLICATES!
     if (event.artists[0] !== undefined) {
-      data.push({'weight': 1, 'name': 'Spotify Artist Ranking (true) ' + event.artists[0].name, 'score': event.artists[0].spotify.popularity});
-      data.push({'weight': 1, 'name': 'SeatGeek Score (true) ' + event.artists[0].name, 'score': event.artists[0].score * 100});
+      let weight = 1;
+      event.artists.forEach(function(artist, index) {
+        data.push({'weight': weight, 'name': 'Spotify Artist Ranking (true) ' + artist.name, 'score': artist.spotify.popularity});
+        data.push({'weight': weight, 'name': 'SeatGeek Score (true) ' + artist.name, 'score': _round(artist.score * 100)});
+        if (index === 0) {
+          weight /= event.artists.length;
+        }
+      });
     }
+    data.push({'weight': 0.5, 'name': 'Venue Score (true) at ' + event.venue, 'score': _round(event.venueScore * 100)});
+    data.push({'weight': 1.5, 'name': 'SeatGeek Event Score (true)', 'score': _round(event.sgscore * 100)});
 
     const eventScore = 
       Math.round(

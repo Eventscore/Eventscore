@@ -101,6 +101,12 @@ class EventView extends Component {
           </View>
         </View>
         <LocationMap />
+        { artists[0] ? 
+          <Image
+            style={{height: 50, width: 50}}
+            source={{uri: artists[0].img }}
+            // resizeMode='cover' // want to put this somewhere // possibly as background
+          /> : null}
         <Graph/> 
       </View>
       </ScrollView>
