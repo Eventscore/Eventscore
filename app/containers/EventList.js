@@ -14,8 +14,9 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import EventListItem from './EventListItem';
 import EventListMap from './EventListMap';
-import NavBar from './NavBar';
+// import NavBar from './NavBar';
 import TabBar from './TabBar';
+import Search from './Search'; //remove this later, only for testing
 
 class EventList extends Component {
   constructor() {
@@ -114,7 +115,7 @@ class EventList extends Component {
 
     return (
       <View style={styles.container}>
-        <NavBar />
+        <Search />
         {listPageRender}
         <TabBar />
       </View>
