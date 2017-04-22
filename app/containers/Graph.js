@@ -38,6 +38,7 @@ const innerRadius = 20; // .3 * pieWidth/2  OR .3 * pieRadius
 const margin = 20;
 const width = 2*propsradius + 2*margin;
 const height = 2*propsradius + 2*margin;
+const padAngle = 0.03;
 
 class Graph extends Component {
   constructor(props) {
@@ -68,13 +69,13 @@ class Graph extends Component {
 
     let arc = d3.shape.arc()
       .outerRadius(( propsradius - innerRadius)*item.score/100 + innerRadius)  // Radius of the pie 
-      .padAngle(.04)    // Angle between sections
+      .padAngle(padAngle)    // Angle between sections
       .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
       // (arcs[index]);
 
     let outerArc = d3.shape.arc()
       .outerRadius(propsradius)  // Radius of the pie 
-      .padAngle(.05)    // Angle between sections
+      .padAngle(padAngle)    // Angle between sections
       .innerRadius(innerRadius);  // Inner radius: to create a donut or pie
       // (arcs[index]);
 
