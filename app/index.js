@@ -26,6 +26,7 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import EventView from './containers/EventView';
 import EventList from './containers/EventList';
+import Search from './containers/Search'; //for testing, remove later
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -34,7 +35,7 @@ const scenes = Actions.create(
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
     <Scene key="home" component={Home} title="Home" hideNavBar />
     <Scene key="filter" component={Filter} title="Search" hideNavBar />
-    <Scene key="event" component={EventList} title="Events" hideNavBar />
+    <Scene key="event" component={EventList} title="Events" />
     <Scene key="eventview" component={EventView} hideNavBar />
   </Scene>
 );
