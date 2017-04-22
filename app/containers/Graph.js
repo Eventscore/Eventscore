@@ -36,8 +36,6 @@ const colors = [
 const propsradius = 100;
 const innerRadius = 20; // .3 * pieWidth/2  OR .3 * pieRadius
 const margin = 20;
-const width = 2*propsradius + 2*margin;
-const height = 2*propsradius + 2*margin;
 const padAngle = 0.03;
 
 class Graph extends Component {
@@ -63,7 +61,7 @@ class Graph extends Component {
 
     // console.log('val', this._value);
     let arcs = d3.shape.pie()
-      // .value(this._value)
+      .sort(null) // this makes it not go by weight!
       .value(this._value)
       (data);
 
@@ -99,22 +97,22 @@ class Graph extends Component {
       // {'weight': 1.5, 'name': 'SeatGeek Score', 'score': 75},
       // {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
       // {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
-      {'weight': .3, 'name': 'Beyonce test', 'score': 100},
       // {'weight': .5, 'name': 'Misc', 'score': 80},
+      {'weight': .3, 'name': 'Beyonce test (fixed)', 'score': 100},
     ];
     // GET FOR ALL ARTISTS BUT NEED TO REMOVE DUPLICATES!
     if (event.artists[0] !== undefined) {
       let weight = 1;
       event.artists.forEach(function(artist, index) {
-        data.push({'weight': weight, 'name': 'Spotify Artist Ranking (true) ' + artist.name, 'score': artist.spotify.popularity});
-        data.push({'weight': weight, 'name': 'SeatGeek Score (true) ' + artist.name, 'score': _round(artist.score * 100)});
+        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity});
+        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100)});
         if (index === 0) {
           weight /= event.artists.length;
         }
       });
     }
-    data.push({'weight': 0.5, 'name': 'Venue Score (true) at ' + event.venue, 'score': _round(event.venueScore * 100)});
-    data.push({'weight': 1.5, 'name': 'SeatGeek Event Score (true)', 'score': _round(event.sgscore * 100)});
+    data.push({'weight': 0.5, 'name': event.venue + '\'s Venue Score', 'score': _round(event.venueScore * 100)});
+    data.push({'weight': 1.5, 'name': 'SeatGeek Event Score', 'score': _round(event.sgscore * 100)});
 
     const eventScore = 
       Math.round(
@@ -128,8 +126,8 @@ class Graph extends Component {
     return (
       <View style={styles.container}>
 
-        <Surface width={width} height={height}>
-        <Group x={width/2} y={propsradius + margin}> 
+        <Surface width={2 * (propsradius + margin) } height={2 * (propsradius + margin)}>
+        <Group x={propsradius + margin} y={propsradius + margin}> 
         {
           data.map( (item, index) => 
             // {console.log(item)}
@@ -141,7 +139,7 @@ class Graph extends Component {
           )
         }
         </Group>
-        <Group x={width/2} y={propsradius + margin}> 
+        <Group x={propsradius + margin} y={propsradius + margin}> 
         {
           data.map( (item, index) => 
             (<PiePiece
