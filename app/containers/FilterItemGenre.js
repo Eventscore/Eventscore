@@ -44,13 +44,11 @@ var FilterItemGenre = React.createClass({
     return(
       <View style={styles.filterOptionGenre}>
         <TouchableOpacity style={styles.filterOptionGenre} onPress={() => this.fetchEventsByGenreRedux()} value={this.props.genre}>
-          <Image source={background} 
-          style={styles.filterOptionGenre} 
-          resizeMode="cover">
-            <View style={styles.genreTextContainer}>
-              <Text style={styles.genreTextTitle}>{this.props.genre}</Text>
-            </View>
+          <Image source={this.props.genre[1]} 
+          style={styles.genrePic} 
+          resizeMode='contain'>
           </Image>     
+          <Text style={styles.genreTextTitle}>{this.props.genre[0]}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -60,14 +58,20 @@ var FilterItemGenre = React.createClass({
 const styles = StyleSheet.create({
   filterOptionContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   filterOptionGenre: {
     // display: 'flex',
     // flex: 1,
     // margin: 5,
-    width: 125,
-    height: 125,
+    width: 150,
+    height: 150,
+    backgroundColor: 'dimgrey', // idk if we want solid pics or what. this color is ugly and is just a placeholder
+    marginBottom: 25
+  },
+  genrePic: {
+    width: 150,
+    height: 150,
   },
   genreTextContainer: {
     // display: 'flex',
@@ -75,6 +79,13 @@ const styles = StyleSheet.create({
   },
   genreTextTitle: {
     color: '#FFF',
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    // justifySelf: 'center'
+    // left: '50%',
+    top: '50%', // isn't the best way because it's not centered
+    // transform: 'translate(-50%, -50%)'
   }
 });
 
