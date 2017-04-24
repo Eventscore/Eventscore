@@ -20,12 +20,23 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const { width , height } = Dimensions.get("window");
 const background = require("../assets/image/login1_bg.png");
 import FilterItemGenre from './FilterItemGenre'
+const popImg = require("../assets/image/genres/pop.png");
+const rockImg = require("../assets/image/genres/rock.png");
+const countryImg = require("../assets/image/genres/country.png");
+const jazzImg = require("../assets/image/genres/jazz.png");
+const electronicImg = require("../assets/image/genres/electronic.png");
+const rapImg = require("../assets/image/genres/rap.png");
+
+// const genreImages = require('../assets/image/Genres');
 
 class Filter extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const genreList = ['pop', 'hip hop', 'rock', 'soul', 'jazz', 'electronic'];
+    // const genreList = ['pop', 'hip hop', 'rock', 'soul', 'jazz', 'electronic'];
+    // const genreList = [{name: 'pop', img: popImg}, {name: 'rap', img: rapImg}, {name: 'rock', img: rockImg}, {name: 'country', img: countryImg}, {name: 'jazz', img: jazzImg}, {name: 'electronic', img: electronicImg} ];
+    const genreList = [['pop', popImg], ['rap', rapImg], ['rock', rockImg], ['country', countryImg], ['jazz', jazzImg], ['electronic', electronicImg] ];
+    // const genreList = ['pop', 'hip hop', 'rock', 'country', 'jazz', 'electronic'];
     this.state = {
       keyword: '',
       genreList: ds.cloneWithRows(genreList),    
