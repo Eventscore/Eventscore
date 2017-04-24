@@ -197,6 +197,9 @@ const styles = StyleSheet.create({
   scoreStyle: {
     fontSize: 20,
     // color: '#ffffff', // white color
+  },
+  label: {
+    alignSelf: 'center'
   }
 });
 
