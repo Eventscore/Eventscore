@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',        
   },
   tabIconName: {
-    color: '#000000',
+    color: '#fff',
   }
 });
 
