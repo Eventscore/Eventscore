@@ -114,6 +114,10 @@ class Graph extends Component {
     data.push({'weight': 0.5, 'name': event.venue + '\'s Venue Score', 'score': _round(event.venueScore * 100)});
     data.push({'weight': 1.5, 'name': 'SeatGeek Event Score', 'score': _round(event.sgscore * 100)});
 
+    if (event.watsonScore) {
+      data.push({'weight': 2, 'name': 'EventScore Crawl', 'score': _round(event.watsonScore.score)});
+    }
+
     const eventScore = 
       Math.round(
       data.reduce(function(a, b) {
