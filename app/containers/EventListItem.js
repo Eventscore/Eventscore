@@ -21,6 +21,9 @@ class EventListItem extends Component {
   constructor() {
     super();
     this.state = {
+      isRefreshing: false,
+      loaded: 0,
+
     };
   }
 

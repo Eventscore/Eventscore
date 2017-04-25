@@ -14,6 +14,7 @@ import {
   StyleSheet,
   Dimensions,
   ListView,
+  StatusBar
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,6 +30,7 @@ const countryImg = require("../assets/image/genres/country.png");
 const jazzImg = require("../assets/image/genres/jazz.png");
 const electronicImg = require("../assets/image/genres/electronic.png");
 const rapImg = require("../assets/image/genres/rap.png");
+StatusBar.setBarStyle('light-content', true);
 
 class Home extends Component {
   constructor(props) {
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    margin: 12
+    padding: 8
   }
 });
 

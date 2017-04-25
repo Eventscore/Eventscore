@@ -7,7 +7,9 @@ import {
   Text,
   View,
   ActivityIndicator,
-  Switch
+  Switch,
+  RefreshControl,
+  ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,12 +21,16 @@ import TabBar from './TabBar';
 import Search from './Search'; //remove this later, only for testing
 
 class EventList extends Component {
+  static title = '<RefreshControl>';
+  static description = 'Adds pull-to-refresh support to a scrollview.';
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       eventList: ds.cloneWithRows([]),
-      listSwitch: false
+      listSwitch: false,
+      isRefreshing: false,
+      loaded: 0,
     };
   }
 
@@ -66,13 +72,23 @@ class EventList extends Component {
     } else {
       list = 
         <View style={styles.eventContainer}>
-          <TouchableHighlight onPress={ () => this.searchPressed() }>
-            <Text style={styles.fetchEventsText}>Check Nearby Events!</Text>
-          </TouchableHighlight>
+          <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={() => this.searchPressed()}
+              tintColor="#ff0000"
+              title="Loading..."
+              titleColor="#00ff00"
+              colors={['#ff0000', '#00ff00', '#0000ff']}
+              progressBackgroundColor="#ffff00"
+            />
+          }>
           <ListView
             dataSource={this.state.eventList}
             renderRow={(event) => <EventListItem key={event._id} event={event} />}
           />
+          </ScrollView>
         </View>;
     }
 
