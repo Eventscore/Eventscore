@@ -114,10 +114,16 @@ class EventList extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        <Search />
-        {listPageRender}
-        <TabBar />
+      <View style={{flex: 1}}>
+        <View style={{flex: -1, zIndex: 1}}>
+          <Search />
+        </View>
+        <View style={{flex: 8, zIndex: 0}}>
+          {listPageRender}
+        </View>
+        <View style={{flex: 1, zIndex: 2}}>
+          <TabBar />
+        </View>
       </View>
     );
   }
