@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#050505',
   },
   title: {
-
+    color: 'dimgrey',
+    fontSize: 24
   },
   list: {
     display: 'flex',
