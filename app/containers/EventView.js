@@ -50,18 +50,6 @@ class EventView extends Component {
   }
 
   render() {
-    // let handleClick = function () {
-    //   // uri = this.props.eventsReducers
-      // const uri = this.props.eventsReducers.currEvent.sgticketsurl;
-    //   console.log('my', uri);
-    //   Linking.canOpenURL(uri).then(supported => {
-    //     if (supported) {
-    //       Linking.openURL(uri);
-    //     } else {
-    //       console.log('Don\'t know how to open URI: ' + uri);
-    //     }
-    //   });
-    // };
     const start = new Date(this.props.eventsReducers.currEvent.start);
     const startArray = start.toString() === 'Invalid Date' ? [] : start.toString().split(' '); 
     const day = startArray[0] || 'TBD';
