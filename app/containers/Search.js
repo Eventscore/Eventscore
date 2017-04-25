@@ -20,8 +20,11 @@ import {
   Dimensions,  
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const WINDOW = Dimensions.get('window');
+const deviceWidth = WINDOW.width;
+const deviceHeight = WINDOW.height;
 
 const defaultStyles = {
   searchContainer: {
@@ -87,6 +90,7 @@ const defaultStyles = {
   },
   textInputBottom: {
     backgroundColor: '#FFFFFF',
+    color: 'blue',
     height: 28,
     borderRadius: 5,
     paddingTop: 4.5,
@@ -156,35 +160,77 @@ const defaultStyles = {
 class Search extends Component {
   constructor() {
     super();
+    this.submitSearch = this.submitSearch.bind(this);
+  }
+
+  async getNearbyEvents() {
+    let getLocation = await this.props.getLocation();
+    console.log('COORDS', this.props.locationReducers.geolocation.coords);
+    this.setState({coords : this.props.locationReducers.geolocation.coords})
+  }
+
+  submitSearch() {
+    console.log('Searching...', this)
+  }
+
+  componentDidMount() {
+    //needs to set current location as default value for bottom search bar
+    this.getNearbyEvents()
   }
 
   render() {
     return (
-    <View style={defaultStyles.searchContainer} >
-      <View style={{flex: 1,flexDirection: 'column'}}>
-        <View style={defaultStyles.textInputContainerLeftTop} >
-            <Text style={defaultStyles.titleViewText}>EventScore</Text>
+      <View style={defaultStyles.searchContainer} >
+        <View style={{flex: 1,flexDirection: 'column'}}>
+          <View style={defaultStyles.textInputContainerLeftTop} >
+              <Text style={defaultStyles.titleViewText}>EventScore</Text>
+          </View>
+          <View style={defaultStyles.textInputContainerLeftBottom} >
+            <TextInput style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})} />
+          </View>
+          <GooglePlacesAutocomplete
+            enablePoweredByContainer={false}
+            placeholder="Search"
+            minLength={2}
+            autoFocus={false}
+            fetchDetails={true}
+            query={{
+              key: 'AIzaSyDAXlRh07LCOjC8nMSPNTJcXOPBXG91liE',
+              language: 'en',
+              types: '(cities)',
+            }}
+            styles={{
+              textInputContainer: defaultStyles.textInputContainerLeftBottom,
+              textInput: defaultStyles.textInputBottom,
+              listView: {
+                height: deviceHeight,
+                width: deviceWidth,
+              },
+            }}
+            nearbyPlacesAPI={'GooglePlacesSearch'}
+            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
+          >
+          </GooglePlacesAutocomplete>
         </View>
-        <View style={defaultStyles.textInputContainerLeftBottom} >
-          <TextInput style={defaultStyles.textInputTop} placeholder="e.g Beyonce, The Weeknd, Bruno Mars" />
-        </View>
-        <View style={defaultStyles.textInputContainerLeftBottom} >
-          <TextInput style={defaultStyles.textInputBottom} />
+        <View style={{flex: 1,flexDirection: 'column',alignItems: 'flex-end'}}>
+          <View style={defaultStyles.textInputContainerRightTop} >
+          </View>
+          <View style={defaultStyles.textInputContainerRightBottom} >
+            <TouchableHighlight underlayColor = 'transparent' onPress={this.submitSearch}>
+              <View>
+                <Icon name='search' size = {20} color = "#FFFFFF" />
+              </View>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
-      <View style={{flex: 1,flexDirection: 'column',alignItems: 'flex-end'}}>
-        <View style={defaultStyles.textInputContainerRightTop} >
-        </View>
-        <View style={defaultStyles.textInputContainerRightBottom} >
-          <TouchableHighlight underlayColor = 'transparent'>
-            <View>
-              <Icon name="search" size = {20} color = "#FFFFFF" />
-            </View>
-          </TouchableHighlight>
-        </View>
-      </View>
-    </View>
     )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    locationReducers: state.locationReducers
   }
 }
 
@@ -192,4 +238,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers}}, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
