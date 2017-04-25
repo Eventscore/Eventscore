@@ -37,7 +37,7 @@ class TabBar extends Component {
           <View style={styles.tabContainer}>
             <View style={styles.tabIconView}>
               <TouchableOpacity style={styles.iconButton} onPress={() => {Actions.home()}}>
-                <Icon name='home' style={styles.tabIconView} size={30} color="white" resizeMode="contain" />
+                <Icon name='home' style={styles.tabIconView} size={30} color="#FFF" resizeMode="contain" />
                 <Text style={styles.tabIconName}>Home</Text>
               </TouchableOpacity>            
             </View>
@@ -45,7 +45,7 @@ class TabBar extends Component {
           <View style={styles.tabContainer}>
             <View style={styles.tabIconView}>
               <TouchableOpacity style={styles.iconButton} onPress={() => {Actions.event()}}>
-                <Icon name='calendar' style={styles.tabIconView} size={30} color="white" resizeMode="contain" />
+                <Icon name='calendar' style={styles.tabIconView} size={30} color="#FFF" resizeMode="contain" />
                 <Text style={styles.tabIconName}>Events</Text>
               </TouchableOpacity>            
             </View>
@@ -58,6 +58,9 @@ class TabBar extends Component {
 const styles = StyleSheet.create({
   container: {
     // flex: 1
+    borderStyle: 'solid',
+    borderTopColor: '#fff',
+    borderTopWidth: 2
   },
   tabBarContainer: {
     display: 'flex',
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // flexWrap: 'nowrap',
     justifyContent: 'space-around',
-    backgroundColor: 'black',
+    backgroundColor: '#282828',
   },
   tabContainer: {
     backgroundColor: 'transparent',
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',        
   },
   tabIconName: {
-    color: '#FFF',
+    color: '#000000',
   }
 });
 

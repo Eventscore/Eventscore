@@ -30,8 +30,6 @@ const jazzImg = require("../assets/image/genres/jazz.png");
 const electronicImg = require("../assets/image/genres/electronic.png");
 const rapImg = require("../assets/image/genres/rap.png");
 
-// const genreImages = require('../assets/image/Genres');
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +49,6 @@ class Home extends Component {
   }
 
   getEvents(...args){
-    // this.props.fetchEventByKeyword(keyword, genre)});
     this.props.fetchEventByKeyword(
       keyword,
       genre,
@@ -69,6 +66,9 @@ class Home extends Component {
     return (
       <View style={styles.container}> 
         <Search />
+        <View style={styles.title}>
+          <Text>Search by Genres</Text>
+        </View>
         <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.genreList}
@@ -83,7 +83,10 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#393a3d',
+    backgroundColor: '#050505',
+  },
+  title: {
+
   },
   list: {
     display: 'flex',
@@ -94,8 +97,17 @@ const styles = StyleSheet.create({
   }
 });
 
+function mapStateToProps(state) {
+  return {
+    routes: state.routes,
+    loginReducers: state.loginReducers,
+    locationReducers: state.locationReducers,
+    eventReducers: state.eventReducers
+  }
+}
+
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, loginReducers, locationReducers, eventReducers}) => { return {routes, loginReducers, locationReducers, eventReducers}}, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
