@@ -18,7 +18,9 @@ const {
   Text,
   View,
   Button,
-  ScrollView
+  ScrollView,
+  Linking,
+  TouchableOpacity,
 } = ReactNative;
 
 class EventView extends Component {
@@ -36,7 +38,30 @@ class EventView extends Component {
     {Actions.event({type: ActionConst.BACK})}
   }
 
+  handlePress() {
+    const uri = this.props.eventsReducers.currEvent.sgticketsurl;
+    Linking.canOpenURL(uri).then(supported => {
+      if (supported) {
+        Linking.openURL(uri);
+      } else {
+        console.log('Don\'t know how to open URI: ' + uri);
+      }
+    });
+  }
+
   render() {
+    // let handleClick = function () {
+    //   // uri = this.props.eventsReducers
+      // const uri = this.props.eventsReducers.currEvent.sgticketsurl;
+    //   console.log('my', uri);
+    //   Linking.canOpenURL(uri).then(supported => {
+    //     if (supported) {
+    //       Linking.openURL(uri);
+    //     } else {
+    //       console.log('Don\'t know how to open URI: ' + uri);
+    //     }
+    //   });
+    // };
     const start = new Date(this.props.eventsReducers.currEvent.start);
     const startArray = start.toString() === 'Invalid Date' ? [] : start.toString().split(' '); 
     const day = startArray[0] || 'TBD';
@@ -108,6 +133,12 @@ class EventView extends Component {
             // resizeMode='cover' // want to put this somewhere // possibly as background
           /> : true}
         <Graph/> 
+        <TouchableOpacity
+          onPress={(e) => this.handlePress(e)}>
+          <View style={styles.button}>
+            <Text style={styles.text}>Buy Tickets</Text>
+          </View>
+        </TouchableOpacity>
       </View>
       </ScrollView>
       <TabBar /> 
@@ -195,7 +226,18 @@ const styles = StyleSheet.create({
   },
   scroll:{
     flex: 1
-  }
+  },
+  button: {
+    padding: 10,
+    // backgroundColor: '#3B5998',
+    backgroundColor: 'dimgray',
+    // marginBottom: 10,
+    marginTop: 30
+  },
+  text: {
+    color: 'white',
+    textAlign: 'center',
+  },
 });
 
 function mapDispatchToProps(dispatch) {
