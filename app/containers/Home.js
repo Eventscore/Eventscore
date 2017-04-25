@@ -64,21 +64,21 @@ class Home extends Component {
 
   render() {
     return (
-
-      <View style={{flex: 1}}>
-        <View style={{flex: -1, zIndex: 1}}>
+      <View style={styles.container}> 
+        <View style={{flex: -1, zIndex: 1}}> 
           <Search />
         </View>
-        <View style={{flex: 8, zIndex: 0}}>
-          <ListView
+        <ScrollView style={styles.title}>
+          <Text style={styles.titleText}>Search by Genres</Text>
+        <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.genreList}
           renderRow={ (genre) => <FilterItemGenre genre={genre} />}
-          />
-        </View>
+        />
+        </ScrollView>
         <View style={{flex: 1, zIndex: 2}}>
           <TabBar />
-        </View>
+        </View>        
       </View>
     );
   }
@@ -87,11 +87,18 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display: 'flex',
     backgroundColor: '#050505',
   },
   title: {
-    color: 'dimgrey',
-    fontSize: 24
+    // display: 'flex',
+    flex: 8, 
+    zIndex: 0
+  },
+  titleText: {
+    color: "#FFF",
+    fontSize: 24,
+    alignSelf: 'center',
   },
   list: {
     display: 'flex',
