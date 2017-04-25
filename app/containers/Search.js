@@ -122,11 +122,10 @@ const defaultStyles = {
     flexDirection: 'row',
   },
   inputContainer: {
-    // flex: 1,
     display: 'flex'
   },
   textInputContainerLeftTop: {
-    backgroundColor: '#bac2d1',
+    backgroundColor: '#181818',
     width: WINDOW.width,
     height: 44,
     borderTopColor: '#7e7e7e',
@@ -137,7 +136,7 @@ const defaultStyles = {
     alignItems: 'center',
   },
   textInputContainerLeftBottom: {
-    backgroundColor: '#bac2d1',
+    backgroundColor: '#181818',
     width: WINDOW.width * .9,
     height: 44,
     borderTopColor: '#7e7e7e',
@@ -147,7 +146,7 @@ const defaultStyles = {
     flexDirection: 'row',
   },
   textInputContainerRightTop: {
-    backgroundColor: '#bac2d1',
+    backgroundColor: '#181818',
     width: WINDOW.width * .1,
     height: 44,
     borderTopColor: '#7e7e7e',
@@ -158,7 +157,7 @@ const defaultStyles = {
     alignItems: 'center',
   },
   textInputContainerRightBottom: {
-    backgroundColor: '#bac2d1',
+    backgroundColor: '#181818',
     width: WINDOW.width * .1,
     height: 88,
     borderTopColor: '#7e7e7e',
