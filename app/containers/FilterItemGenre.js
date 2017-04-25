@@ -56,10 +56,6 @@ var FilterItemGenre = React.createClass({
 })
 
 const styles = StyleSheet.create({
-  filterOptionContainer: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
   filterOptionGenre: {
     // display: 'flex',
     // flex: 1,
@@ -72,10 +68,6 @@ const styles = StyleSheet.create({
   genrePic: {
     width: 150,
     height: 150,
-  },
-  genreTextContainer: {
-    // display: 'flex',
-    // justifyContent: 'center'
   },
   genreTextTitle: {
     color: '#FFF',
