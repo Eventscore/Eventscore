@@ -13,6 +13,7 @@
     "react-native": "0.43.2",
     "react-native-google-places-autocomplete": "^1.2.12",
     "react-native-maps": "^0.13.1",
+    "react-native-overlay": "^0.5.0",
     "react-native-router-flux": "^3.38.0",
     "react-native-vector-icons": "^4.0.1",
     "react-redux": "^5.0.3",
