@@ -7,7 +7,7 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import Graph from './Graph';
 import LocationMap from './Map';
 
-import Search from './Search';
+import BasicNav from './BasicNav';
 import TabBar from './TabBar';
 
 const {
@@ -83,15 +83,11 @@ class EventView extends Component {
       state
     } = this.props.eventsReducers.currEvent;
 
+
     return (
 
-      <View style={{flex: 1}}>
-
-
-        <View style={{flex: -1, zIndex: 1}}>
-          <Search />
-        </View>
-
+      <View style={styles.container}>
+      <BasicNav />
         <View style={{flex: 8, zIndex: 0}}>
           <ScrollView style={styles.scroll}>
             <View style={styles.eventViewContainer}>
@@ -150,13 +146,6 @@ class EventView extends Component {
 }
 
 const styles = StyleSheet.create({
-  backButton: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333333',
-    margin: 5
-  },
   container: {
     flex: 1
   },

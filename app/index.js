@@ -27,6 +27,7 @@ import Signup from './containers/Signup';
 import EventView from './containers/EventView';
 import EventList from './containers/EventList';
 import Search from './containers/Search'; //for testing, remove later
+import BasicNav from './containers/BasicNav';
 
 const scenes = Actions.create(
   <Scene key="root">

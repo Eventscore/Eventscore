@@ -151,6 +151,9 @@ const defaultStyles = {
 class Search extends Component {
   constructor() {
     super();
+    this.state ={
+      mainNav: true,
+    }
     this.submitSearch = this.submitSearch.bind(this);
   }
 
@@ -169,7 +172,10 @@ class Search extends Component {
     this.getNearbyEvents()
   }
 
+
   render() {
+    let searchInput = null;
+
     return (
       <View style={defaultStyles.searchContainer} >
         <View style={{flex: -1,flexDirection: 'column'}}>
