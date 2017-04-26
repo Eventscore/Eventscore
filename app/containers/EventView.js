@@ -7,7 +7,7 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import Graph from './Graph';
 import LocationMap from './Map';
 
-import NavBar from './NavBar';
+import Search from './Search';
 import TabBar from './TabBar';
 
 const {
@@ -84,52 +84,66 @@ class EventView extends Component {
     } = this.props.eventsReducers.currEvent;
 
     return (
-      <View style={styles.container}>
-      <NavBar />
-      <ScrollView style={styles.scroll}>
-      <View style={styles.eventViewContainer}>
-        <View style={styles.eventContainer}>
-          <View style={styles.dateBox}>
-            <Text style={styles.weekday}>{day}</Text>
-            <Text style={styles.date}>{date}</Text>
-          </View>
-          <View style={styles.eventInfo}>
-            <Text style={styles.artist}>
-              {artists[0] ? artists[0].name : 'Rum Ham'}
-            </Text>
-            <Text style={styles.headline}>{name}</Text>
-            <Text style={styles.timeVenue}>
-              {timeValue} @ {venue ? venue : 'Wrigley Field'}
-            </Text>
-            <Text style={styles.location}>
-              {city ? city : 'Chicago'}, 
-              {state ? state : 'IL'}
-            </Text>
-          </View>
-          <View style={styles.scoreBox}>
-            <Text style={styles.score}>Score:</Text>
-            <Text style={styles.scoreNumber}>
-              {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
-            </Text>
-          </View>
+
+      <View style={{flex: 1}}>
+
+
+        <View style={{flex: -1, zIndex: 1}}>
+          <Search />
         </View>
-        <LocationMap />
-        { artists[0] ? 
-          <Image
-            style={{height: 50, width: 50}}
-            source={{uri: artists[0].img }}
-            // resizeMode='cover' // want to put this somewhere // possibly as background
-          /> : true}
-        <Graph/> 
-        <TouchableOpacity
-          onPress={(e) => this.handlePress(e)}>
-          <View style={styles.button}>
-            <Text style={styles.text}>Buy Tickets</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      </ScrollView>
-      <TabBar /> 
+
+        <View style={{flex: 8, zIndex: 0}}>
+          <ScrollView style={styles.scroll}>
+            <View style={styles.eventViewContainer}>
+              <View style={styles.eventContainer}>
+                <View style={styles.dateBox}>
+                  <Text style={styles.weekday}>{day}</Text>
+                  <Text style={styles.date}>{date}</Text>
+                </View>
+                <View style={styles.eventInfo}>
+                  <Text style={styles.artist}>
+                    {artists[0] ? artists[0].name : 'Rum Ham'}
+                  </Text>
+                  <Text style={styles.headline}>{name}</Text>
+                  <Text style={styles.timeVenue}>
+                    {timeValue} @ {venue ? venue : 'Wrigley Field'}
+                  </Text>
+                  <Text style={styles.location}>
+                    {city ? city : 'Chicago'}, 
+                    {state ? state : 'IL'}
+                  </Text>
+                </View>
+                <View style={styles.scoreBox}>
+                  <Text style={styles.score}>Score:</Text>
+                  <Text style={styles.scoreNumber}>
+                    {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
+                  </Text>
+                </View>
+              </View>
+              <LocationMap />
+              { artists[0] ? 
+                <Image
+                  style={{height: 50, width: 50}}
+                  source={{uri: artists[0].img }}
+                  // resizeMode='cover' // want to put this somewhere // possibly as background
+                /> : true}
+              <Graph/> 
+              <TouchableOpacity
+                onPress={(e) => this.handlePress(e)}>
+                <View style={styles.button}>
+                  <Text style={styles.text}>Buy Tickets</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </View>
+
+        
+        <View style={{flex: 1, zIndex: 2}}>
+          <TabBar />
+        </View>
+
+
       </View>
     );
   }
