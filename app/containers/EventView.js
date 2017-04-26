@@ -90,6 +90,7 @@ class EventView extends Component {
           <BasicNav />
         </View>
         <ScrollView style={styles.eventBasicContainer}>
+
           { artists[0] ? 
             <Image
               style={styles.image}
@@ -100,6 +101,7 @@ class EventView extends Component {
               source={background}
             />
           }
+          <View style={{flex: 8, zIndex: 0}}>
           <View style={styles.eventInformation}>
             <Text style={styles.textTitle}>{name}</Text>
             <View style={styles.badgeList}>
@@ -119,6 +121,7 @@ class EventView extends Component {
                 <Text>{city}</Text>
               </View>
             </View>
+            <Graph/> 
             <TouchableOpacity
               onPress={(e) => this.handlePress(e)}>
               <View style={styles.buyButton}>
@@ -134,6 +137,7 @@ class EventView extends Component {
                 <Icon name='chevron-right' size={15} color="#7a7b7c" resizeMode="contain" />
               </View>
             </TouchableOpacity>            
+          </View>
           </View>
         </ScrollView>
         <View style={{flex: 1, zIndex: 2}}>
@@ -196,21 +200,19 @@ class EventView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 3,
+    // display: 'flex',
+    flex: -1,
+    // flexDirection: 'column',
+    // padding: 3,
   },
   eventBasicContainer: {
     display: 'flex',
-    // alignItems: 'stretch',
-    // resizeMode: 'cover',
-    // flex: 8, 
-    // zIndex: 0
+    // flex: 1,
   },
   image: {
     // flex: 1,
-    display: 'flex',
-    height: 150,
+    // display: 'flex',
+    height: 300,
     width: null, 
     // resizeMode: 'cover',
   },
