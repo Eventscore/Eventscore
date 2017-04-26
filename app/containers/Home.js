@@ -64,17 +64,21 @@ class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}> 
-        <Search />
-        <View style={styles.title}>
-          <Text>Search by Genres</Text>
+
+      <View style={{flex: 1}}>
+        <View style={{flex: -1, zIndex: 1}}>
+          <Search />
         </View>
-        <ListView
+        <View style={{flex: 8, zIndex: 0}}>
+          <ListView
           contentContainerStyle={styles.list}
           dataSource={this.state.genreList}
           renderRow={ (genre) => <FilterItemGenre genre={genre} />}
-        />
-        <TabBar />
+          />
+        </View>
+        <View style={{flex: 1, zIndex: 2}}>
+          <TabBar />
+        </View>
       </View>
     );
   }
