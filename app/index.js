@@ -33,9 +33,9 @@ const scenes = Actions.create(
     <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar/>    
     <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
-    <Scene key="home" component={Home} title="Home" hideNavBar initial />
+    <Scene key="home" component={Home} title="Home" hideNavBar />
     <Scene key="filter" component={Filter} title="Search" hideNavBar />
-    <Scene key="event" component={EventList} title="Events" hideNavBar />
+    <Scene key="event" component={EventList} title="Events" hideNavBar initial />
     <Scene key="eventview" component={EventView} hideNavBar />
   </Scene>
 );

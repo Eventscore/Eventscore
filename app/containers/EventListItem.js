@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import NavBar from './NavBar';
 import TabBar from './TabBar';
 
@@ -16,6 +17,8 @@ const {
   Text,
   View,
 } = ReactNative;
+
+const background = require("../assets/image/login1_bg.png");
 
 class EventListItem extends Component {
   constructor() {
@@ -72,30 +75,52 @@ class EventListItem extends Component {
     return (
       <TouchableHighlight onPress={() => this.pressListItem()}>
       <View style={styles.container}>
-        <View style={styles.dateBox}>
-          <Text style={styles.weekday}>{day}</Text>
-          <Text style={styles.date}>{date}</Text>
-        </View>
-        <View style={styles.eventInfo}>
-          <Text style={styles.artist}>
-            {artists[0] ? artists[0].name : 'Rum Ham'}
-          </Text>
-          <Text style={styles.headline}>{name}</Text>
-          <Text style={styles.timeVenue}>
-            {timeValue} @ {venue ? venue : 'Wrigley Field'}
-          </Text>
-          <Text style={styles.location}>
-            {city ? city : 'Chicago'}, {state ? state : 'IL'}
-          </Text>
-        </View>
-        <View style={styles.scoreBox}>
-          <Text style={styles.score}>Score:</Text>
-          <Text style={styles.scoreNumber}>
-            {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
-          </Text>
+        <View style={styles.imageBox}>
+          { artists[0] ? 
+            <Image
+              style={styles.image}
+              source={{uri: artists[0].img }}
+              // resizeMode='cover' // want to put this somewhere // possibly as background
+            /> : 
+            <Image
+              style={styles.image}
+              source={background}
+              // resizeMode='cover' // want to put this somewhere // possibly as background
+            />
+          }
+            <View style={styles.headlineTitleContainer}>
+            <Text style={styles.headlineTitle}>{name}</Text>
+            </View>
+        <View style={styles.eventInfoBox}>
+
+
+          <View style={styles.dateBox}>
+            <Icon name='calendar-o' style={styles.tabIconView} size={30} color="#FFF" resizeMode="contain" />
+            <Text style={styles.weekday}>{day}</Text>
+            <Text style={styles.date}>{date}</Text>
+          </View>
+          <View style={styles.eventInfo}>
+            <Text style={styles.artist}>
+              {artists[0] ? artists[0].name : 'Rum Ham'}
+            </Text>
+            <Text style={styles.headline}>{name}</Text>
+            <Text style={styles.timeVenue}>
+              {timeValue} @ {venue ? venue : 'Wrigley Field'}
+            </Text>
+            <Text style={styles.location}>
+              {city ? city : 'Chicago'}, {state ? state : 'IL'}
+            </Text>
+          </View>
+          <View style={styles.scoreBox}>
+            <Text style={styles.score}>Score:</Text>
+            <Text style={styles.scoreNumber}>
+              {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
+            </Text>
+          </View>
         </View>
       </View>
-      </TouchableHighlight>
+    </View>
+    </TouchableHighlight>
     );
           // {this.props.event.artists.map((artist) => {
           //   return (<Text key={artist.name}>{artist.name}</Text>)
@@ -105,6 +130,21 @@ class EventListItem extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 3,
+  },
+  imageBox: {
+    display: 'flex',
+    alignItems: 'stretch',
+    alignContent: 'flex-end'
+  },
+  image: {
+    flex: 1,
+    height: 150,
+    resizeMode: 'cover'
+  },
+  eventInfoBox: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -116,6 +156,30 @@ const styles = StyleSheet.create({
     padding: 3,
     margin: 1.5,
     // marginBottom: 3
+  },
+  headlineTitleContainer: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,.6)',    
+  },
+  headlineTitle: {
+    textAlign: 'left',
+    color: '#FFF',
+    fontSize: 16,
+    paddingLeft: 5,
+    backgroundColor: 'rgba(0,0,0,.6)',
+    position: 'absolute',
+    top: '45%'
+  },
+  headline:{
+    textAlign: 'center',
+    fontSize: 18,
+  },  
+  eventListName: {
+
   },
   dateBox:{
     display: 'flex',
@@ -141,11 +205,6 @@ const styles = StyleSheet.create({
   },
   artist:{
     textAlign: 'center',
-  },
-  headline:{
-    textAlign: 'center',
-    // flex: 1,
-    fontSize: 18
   },
   timeVenue:{
     textAlign: 'center',
