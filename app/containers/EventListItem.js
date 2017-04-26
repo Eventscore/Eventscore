@@ -88,28 +88,20 @@ class EventListItem extends Component {
               // resizeMode='cover' // want to put this somewhere // possibly as background
             />
           }
-            <View style={styles.headlineTitleContainer}>
+          <View style={styles.headlineTitleContainer}>
             <Text style={styles.headlineTitle}>{name}</Text>
-            </View>
-        <View style={styles.eventInfoBox}>
-
-
-          <View style={styles.dateBox}>
-            <Icon name='calendar-o' style={styles.tabIconView} size={30} color="#FFF" resizeMode="contain" />
-            <Text style={styles.weekday}>{day}</Text>
-            <Text style={styles.date}>{date}</Text>
+            <Text style={styles.headlineVenue}>{timeValue} @ {venue ? venue : 'Undefined'}</Text>
           </View>
-          <View style={styles.eventInfo}>
-            <Text style={styles.artist}>
-              {artists[0] ? artists[0].name : 'Rum Ham'}
-            </Text>
-            <Text style={styles.headline}>{name}</Text>
-            <Text style={styles.timeVenue}>
-              {timeValue} @ {venue ? venue : 'Wrigley Field'}
-            </Text>
+        <View style={styles.eventInfoBox}>
+          <View style={styles.dateBox}>
+            <Icon name='calendar-o' size={20} color="#7a7b7c" resizeMode="contain" />
+            <Text style={styles.date}>{day}{', '}{date}</Text>
+          </View>
+          <View style={styles.locationBox}>
+            <Icon name='map-marker' size={20} color="#7a7b7c" resizeMode="contain" />
             <Text style={styles.location}>
-              {city ? city : 'Chicago'}, {state ? state : 'IL'}
-            </Text>
+              {city ? city : 'N/A'}, {state ? state : 'N/A'}
+            </Text>          
           </View>
           <View style={styles.scoreBox}>
             <Text style={styles.score}>Score:</Text>
@@ -145,17 +137,14 @@ const styles = StyleSheet.create({
     resizeMode: 'cover'
   },
   eventInfoBox: {
-    display: 'flex',
+    // display: 'flex',
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#EEE',
-    flex: 1,
     justifyContent: 'space-around',
-    // height: 80,
-    // borderBottomWidth: 0.3,
     padding: 3,
     margin: 1.5,
-    // marginBottom: 3
   },
   headlineTitleContainer: {
     position: 'absolute',
@@ -172,19 +161,43 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     backgroundColor: 'rgba(0,0,0,.6)',
     position: 'absolute',
-    top: '45%'
+    top: '55%'
+  },
+  headlineVenue: {
+    textAlign: 'left',
+    color: '#FFF5',
+    fontSize: 14,
+    paddingLeft: 5,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: '65%'
   },
   headline:{
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 22,
   },  
-  eventListName: {
-
+  dateBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 5
   },
-  dateBox:{
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 0.5
+  date: {
+    fontSize: 13,
+    color: '#7a7b7c',
+    alignSelf: 'center',
+    // textAlign: 'center',
+  },
+  locationBox: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 5
+  },
+  location: {
+    fontSize: 13,
+    color: '#7a7b7c',
+    alignSelf: 'center',
   },
   eventInfo:{
     display: 'flex',
@@ -192,34 +205,22 @@ const styles = StyleSheet.create({
     flex: 1
   },
   scoreBox:{
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 0.5
-  },
-  weekday:{
-    textAlign: 'center',
-    fontSize: 18
-  },
-  date:{
-    textAlign: 'center',
-  },
-  artist:{
-    textAlign: 'center',
-  },
-  timeVenue:{
-    textAlign: 'center',
-    fontSize: 12
-  },
-  location:{
-    textAlign: 'center',
-    fontSize: 12
+    flex: .5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'stretch',
+    padding: 5
   },
   score:{
+    fontSize: 13,
+    alignSelf: 'center',    
     textAlign: 'center',
+    color: '#7a7b7c',
   },
   scoreNumber:{
-    textAlign: 'center',
-    fontSize: 18
+    fontSize: 18,
+    color: '#7a7b7c',
+    alignSelf: 'center',
   }
 });
 
