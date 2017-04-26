@@ -27,7 +27,7 @@ class Api {
 
   static xhr(route, params, verb) {
     const host = 'https://eventscore-server-production.herokuapp.com';
-    // const host = 'http://127.0.0.1:1337';
+    // const host = 'http://104.236.180.140:3000'; // docker deployment link
     const url = `${host}${route}`;
     let options = Object.assign({ method: verb }, params ? { body: JSON.stringify(params) } : null);
     options.headers = Api.headers();
