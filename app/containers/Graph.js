@@ -98,7 +98,7 @@ class Graph extends Component {
       // {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
       // {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
       // {'weight': .5, 'name': 'Misc', 'score': 80},
-      {'weight': .3, 'name': 'Beyonce test (fixed)', 'score': 100},
+      // {'weight': .3, 'name': 'Beyonce test (fixed)', 'score': 100},
     ];
     // GET FOR ALL ARTISTS BUT NEED TO REMOVE DUPLICATES!
     if (event.artists[0] !== undefined) {
@@ -115,7 +115,7 @@ class Graph extends Component {
     data.push({'weight': 1.5, 'name': 'SeatGeek Event Score', 'score': _round(event.sgscore * 100)});
 
     if (event.watsonScore) {
-      data.push({'weight': 2, 'name': 'EventScore Crawl', 'score': _round(event.watsonScore.score)});
+      data.push({'weight': 2, 'name': 'Social Perception', 'score': _round(event.watsonScore.score * 100)});
     }
 
     const eventScore = 
@@ -184,13 +184,6 @@ class Graph extends Component {
 
 }
 
-              //   (<TouchableWithoutFeedback key={index} onPress={() => this._onPieItemSelected(index)}>
-              //     <View>
-              //       <Text style={[styles.label, {color: this._color(index), fontWeight: 'normal'}]}>{this._label(item)}: {item.score}%</Text>
-              //     </View>
-              //   </TouchableWithoutFeedback>
-              // )
-        
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
