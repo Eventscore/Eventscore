@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   imageBox: {
     display: 'flex',
     alignItems: 'stretch',
-    alignContent: 'flex-end'
+    // alignContent: 'flex-end'
   },
   image: {
     flex: 1,

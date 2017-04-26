@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: width,
-    height: 150,
+    height: 120,
   }
 });
 
