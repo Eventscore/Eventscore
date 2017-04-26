@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
 import { Actions, ActionConst } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Graph from './Graph';
 import LocationMap from './Map';
 
@@ -23,19 +24,14 @@ const {
   TouchableOpacity,
 } = ReactNative;
 
+const background = require("../assets/image/login1_bg.png");
+
 class EventView extends Component {
   constructor() {
     super();
     this.state = {
     };
     
-  }
-
-  componentWillMount() {
-  }
-
-  goBackToEventList() {
-    {Actions.event({type: ActionConst.BACK})}
   }
 
   handlePress() {
@@ -47,6 +43,10 @@ class EventView extends Component {
         console.log('Don\'t know how to open URI: ' + uri);
       }
     });
+  }
+
+  handlePressMap() {
+
   }
 
   render() {
@@ -85,70 +85,180 @@ class EventView extends Component {
 
 
     return (
-
       <View style={styles.container}>
-      <BasicNav />
-        <View style={{flex: 8, zIndex: 0}}>
-          <ScrollView style={styles.scroll}>
-            <View style={styles.eventViewContainer}>
-              <View style={styles.eventContainer}>
-                <View style={styles.dateBox}>
-                  <Text style={styles.weekday}>{day}</Text>
-                  <Text style={styles.date}>{date}</Text>
-                </View>
-                <View style={styles.eventInfo}>
-                  <Text style={styles.artist}>
-                    {artists[0] ? artists[0].name : 'Rum Ham'}
-                  </Text>
-                  <Text style={styles.headline}>{name}</Text>
-                  <Text style={styles.timeVenue}>
-                    {timeValue} @ {venue ? venue : 'Wrigley Field'}
-                  </Text>
-                  <Text style={styles.location}>
-                    {city ? city : 'Chicago'}, 
-                    {state ? state : 'IL'}
-                  </Text>
-                </View>
-                <View style={styles.scoreBox}>
-                  <Text style={styles.score}>Score:</Text>
-                  <Text style={styles.scoreNumber}>
-                    {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
-                  </Text>
-                </View>
-              </View>
-              <LocationMap />
-              { artists[0] ? 
-                <Image
-                  style={{height: 50, width: 50}}
-                  source={{uri: artists[0].img }}
-                  // resizeMode='cover' // want to put this somewhere // possibly as background
-                /> : true}
-              <Graph/> 
-              <TouchableOpacity
-                onPress={(e) => this.handlePress(e)}>
-                <View style={styles.button}>
-                  <Text style={styles.text}>Buy Tickets</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
+        <View style={{flex: -1, zIndex: 1}}>      
+          <BasicNav />
         </View>
-
-        
+        <ScrollView style={styles.eventBasicContainer}>
+          { artists[0] ? 
+            <Image
+              style={styles.image}
+              source={{uri: artists[0].img }}
+            /> : 
+            <Image
+              style={styles.image}
+              source={background}
+            />
+          }
+          <View style={styles.eventInformation}>
+            <Text style={styles.textTitle}>{name}</Text>
+            <View style={styles.badgeList}>
+              <View style={styles.badge}>
+                <Icon name='spotify' size={30} color='green' resizeMode="contain" />
+                <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.popularity}</Text>
+              </View>
+              <View style={styles.badge}>
+              <Icon name='users' size={30} color='lime' resizeMode="contain" />
+                <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.followers}</Text>
+              </View>
+              <View style={styles.badge}>
+                <Icon name='globe' size={30} color='skyblue' resizeMode="contain" />
+                <Text>{Math.round(this.props.eventsReducers.currEvent.venueScore * 100)}</Text>
+              </View>
+              <View style={styles.badge}>
+                <Text>{city}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={(e) => this.handlePress(e)}>
+              <View style={styles.buyButton}>
+                <Text style={styles.buyText}>Buy Tickets</Text>
+              </View>
+            </TouchableOpacity>            
+            <TouchableOpacity
+              onPress={(e) => this.handlePressMap(e)}>
+              <LocationMap />
+              <View style={styles.addressButton}>
+                <Text style={styles.text}>{venue ? venue : 'N/A'}, {city ? city : 'N/A'}, {state ? state : 'N/A'}
+                </Text>
+                <Icon name='chevron-right' size={15} color="#7a7b7c" resizeMode="contain" />
+              </View>
+            </TouchableOpacity>            
+          </View>
+        </ScrollView>
         <View style={{flex: 1, zIndex: 2}}>
           <TabBar />
         </View>
-
-
       </View>
     );
   }
 }
 
+
+        // <View style={{flex: 8, zIndex: 0}}>
+        //   <ScrollView style={styles.scroll}>
+        //     <View style={styles.eventViewContainer}>
+        //       <View style={styles.eventContainer}>
+        //         <View style={styles.dateBox}>
+        //           <Text style={styles.weekday}>{day}</Text>
+        //           <Text style={styles.date}>{date}</Text>
+        //         </View>
+        //         <View style={styles.eventInfo}>
+        //           <Text style={styles.artist}>
+        //             {artists[0] ? artists[0].name : 'Rum Ham'}
+        //           </Text>
+        //           <Text style={styles.headline}>{name}</Text>
+        //           <Text style={styles.timeVenue}>
+        //             {timeValue} @ {venue ? venue : 'Wrigley Field'}
+        //           </Text>
+        //           <Text style={styles.location}>
+        //             {city ? city : 'Chicago'}, 
+        //             {state ? state : 'IL'}
+        //           </Text>
+        //         </View>
+        //         <View style={styles.scoreBox}>
+        //           <Text style={styles.score}>Score:</Text>
+        //           <Text style={styles.scoreNumber}>
+        //             {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
+        //           </Text>
+        //         </View>
+        //       </View>
+        //       <LocationMap />
+        //       { artists[0] ? 
+        //         <Image
+        //           style={{height: 50, width: 50}}
+        //           source={{uri: artists[0].img }}
+        //           // resizeMode='cover' // want to put this somewhere // possibly as background
+        //         /> : true}
+        //       <Graph/> 
+        //       <TouchableOpacity
+        //         onPress={(e) => this.handlePress(e)}>
+        //         <View style={styles.button}>
+        //           <Text style={styles.text}>Buy Tickets</Text>
+        //         </View>
+        //       </TouchableOpacity>
+        //     </View>
+        //   </ScrollView>
+        // </View>
+        // <View style={{flex: 1, zIndex: 2}}>
+        //   <TabBar />
+        // </View>
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 3,
   },
+  eventBasicContainer: {
+    display: 'flex',
+    // alignItems: 'stretch',
+    // resizeMode: 'cover',
+    // flex: 8, 
+    // zIndex: 0
+  },
+  image: {
+    // flex: 1,
+    display: 'flex',
+    height: 150,
+    width: null, 
+    // resizeMode: 'cover',
+  },
+  eventInformation: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textTitle: {
+    fontSize: 26,
+  },
+  badgeList: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  badge: {
+    display: 'flex',
+    height: 60,
+    width: 80,
+    alignItems: 'center',
+    padding: 5  
+  },
+  addressButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 5,
+    borderTopColor: '#7e7e7e',
+    borderBottomColor: '#b5b5b5',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,    
+  },
+  text: {
+    color: '#7a7b7c',
+  },
+  buyButton: {
+    padding: 10,
+    backgroundColor: 'dimgray',
+    margin: 20
+  },
+  buyText: {
+    color: '#FFF',
+    fontSize: 16
+  },
+
+
   eventViewContainer: {
     // backgroundColor: '#4682B4',
     // flex: 1,
@@ -217,17 +327,6 @@ const styles = StyleSheet.create({
   },
   scroll:{
     flex: 1
-  },
-  button: {
-    padding: 10,
-    // backgroundColor: '#3B5998',
-    backgroundColor: 'dimgray',
-    // marginBottom: 10,
-    marginTop: 30
-  },
-  text: {
-    color: 'white',
-    textAlign: 'center',
   },
 });
 

@@ -68,7 +68,7 @@ const styles = {
     borderTopWidth: 0,
     borderBottomWidth: 0,
     flexDirection: 'row',
-    justifyContent: 'space-between',    
+    justifyContent: 'space-between',
   },
   navLeft: {
     flex: .5,
