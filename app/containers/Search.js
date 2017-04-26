@@ -31,6 +31,7 @@ const defaultStyles = {
     flex: -1,
     flexDirection: 'row',
   },
+<<<<<<< HEAD
   topBarContainer: {
     display:'flex',
     flexDirection: 'row',
@@ -39,6 +40,10 @@ const defaultStyles = {
   topBarLeft: {
     flex: 1,
     backgroundColor: '#000000',
+=======
+  textInputContainerLeftTop: {
+    backgroundColor: '#282828',
+>>>>>>> Search function partially complete.
     width: WINDOW.width,
     height: 50,
     borderTopColor: '#7e7e7e',
@@ -47,32 +52,53 @@ const defaultStyles = {
     borderBottomWidth: 0,
     alignItems: 'flex-start',
   },
+<<<<<<< HEAD
   topBarRight: {
     flex: 1,
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 50,
+=======
+  textInputContainerLeftBottom: {
+    backgroundColor: '#282828',
+    width: WINDOW.width * .9,
+    height: 44,
+>>>>>>> Search function partially complete.
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
     borderBottomWidth: 0,
     alignItems: 'flex-end',
   },
+<<<<<<< HEAD
   topBarMiddle: {
     flex: 1,
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 50,
+=======
+  textInputContainerRightTop: {
+    backgroundColor: '#282828',
+    width: WINDOW.width * .1,
+    height: 44,
+>>>>>>> Search function partially complete.
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
     borderBottomWidth: 0,
     alignItems: 'center',
   },
+<<<<<<< HEAD
   textInputContainer: {
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 44,
+=======
+  textInputContainerRightBottom: {
+    backgroundColor: '#282828',
+    width: WINDOW.width * .1,
+    height: 88,
+>>>>>>> Search function partially complete.
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
@@ -95,7 +121,7 @@ const defaultStyles = {
   },
   textInputBottom: {
     backgroundColor: '#FFFFFF',
-    color: 'blue',
+    color: '#1faadb',
     height: 28,
     borderRadius: 5,
     paddingTop: 4.5,
@@ -117,23 +143,6 @@ const defaultStyles = {
   },
 };
 
-//search starts as one empty field with instructions: search for events
-//eventscore logo is above search bar in the middle
-
-//when search bar is tapped, search bar transforms to two fields with search button
-
-//search needs two fields: one for keywords and another for location
-//keywords: default is blank
-//location: default is current location
-//when both are default, events of any type that are close to current location 
-  //are passed to eventlist component to render
-
-//onSubmit or onChange, values from both fields are sent to server endpoint
-
-//need to re-use url builder function from Al's component
-
-//need to have autocomplete or have a dropdown of list of cities, states in second field
-//second field can be tapped to expand dropdown
 class Search extends Component {
   constructor() {
     super();
@@ -152,7 +161,10 @@ class Search extends Component {
   }
 
   submitSearch() {
-    console.log('Searching...', this)
+    //this.state.keywords or ''
+    //this.state.details.geometry.location.lng or lat
+    //or this.state.coords.longitude or latitude (this choice is for current location)
+    console.log('Searching...', this.state)
   }
 
   clearText() {
@@ -163,6 +175,7 @@ class Search extends Component {
   componentDidMount() {
     //needs to set current location as default value for bottom search bar
     this.getNearbyEvents()
+    console.log('COMPONENT MOUNTED STATE', this);
   }
 
 
