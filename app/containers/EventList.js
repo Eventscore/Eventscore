@@ -18,6 +18,7 @@ import EventListMap from './EventListMap';
 // import NavBar from './NavBar';
 import TabBar from './TabBar';
 import Search from './Search'; //remove this later, only for testing
+import FlipCard from 'react-native-flip-card';
 const background = require("../assets/image/SeaBlue.jpg");
 
 class EventList extends Component {

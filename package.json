@@ -12,6 +12,7 @@
     "moment": "^2.18.1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.2",
+    "react-native-flip-card": "^3.3.3",
     "react-native-google-places-autocomplete": "^1.2.12",
     "react-native-maps": "^0.13.1",
     "react-native-overlay": "^0.5.0",
