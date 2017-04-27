@@ -38,8 +38,6 @@ const defaultStyles = {
   },
   topBarLeft: {
     flex: 1,
-    // backgroundColor: '#000000',
-    // backgroundColor: 'transparent',
     backgroundColor: 'rgba(0,0,0,.2)',   
     width: WINDOW.width,
     height: 50,
@@ -50,9 +48,7 @@ const defaultStyles = {
     alignItems: 'flex-start',
   },
   topBarRight: {
-    flex: 1,
-    // backgroundColor: '#000000',
-    // backgroundColor: 'transparent',    
+    flex: 1, 
     backgroundColor: 'rgba(0,0,0,.2)',
     width: WINDOW.width,
     height: 50,
@@ -64,8 +60,6 @@ const defaultStyles = {
   },
   topBarMiddle: {
     flex: 1,
-    // backgroundColor: '#000000',
-    // backgroundColor: 'transparent',
     backgroundColor: 'rgba(0,0,0,.2)',
     width: WINDOW.width,
     height: 50,
@@ -129,7 +123,6 @@ class Search extends Component {
   constructor() {
     super();
     this.state ={
-      mainNav: true,
       keywords: '',
     }
     this.submitSearch = this.submitSearch.bind(this);
@@ -142,19 +135,18 @@ class Search extends Component {
     this.setState({coords : this.props.locationReducers.geolocation.coords})
   }
 
-  submitSearch() {
-    let keywords;
-    let longitude;
-    let latitude;
+  async submitSearch() {
+    let keywords, longitude, latitude;
     this.state.keywords ? keywords = this.state.keywords.split(' ') : keywords = [];
     this.state.details ? longitude = this.state.details.geometry.location.lng : longitude = this.props.locationReducers.geolocation.coords.longitude;
     this.state.details ? latitude =  this.state.details.geometry.location.lat : latitude = this.props.locationReducers.geolocation.coords.latitude;
     console.log('SUBMIT SEARCH', keywords, longitude, latitude);
-    this.props.searchEvents(
+    var searchEvent = await this.props.searchEvents(
       longitude,
       latitude,
       keywords
-    )
+    );
+    Actions.event();
   }
 
   clearText() {
@@ -196,16 +188,12 @@ class Search extends Component {
                           styles={{
                             textInputContainer: defaultStyles.textInputContainer,
                             textInput: defaultStyles.textInputBottom,
-<<<<<<< HEAD
                             description: {
                               fontWeight: 'bold',
                             },
                             predefinedPlacesDescription: {
                               color: '#1faadb',
                             },
-=======
-                            backgroundColor: 'rgba(0,0,0,.2)',                            
->>>>>>> minor changes on UI
                             listView: {
                               flex: 1,
                               height: deviceHeight,
