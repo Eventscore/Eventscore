@@ -56,8 +56,10 @@ class EventList extends Component {
 
   componentDidMount() {
     if (!this.props.eventsReducers.events) {
+      console.log('COMPONENT DID MOUNT FOR EVENTLIST')
       this.getNearbyEvents();
     } else {
+      console.log('EVENTLIST STATE', this);
       this.setState({
           eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
       });
