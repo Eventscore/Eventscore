@@ -31,7 +31,6 @@ const defaultStyles = {
     flex: -1,
     flexDirection: 'row',
   },
-<<<<<<< HEAD
   topBarContainer: {
     display:'flex',
     flexDirection: 'row',
@@ -40,10 +39,6 @@ const defaultStyles = {
   topBarLeft: {
     flex: 1,
     backgroundColor: '#000000',
-=======
-  textInputContainerLeftTop: {
-    backgroundColor: '#282828',
->>>>>>> Search function partially complete.
     width: WINDOW.width,
     height: 50,
     borderTopColor: '#7e7e7e',
@@ -52,53 +47,32 @@ const defaultStyles = {
     borderBottomWidth: 0,
     alignItems: 'flex-start',
   },
-<<<<<<< HEAD
   topBarRight: {
     flex: 1,
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 50,
-=======
-  textInputContainerLeftBottom: {
-    backgroundColor: '#282828',
-    width: WINDOW.width * .9,
-    height: 44,
->>>>>>> Search function partially complete.
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
     borderBottomWidth: 0,
     alignItems: 'flex-end',
   },
-<<<<<<< HEAD
   topBarMiddle: {
     flex: 1,
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 50,
-=======
-  textInputContainerRightTop: {
-    backgroundColor: '#282828',
-    width: WINDOW.width * .1,
-    height: 44,
->>>>>>> Search function partially complete.
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
     borderBottomWidth: 0,
     alignItems: 'center',
   },
-<<<<<<< HEAD
   textInputContainer: {
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 44,
-=======
-  textInputContainerRightBottom: {
-    backgroundColor: '#282828',
-    width: WINDOW.width * .1,
-    height: 88,
->>>>>>> Search function partially complete.
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
@@ -172,13 +146,7 @@ class Search extends Component {
       longitude,
       latitude,
       keywords
-    ).then(() => {
-      this.setState({
-        eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
-      });
-    }).catch((error) => {
-      console.log(error);
-    });
+    )
   }
 
   clearText() {
@@ -198,10 +166,20 @@ class Search extends Component {
     if(this.state.keywords) {
       searchInputShow = <GooglePlacesAutocomplete
                           enablePoweredByContainer={false}
-                          placeholder="Location"
+                          placeholder="e.g San Francisco, Los Angeles"
+                          placeholderTextColor='#A8A8A8'
                           minLength={2}
                           autoFocus={false}
                           fetchDetails={true}
+                          getDefaultValue={() => {
+                            return 'Current location'; // text input default value
+                          }}
+                          onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+                            console.log('DATA', data);
+                            console.log('DETAILS', details);
+                            this.setState({data: data, details: details});
+                            console.log('SET STATE', this.state);
+                          }}
                           query={{
                             key: 'AIzaSyDAXlRh07LCOjC8nMSPNTJcXOPBXG91liE',
                             language: 'en',
@@ -210,6 +188,12 @@ class Search extends Component {
                           styles={{
                             textInputContainer: defaultStyles.textInputContainer,
                             textInput: defaultStyles.textInputBottom,
+                            description: {
+                              fontWeight: 'bold',
+                            },
+                            predefinedPlacesDescription: {
+                              color: '#1faadb',
+                            },
                             listView: {
                               flex: 1,
                               height: deviceHeight,
@@ -218,6 +202,8 @@ class Search extends Component {
                               paddingBottom: 90,
                             },
                           }}
+                          currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
+                          currentLocationLabel="Current location"
                           nearbyPlacesAPI={'GooglePlacesSearch'}
                           filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
                         >

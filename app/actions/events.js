@@ -11,8 +11,9 @@ export function searchEvents(long, lat, keywords) {
       `latitude/${encodeURIComponent(lat)}`
     ];
     if (keywords.length > 0) {
-      const query = keywords.join('&');
+      const query = keywords.join('-');
       params.push(`?keywords=${encodeURIComponent(query)}`);
+      console.log('PARAMS', params);
     }
     dispatch({
       type: types.REQUEST_EVENTS,
@@ -83,8 +84,8 @@ export function fetchNearbyEvents(long, lat) {
 export function fetchEventByKeyword(keyword, genre) {
   return (dispatch, getState) => {
     const params = [
-    `keyword/${encodeuRIComponent(keyword)}`,
-    `genre/${encodeuRIComponent(genre)}`,
+    `keyword/${encodeURIComponent(keyword)}`,
+    `genre/${encodeURIComponent(genre)}`,
     ];
     return Api.get(`/api/events/${params.join('/')}`).then(res => {
       dispatch({
