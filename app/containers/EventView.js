@@ -25,7 +25,7 @@ import {
   Dimensions,  
 } from 'react-native';
 
-const background = require("../assets/image/login1_bg.png");
+const background = require('../assets/image/login1_bg.png');
 
 class EventView extends Component {
   constructor() {
@@ -66,15 +66,15 @@ class EventView extends Component {
     let timeValue;
 
     if (hours > 0 && hours <= 12) {
-      timeValue= "" + hours;
+      timeValue = '' + hours;
     } else if (hours > 12) {
-      timeValue= "" + (hours - 12);
+      timeValue = '' + (hours - 12);
     } else if (hours === 0) {
-      timeValue= "12";
+      timeValue = '12';
     }
      
-    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
-    timeValue += (hours >= 12) ? "PM" : "AM";  // get AM/PM
+    timeValue += (minutes < 10) ? ':0' + minutes : ':' + minutes;  // get minutes
+    timeValue += (hours >= 12) ? 'PM' : 'AM';  // get AM/PM
 
     const {
       artists,
@@ -92,8 +92,8 @@ class EventView extends Component {
     if (event.artists[0] !== undefined) {
       let weight = 1;
       event.artists.forEach(function(artist, index) {
-        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity});
-        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100)});
+        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity, 'type': 'SpotifyArtist'});
+        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100), 'type': 'SeatGeekArtist'});
         if (index === 0) {
           weight /= event.artists.length;
         }
@@ -133,15 +133,15 @@ class EventView extends Component {
             <Text style={styles.textTitle}>{name}</Text>
             <View style={styles.badgeList}>
               <View style={styles.badge}>
-                <Icon name='spotify' size={30} color='green' resizeMode="contain" />
+                <Icon name='spotify' size={30} color='green' resizeMode='contain' />
                 <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.popularity}</Text>
               </View>
               <View style={styles.badge}>
-              <Icon name='users' size={30} color='lime' resizeMode="contain" />
+              <Icon name='users' size={30} color='lime' resizeMode='contain' />
                 <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.followers}</Text>
               </View>
               <View style={styles.badge}>
-                <Icon name='globe' size={30} color='skyblue' resizeMode="contain" />
+                <Icon name='globe' size={30} color='skyblue' resizeMode='contain' />
                 <Text>{Math.round(this.props.eventsReducers.currEvent.venueScore * 100)}</Text>
               </View>
               <View style={styles.badge}>
@@ -164,7 +164,7 @@ class EventView extends Component {
               <View style={styles.addressButton}>
                 <Text style={styles.text}>{venue ? venue : 'N/A'}, {city ? city : 'N/A'}, {state ? state : 'N/A'}
                 </Text>
-                <Icon name='chevron-right' size={15} color="#7a7b7c" resizeMode="contain" />
+                <Icon name='chevron-right' size={15} color='#7a7b7c' resizeMode='contain' />
               </View>
             </TouchableOpacity>            
           </View>
@@ -316,52 +316,52 @@ const styles = StyleSheet.create({
     margin: 1.5,
     // marginBottom: 3
   },
-  dateBox:{
+  dateBox: {
     display: 'flex',
     justifyContent: 'center',
     flex: 0.5
   },
-  eventInfo:{
+  eventInfo: {
     display: 'flex',
     justifyContent: 'center',
     flex: 1
   },
-  scoreBox:{
+  scoreBox: {
     display: 'flex',
     justifyContent: 'center',
     flex: 0.5
   },
-  weekday:{
+  weekday: {
     textAlign: 'center',
     fontSize: 18
   },
-  date:{
+  date: {
     textAlign: 'center',
   },
-  artist:{
+  artist: {
     textAlign: 'center',
   },
-  headline:{
+  headline: {
     textAlign: 'center',
     // flex: 1,
     fontSize: 18
   },
-  timeVenue:{
+  timeVenue: {
     textAlign: 'center',
     fontSize: 12
   },
-  location:{
+  location: {
     textAlign: 'center',
     fontSize: 12
   },
-  score:{
+  score: {
     textAlign: 'center',
   },
-  scoreNumber:{
+  scoreNumber: {
     textAlign: 'center',
     fontSize: 18
   },
-  scroll:{
+  scroll: {
     flex: 1
   },
 });
@@ -370,5 +370,10 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-// export default EventView;
-export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(EventView);
+function mapStateToProps(state) {
+  return {
+    eventsReducers: state.eventsReducers,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventView);
