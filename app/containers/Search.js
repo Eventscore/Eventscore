@@ -31,7 +31,45 @@ const defaultStyles = {
     flex: -1,
     flexDirection: 'row',
   },
-  textInputContainerLeftTop: {
+  topBarContainer: {
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',  
+  },
+  topBarLeft: {
+    flex: 1,
+    backgroundColor: '#000000',
+    width: WINDOW.width,
+    height: 50,
+    borderTopColor: '#7e7e7e',
+    borderBottomColor: '#b5b5b5',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    alignItems: 'flex-start',
+  },
+  topBarRight: {
+    flex: 1,
+    backgroundColor: '#000000',
+    width: WINDOW.width,
+    height: 50,
+    borderTopColor: '#7e7e7e',
+    borderBottomColor: '#b5b5b5',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    alignItems: 'flex-end',
+  },
+  topBarMiddle: {
+    flex: 1,
+    backgroundColor: '#000000',
+    width: WINDOW.width,
+    height: 50,
+    borderTopColor: '#7e7e7e',
+    borderBottomColor: '#b5b5b5',
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    alignItems: 'center',
+  },
+  textInputContainer: {
     backgroundColor: '#000000',
     width: WINDOW.width,
     height: 44,
@@ -39,40 +77,7 @@ const defaultStyles = {
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 0,
     borderBottomWidth: 0,
-    // flexDirection: 'row',
-    alignItems: 'center',
-  },
-  textInputContainerLeftBottom: {
-    backgroundColor: '#000000',
-    width: WINDOW.width * .9,
-    height: 44,
-    borderTopColor: '#7e7e7e',
-    borderBottomColor: '#b5b5b5',
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
     flexDirection: 'row',
-  },
-  textInputContainerRightTop: {
-    backgroundColor: '#000000',
-    width: WINDOW.width * .1,
-    height: 44,
-    borderTopColor: '#7e7e7e',
-    borderBottomColor: '#b5b5b5',
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInputContainerRightBottom: {
-    backgroundColor: '#000000',
-    width: WINDOW.width * .1,
-    height: 88,
-    borderTopColor: '#7e7e7e',
-    borderBottomColor: '#b5b5b5',
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   textInputTop: {
     backgroundColor: '#FFFFFF',
@@ -110,25 +115,6 @@ const defaultStyles = {
     textAlign: 'center',
     color: '#fff',
   },
-  row: {
-    padding: 13,
-    height: 44,
-    flexDirection: 'row',
-  },
-  separator: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: '#c8c7cc',
-  },
-  description: {},
-  loader: {
-    // flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    height: 20,
-  },
-  androidLoader: {
-    marginRight: -15,
-  },
 };
 
 //search starts as one empty field with instructions: search for events
@@ -153,8 +139,10 @@ class Search extends Component {
     super();
     this.state ={
       mainNav: true,
+      keywords: '',
     }
     this.submitSearch = this.submitSearch.bind(this);
+    this.clearText = this.clearText.bind(this);
   }
 
   async getNearbyEvents() {
@@ -167,6 +155,11 @@ class Search extends Component {
     console.log('Searching...', this)
   }
 
+  clearText() {
+    this._textInput.setNativeProps({text: ''});
+    this.setState({'keywords': ''});
+  }
+
   componentDidMount() {
     //needs to set current location as default value for bottom search bar
     this.getNearbyEvents()
@@ -174,54 +167,60 @@ class Search extends Component {
 
 
   render() {
-    let searchInput = null;
+    let searchInputShow = null;
+    if(this.state.keywords) {
+      searchInputShow = <GooglePlacesAutocomplete
+                          enablePoweredByContainer={false}
+                          placeholder="Location"
+                          minLength={2}
+                          autoFocus={false}
+                          fetchDetails={true}
+                          query={{
+                            key: 'AIzaSyDAXlRh07LCOjC8nMSPNTJcXOPBXG91liE',
+                            language: 'en',
+                            types: '(cities)',
+                          }}
+                          styles={{
+                            textInputContainer: defaultStyles.textInputContainer,
+                            textInput: defaultStyles.textInputBottom,
+                            listView: {
+                              flex: 1,
+                              height: deviceHeight,
+                              width: deviceWidth,
+                              backgroundColor: '#FFFFFF',
+                              paddingBottom: 90,
+                            },
+                          }}
+                          nearbyPlacesAPI={'GooglePlacesSearch'}
+                          filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
+                        >
+                        </GooglePlacesAutocomplete>
+    }
 
     return (
       <View style={defaultStyles.searchContainer} >
-        <View style={{flex: -1,flexDirection: 'column'}}>
-          <View style={defaultStyles.textInputContainerLeftTop} >
-              <Text style={defaultStyles.titleViewText}>EventScore</Text>
+        <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
+          <View style={defaultStyles.topBarContainer}>
+            <View style={defaultStyles.topBarLeft}>
+            {this.state.keywords.length > 0 && 
+              <TouchableOpacity onPress={this.clearText}>
+                <Text style={{color: '#FFF', marginTop: 25, marginLeft: 15}}>Cancel</Text>
+              </TouchableOpacity>}
+            </View>
+            <View style={defaultStyles.topBarMiddle} >
+                <Text style={defaultStyles.titleViewText}>EventScore</Text>
+            </View>
+            <View style={defaultStyles.topBarRight}>
+            {this.state.keywords.length > 0 && 
+              <TouchableOpacity onPress={this.submitSearch}>
+                <Text style={{color: '#FFF', marginTop: 25, marginRight: 15}}>Search</Text>
+              </TouchableOpacity>}          
+            </View>            
           </View>
-          <View style={defaultStyles.textInputContainerLeftBottom} >
-            <TextInput style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})} />
+          <View style={defaultStyles.textInputContainer} >
+            <TextInput ref={component => this._textInput = component} style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})} />
           </View>
-          <GooglePlacesAutocomplete
-            enablePoweredByContainer={false}
-            placeholder="Search"
-            minLength={2}
-            autoFocus={false}
-            fetchDetails={true}
-            query={{
-              key: 'AIzaSyDAXlRh07LCOjC8nMSPNTJcXOPBXG91liE',
-              language: 'en',
-              types: '(cities)',
-            }}
-            styles={{
-              textInputContainer: defaultStyles.textInputContainerLeftBottom,
-              textInput: defaultStyles.textInputBottom,
-              listView: {
-                flex: 1,
-                height: deviceHeight,
-                width: deviceWidth,
-                backgroundColor: '#FFFFFF',
-                paddingBottom: 90,
-              },
-            }}
-            nearbyPlacesAPI={'GooglePlacesSearch'}
-            filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']}
-          >
-          </GooglePlacesAutocomplete>
-        </View>
-        <View style={{flex: -1,flexDirection: 'column',alignItems: 'flex-end'}}>
-          <View style={defaultStyles.textInputContainerRightTop} >
-          </View>
-          <View style={defaultStyles.textInputContainerRightBottom} >
-            <TouchableHighlight underlayColor = 'transparent' onPress={this.submitSearch}>
-              <View>
-                <Icon name='search' size = {20} color = "#FFFFFF" />
-              </View>
-            </TouchableHighlight>
-          </View>
+          {searchInputShow}
         </View>
       </View>
     )

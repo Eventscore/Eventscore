@@ -7,7 +7,6 @@ import {
   Text,
   View,
   ActivityIndicator,
-  Switch,
   RefreshControl,
   ScrollView,
 } from 'react-native';
@@ -109,19 +108,10 @@ class EventList extends Component {
     } else if (this.props.eventsReducers.events) {
       listPageRender = 
         <View style={styles.eventContainer}>
-          <View style={styles.switchContainer}>
-            <Text style={styles.switch}>
-              List 
-              <Switch
-                onValueChange={(value) => {
-                  this.setState({listSwitch: value});
-                }}
-                value={this.state.listSwitch}
-              />
-              Map
-            </Text>
-          </View>
           {list}
+            <TouchableHighlight style={styles.floatButtonContainer} onPress={ (value) => { this.setState({listSwitch: !this.state.listSwitch}); }} value={this.state.listSwitch}>
+              <Text style={{fontSize: 15, color: '#FFF'}}>{this.state.listSwitch === false ? 'Map' : 'List'}</Text>
+            </TouchableHighlight>
         </View>;
     } else {
       listPageRender = 
@@ -154,19 +144,42 @@ const styles = StyleSheet.create({
     margin: 5
   },
   container: {
-    flex: 1
+    flex: 1,
+    color: '#000000'
   },
   eventContainer: {
     flex: 1,
+    backgroundColor: '#050505',
     justifyContent: 'center',
     display: 'flex',
   },
   switch: {
     marginTop: 5,
     fontSize: 20,
+    color: '#FFF'
   },
   switchContainer: {
     alignItems: 'center'
+  },
+  floatButtonContainer: {
+    backgroundColor: '#ff5722',
+    borderColor: '#ff5722',
+    borderWidth: 1,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    right:20,
+    shadowColor: "#000000",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   }
 });
 
