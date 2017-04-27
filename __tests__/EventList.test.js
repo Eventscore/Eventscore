@@ -10,6 +10,9 @@ const initialState = {
   eventsReducers: {
     loadingEvents: false
   },
+  listTypeReducers: {
+    listType: false
+  }
 };
 
 const mockStore = configureStore(initialState);
