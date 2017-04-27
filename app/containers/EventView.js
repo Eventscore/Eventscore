@@ -117,20 +117,25 @@ class EventView extends Component {
           <BasicNav />
         </View>
         <ScrollView style={styles.eventBasicContainer}>
-
-          { artists[0] ? 
-            <Image
-              style={styles.image}
-              source={{uri: artists[0].img }}
-            /> : 
-            <Image
-              style={styles.image}
-              source={background}
-            />
-          }
           <View style={{flex: 8, zIndex: 0}}>
+            <View style={styles.imageBox}>
+            { artists[0] ? 
+              <Image
+                style={styles.image}
+                source={{uri: artists[0].img }}
+              /> : 
+              <Image
+                style={styles.image}
+                source={background}
+              />
+            }
+              <View style={styles.headlineTitleContainer}>
+                <Text style={styles.headlineTitle}>{name}</Text>
+                <Text style={styles.headlineVenue}>{timeValue} @ {venue ? venue : 'Undefined'}</Text>
+              </View>
+            </View>
           <View style={styles.eventInformation}>
-            <Text style={styles.textTitle}>{name}</Text>
+            <Graph/> 
             <View style={styles.badgeList}>
               <View style={styles.badge}>
                 <Icon name='spotify' size={30} color='green' resizeMode='contain' />
@@ -152,6 +157,8 @@ class EventView extends Component {
               data={data}
               colors={colors}
             /> 
+          </View>
+          <View>
             <TouchableOpacity
               onPress={(e) => this.handlePress(e)}>
               <View style={styles.buyButton}>
@@ -166,13 +173,13 @@ class EventView extends Component {
                 </Text>
                 <Icon name='chevron-right' size={15} color='#7a7b7c' resizeMode='contain' />
               </View>
-            </TouchableOpacity>            
-          </View>
+            </TouchableOpacity>
+          </View>            
+
+
+
           </View>
         </ScrollView>
-        <View style={{flex: 1, zIndex: 2}}>
-          <TabBar />
-        </View>
       </View>
     );
   }
@@ -230,34 +237,56 @@ class EventView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    // display: 'flex',
     flex: -1,
-    // flexDirection: 'column',
-    // padding: 3,
+    flexDirection: 'column',
+  },
+  imageBox: {
+    display: 'flex',
+    alignItems: 'stretch',
   },
   eventBasicContainer: {
     display: 'flex',
-    // flex: 1,
   },
   image: {
-    // flex: 1,
-    // display: 'flex',
     height: 300,
     width: null,
-    // backgroundAttachment: 'fixed',
-    // backgroundPosition: 'center',
-    // backgroundRepeat: 'no-repeat',
-    // backgroundSize: 'cover'
     resizeMode: 'cover',
+  },
+  headlineTitleContainer: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,.3)',    
+  },
+  headlineTitle: {
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: '#FFF',
+    fontSize: 30,
+    position: 'absolute',
+    top: '75%'
+  },
+  headlineVenue: {
+    textAlign: 'center',
+    alignSelf: 'center',
+    color: '#FFF9',
+    fontSize: 20,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: '85%'
   },
   eventInformation: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row'
   },
-  textTitle: {
-    fontSize: 26,
-  },
+
+
+
+
   badgeList: {
     flex: 1,
     flexDirection: 'row',

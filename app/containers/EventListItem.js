@@ -137,16 +137,6 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: 'cover'
   },
-  eventInfoBox: {
-    // display: 'flex',
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#EEE',
-    justifyContent: 'space-around',
-    padding: 3,
-    margin: 1.5,
-  },
   headlineTitleContainer: {
     position: 'absolute',
     left: 0,
@@ -172,6 +162,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     position: 'absolute',
     top: '65%'
+  },
+  eventInfoBox: {
+    // display: 'flex',
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#EEE',
+    justifyContent: 'space-around',
+    padding: 3,
+    margin: 1.5,
   },
   headline:{
     textAlign: 'center',
