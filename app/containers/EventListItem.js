@@ -39,6 +39,7 @@ class EventListItem extends Component {
   }
 
   render() {
+
     const start = new Date(this.props.event.start);
     const startArray = start.toString() === 'Invalid Date' ? [] : start.toString().split(' '); 
     const day = startArray[0] || 'TBD';
@@ -226,7 +227,13 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
-}
+};
 
-// export default EventListItem;
-export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers} }, mapDispatchToProps)(EventListItem);
+function mapStateToProps(state) {
+  return {
+    locationReducers: state.locationReducers,
+    eventsReducers: state.eventsReducers,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventListItem);

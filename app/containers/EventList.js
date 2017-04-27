@@ -24,9 +24,7 @@ class EventList extends Component {
   static description = 'Adds pull-to-refresh support to a scrollview.';
   constructor() {
     super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      eventList: ds.cloneWithRows([]),
       listSwitch: false,
       isRefreshing: false,
       loaded: 0,
@@ -42,11 +40,7 @@ class EventList extends Component {
     this.props.fetchNearbyEvents(
       this.props.locationReducers.geolocation.coords.longitude,
       this.props.locationReducers.geolocation.coords.latitude
-    ).then(() => {
-      this.setState({
-        eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
-      });
-    }).catch((error) => {
+    ).catch((error) => {
       console.log(error);
     });
   }
@@ -58,15 +52,11 @@ class EventList extends Component {
     if (!this.props.eventsReducers.events) {
       console.log('COMPONENT DID MOUNT FOR EVENTLIST')
       this.getNearbyEvents();
-    } else {
-      console.log('EVENTLIST STATE', this);
-      this.setState({
-          eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
-      });
     }
   }
 
   render() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let list = null;
     if (this.state.listSwitch) {
       list = <EventListMap />;
@@ -86,7 +76,7 @@ class EventList extends Component {
             />
           }>
           <ListView
-            dataSource={this.state.eventList}
+            dataSource={ds.cloneWithRows(this.props.eventsReducers.events ? this.props.eventsReducers.events : [])}
             renderRow={(event) => <EventListItem key={event._id} event={event} />}
           />
           </ScrollView>
@@ -187,6 +177,14 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
-}
+};
 
-export default connect(({routes, loginReducers, eventsReducers, locationReducers}) => { return {routes, loginReducers, eventsReducers, locationReducers}}, mapDispatchToProps)(EventList);
+function mapStateToProps(state) {
+  return {
+    locationReducers: state.locationReducers,
+    eventsReducers: state.eventsReducers,
+    // routes: state.routes
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventList);
