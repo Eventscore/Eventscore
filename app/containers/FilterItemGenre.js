@@ -21,8 +21,9 @@ const background = require("../assets/image/login1_bg.png");
 
 var FilterItemGenre = React.createClass({
   async fetchEventsByGenreRedux(){
-    let genre = this.props.genre || null;
+    let genre = this.props.genre[0] || null;
     let getLocation = await this.props.getLocation();
+    console.log('FILTERITEMGENRE GENRE', genre);
     this.getEvents(genre);
   },
 
@@ -31,7 +32,7 @@ var FilterItemGenre = React.createClass({
     this.props.fetchEventByGenre(
       this.props.locationReducers.geolocation.coords.longitude,
       this.props.locationReducers.geolocation.coords.latitude,
-      genre
+      this.props.genre[0]
     ).then(() => {
       {Actions.event()}
     }).catch((error) => {
