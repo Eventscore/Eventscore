@@ -20,35 +20,44 @@ import {
   Dimensions,  
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const WINDOW = Dimensions.get('window');
 const deviceWidth = WINDOW.width;
 const deviceHeight = WINDOW.height;
 
-
 class BasicNav extends Component {
   constructor() {
     super();
     this.state ={
-      mainNav: true,
     }
   }
 
   render() {
 
+    const {
+      artists,
+      name,
+      venue,
+      city,
+      state
+    } = this.props.eventsReducers.currEvent;
+
     return (
       <View style={styles.searchContainer} >
-          <View style={styles.navContainer} >
-            <View style={styles.navLeft}>
-              <TouchableOpacity style={styles.navLeftIconButton} onPress={() => {Actions.pop()}}>
-                <Icon name='arrow-left' style={styles.navLeftIconView} size={15} color="#dbdfe0" resizeMode="contain" />  
-              </TouchableOpacity>             
+        <View style={{flex: 1, flexDirection: 'column'}}>
+          <View style={styles.topBarContainer}>
+            <View style={styles.topBarLeft}>
+              <TouchableOpacity style={{marginTop: 25}} onPress={() => {Actions.pop()}}>
+                <Icon name='chevron-left' style={{marginLeft: 15}} size={15} color="#dbdfe0" resizeMode="contain" />  
+              </TouchableOpacity> 
             </View>
-              <Text style={styles.titleViewText}>EventScore</Text>
-            <View style={styles.navRight}>          
-            </View>              
+            <View style={styles.topBarMiddle} >
+                <Text style={styles.titleViewText}>Eventscore</Text>
+            </View>
+            <View style={styles.topBarRight}>
+            </View>            
           </View>
+        </View>
       </View>
     )
   }
@@ -58,55 +67,48 @@ const styles = {
   searchContainer: {
     flex: -1,
   },
-  navContainer: {
-    display: 'flex',
-    backgroundColor: '#000000',
+  topBarContainer: {
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',  
+  },
+  topBarLeft: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,.2)',   
     width: WINDOW.width,
     height: 50,
-    borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    borderBottomWidth: 1,
   },
-  navLeft: {
-    flex: .5,
+  topBarRight: {
+    flex: 1, 
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: WINDOW.width,
+    height: 50,
+    borderBottomColor: '#b5b5b5',
+    borderBottomWidth: 1,
+    alignItems: 'flex-end',
   },
-  navLeftIconView: {
-    paddingLeft: 15,
-  },
-  navLeftIconButton: {
-    backgroundColor: 'transparent',
-    marginTop: 25,     
-  },  
-  titleViewText: {
+  topBarMiddle: {
     flex: 1,
-    marginTop: 25,
-    fontSize: 15,
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: WINDOW.width,
+    height: 50,
+    borderBottomColor: '#b5b5b5',
+    borderBottomWidth: 1,
+  },
+  titleViewText: {
+    marginTop: 20,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#fff',
   },
-  navRight: {
-    flex: .5,
-  },
-  navRightIconButton: {
-    backgroundColor: 'transparent',  
-  },
-  navRightIconView: {
-    paddingRight: 15, 
-  }
 };
-
-function mapStateToProps(state) {
-  return {
-    routes: state.routes
-  }
-}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BasicNav);
+export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(BasicNav);
+
