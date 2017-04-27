@@ -85,6 +85,32 @@ class EventView extends Component {
     } = this.props.eventsReducers.currEvent;
 
 
+    let _round = (num) => Math.round(100 * num) / 100; 
+    const event = this.props.eventsReducers.currEvent;
+    let data = [];
+    // GET FOR ALL ARTISTS BUT NEED TO REMOVE DUPLICATES!
+    if (event.artists[0] !== undefined) {
+      let weight = 1;
+      event.artists.forEach(function(artist, index) {
+        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity});
+        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100)});
+        if (index === 0) {
+          weight /= event.artists.length;
+        }
+      });
+    }
+    data.push({'weight': 0.5, 'name': event.venue + '\'s Venue Score', 'score': _round(event.venueScore * 100)});
+    data.push({'weight': 1.5, 'name': 'SeatGeek Event Score', 'score': _round(event.sgscore * 100)});
+
+    if (event.watsonScore) {
+      data.push({'weight': 2, 'name': 'Social Perception', 'score': _round(event.watsonScore.score * 100)});
+    }
+
+    const colors = [
+      '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+      '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
+    ];
+
     return (
       <View style={styles.container}>
         <View style={{flex: -1, zIndex: 1}}>      
@@ -122,7 +148,10 @@ class EventView extends Component {
                 <Text>{city}</Text>
               </View>
             </View>
-            <Graph/> 
+            <Graph 
+              data={data}
+              colors={colors}
+            /> 
             <TouchableOpacity
               onPress={(e) => this.handlePress(e)}>
               <View style={styles.buyButton}>

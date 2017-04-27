@@ -27,11 +27,6 @@ const d3 = {
   shape,
 };
 
-const colors = [
-  '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
-  '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
-];
-
 // delete these later // change to props;
 const propsradius = 100;
 const innerRadius = 20; // .3 * pieWidth/2  OR .3 * pieRadius
@@ -87,37 +82,10 @@ class Graph extends Component {
     this.props.onItemSelected(index);
   }
 
-
   render () {
-    let _round = (num) => Math.round(100 * num) / 100; 
     console.log('event red', this.props.eventsReducers.currEvent);
-    const event = this.props.eventsReducers.currEvent;
-    let data = [ // const??? had changed from const to let
-      // {'weight': 1, 'name': 'Spotify Artist Ranking', 'score': 60},
-      // {'weight': 1.5, 'name': 'SeatGeek Score', 'score': 75},
-      // {'weight': 1, 'name': 'Spotify Play Count', 'score': 90},
-      // {'weight': 1, 'name': 'iamjasonkuo internet crawling', 'score': 40},
-      // {'weight': .5, 'name': 'Misc', 'score': 80},
-      // {'weight': .3, 'name': 'Beyonce test (fixed)', 'score': 100},
-    ];
-    // GET FOR ALL ARTISTS BUT NEED TO REMOVE DUPLICATES!
-    if (event.artists[0] !== undefined) {
-      let weight = 1;
-      event.artists.forEach(function(artist, index) {
-        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity});
-        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100)});
-        if (index === 0) {
-          weight /= event.artists.length;
-        }
-      });
-    }
-    data.push({'weight': 0.5, 'name': event.venue + '\'s Venue Score', 'score': _round(event.venueScore * 100)});
-    data.push({'weight': 1.5, 'name': 'SeatGeek Event Score', 'score': _round(event.sgscore * 100)});
-
-    if (event.watsonScore) {
-      data.push({'weight': 2, 'name': 'Social Perception', 'score': _round(event.watsonScore.score * 100)});
-    }
-
+    data = this.props.data;
+    colors = this.props.colors;
     const eventScore = 
       Math.round(
       data.reduce(function(a, b) {
@@ -154,7 +122,7 @@ class Graph extends Component {
           )
         }
         </Group>
-
+        
 
         </Surface>
         <View style={{position: 'absolute', top: propsradius + margin - 15}}>
@@ -176,12 +144,9 @@ class Graph extends Component {
             )
           }
         </View>
-
-
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -204,4 +169,10 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(Graph);
+function mapStateToProps(state) {
+  return {
+    eventsReducers: state.eventsReducers,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Graph);
