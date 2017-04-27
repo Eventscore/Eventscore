@@ -25,7 +25,7 @@ import {
   Dimensions,  
 } from 'react-native';
 
-const background = require('../assets/image/login1_bg.png');
+const background = require("../assets/image/SeaBlue.jpg");
 
 class EventView extends Component {
   constructor() {
@@ -92,18 +92,17 @@ class EventView extends Component {
     if (event.artists[0] !== undefined) {
       let weight = 1;
       event.artists.forEach(function(artist, index) {
-        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity, 'type': 'SpotifyArtist'});
-        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100), 'type': 'SeatGeekArtist'});
+        data.push({'weight': weight, 'name': artist.name + '\'s Spotify Ranking', 'score': artist.spotify.popularity, 'type': 'spotifyArtist'});
+        data.push({'weight': weight, 'name': artist.name + '\'s SeatGeek Score', 'score': _round(artist.score * 100), 'type': 'seatGeekArtist'});
         if (index === 0) {
           weight /= event.artists.length;
         }
       });
     }
-    data.push({'weight': 0.5, 'name': event.venue + '\'s Venue Score', 'score': _round(event.venueScore * 100)});
+    data.push({'weight': 0.5, 'name': event.venue + '\'s Venue Score', 'score': _round(event.venueScore * 100), 'type': 'venue'});
     data.push({'weight': 1.5, 'name': 'SeatGeek Event Score', 'score': _round(event.sgscore * 100)});
-
     if (event.watsonScore) {
-      data.push({'weight': 2, 'name': 'Social Perception', 'score': _round(event.watsonScore.score * 100)});
+      data.push({'weight': 2, 'name': 'Social Perception', 'score': _round(event.watsonScore.score * 100), 'type': 'socialPerception'});
     }
 
     const eventScore = 
@@ -123,11 +122,16 @@ class EventView extends Component {
 
     return (
       <View style={styles.container}>
+        <Image 
+          source={background} 
+          style={[styles.container, styles.bg]}
+          resizeMode="cover"
+        >
         <View style={{flex: -1, zIndex: 1}}>      
           <BasicNav />
         </View>
         <ScrollView style={styles.eventBasicContainer}>
-          <View style={{flex: 8, zIndex: 0}}>
+          <View style={{flex: 2, zIndex: 0}}>
             <View style={styles.imageBox}>
             { artists[0] ? 
               <Image
@@ -142,32 +146,47 @@ class EventView extends Component {
               <View style={styles.headlineTitleContainer}>
                 <Text style={styles.headlineTitle}>{name}</Text>
                 <Text style={styles.headlineVenue}>{timeValue} @ {venue ? venue : 'Undefined'}</Text>
+                <TouchableHighlight 
+                  style={styles.floatButtonContainer} 
+                  onPress={ () => { this.refs.scrollView.scrollTo(_scrollToBottomY) }} 
+                >
+                  <Icon name='angle-double-down' size={25} color='#7a7b7c' resizeMode='contain' />
+                </TouchableHighlight>
               </View>
             </View>
-          <View style={styles.eventInformation}>
+          <ScrollView 
+            style={styles.metricContainer}
+            ref='scrollView'
+            scrollEnabled = {false}
+            onContentSizeChange={(contentWidth, contentHeight) => {
+              _scrollToBottomY = contentHeight;
+            }}>
+            <View style={styles.eventInformation}>
+              <View style={styles.badgeList}>
+                <View style={styles.badge}>
+                  <Icon name='spotify' size={30} color='green' resizeMode='contain' />
+                  <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.popularity}</Text>
+                </View>
+                <View style={styles.badge}>
+                <Icon name='users' size={30} color='lime' resizeMode='contain' />
+                  <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.followers}</Text>
+                </View>
+                <View style={styles.badge}>
+                  <Icon name='globe' size={30} color='skyblue' resizeMode='contain' />
+                  <Text>{Math.round(this.props.eventsReducers.currEvent.venueScore * 100)}</Text>
+                </View>
+                <View style={styles.badge}>
+                  <Text>{city}</Text>
+                </View>
+              </View>
+            </View>            
             <Graph
               data={data}
               colors={colors}
               eventScore={eventScore}
             /> 
-            <View style={styles.badgeList}>
-              <View style={styles.badge}>
-                <Icon name='spotify' size={30} color='green' resizeMode='contain' />
-                <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.popularity}</Text>
-              </View>
-              <View style={styles.badge}>
-              <Icon name='users' size={30} color='lime' resizeMode='contain' />
-                <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.followers}</Text>
-              </View>
-              <View style={styles.badge}>
-                <Icon name='globe' size={30} color='skyblue' resizeMode='contain' />
-                <Text>{Math.round(this.props.eventsReducers.currEvent.venueScore * 100)}</Text>
-              </View>
-              <View style={styles.badge}>
-                <Text>{city}</Text>
-              </View>
-            </View>
-          </View>
+          </ScrollView>
+
           <View>
             <TouchableOpacity
               onPress={(e) => this.handlePress(e)}>
@@ -187,66 +206,21 @@ class EventView extends Component {
           </View>            
           </View>
         </ScrollView>
+        </Image>
       </View>
     );
   }
 }
-
-
-        // <View style={{flex: 8, zIndex: 0}}>
-        //   <ScrollView style={styles.scroll}>
-        //     <View style={styles.eventViewContainer}>
-        //       <View style={styles.eventContainer}>
-        //         <View style={styles.dateBox}>
-        //           <Text style={styles.weekday}>{day}</Text>
-        //           <Text style={styles.date}>{date}</Text>
-        //         </View>
-        //         <View style={styles.eventInfo}>
-        //           <Text style={styles.artist}>
-        //             {artists[0] ? artists[0].name : 'Rum Ham'}
-        //           </Text>
-        //           <Text style={styles.headline}>{name}</Text>
-        //           <Text style={styles.timeVenue}>
-        //             {timeValue} @ {venue ? venue : 'Wrigley Field'}
-        //           </Text>
-        //           <Text style={styles.location}>
-        //             {city ? city : 'Chicago'}, 
-        //             {state ? state : 'IL'}
-        //           </Text>
-        //         </View>
-        //         <View style={styles.scoreBox}>
-        //           <Text style={styles.score}>Score:</Text>
-        //           <Text style={styles.scoreNumber}>
-        //             {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
-        //           </Text>
-        //         </View>
-        //       </View>
-        //       <LocationMap />
-        //       { artists[0] ? 
-        //         <Image
-        //           style={{height: 50, width: 50}}
-        //           source={{uri: artists[0].img }}
-        //           // resizeMode='cover' // want to put this somewhere // possibly as background
-        //         /> : true}
-        //       <Graph/> 
-        //       <TouchableOpacity
-        //         onPress={(e) => this.handlePress(e)}>
-        //         <View style={styles.button}>
-        //           <Text style={styles.text}>Buy Tickets</Text>
-        //         </View>
-        //       </TouchableOpacity>
-        //     </View>
-        //   </ScrollView>
-        // </View>
-        // <View style={{flex: 1, zIndex: 2}}>
-        //   <TabBar />
-        // </View>
 
 const styles = StyleSheet.create({
   container: {
     flex: -1,
     flexDirection: 'column',
   },
+  bg: {
+    width: null,
+    height: null
+  },    
   imageBox: {
     display: 'flex',
     alignItems: 'stretch',
@@ -284,11 +258,37 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '85%'
   },
+  metricContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    height: 230,
+    width: null
+  },
   eventInformation: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'
+  },
+  floatButtonContainer: {
+    backgroundColor: 'rgba(0,0,0,.2)',
+    borderColor: '#fff5',
+    borderWidth: 1,
+    height: 35,
+    width: 35,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    right:20,
+    shadowColor: "#FFF9",
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   },
 
 
