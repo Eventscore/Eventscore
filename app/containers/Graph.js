@@ -145,15 +145,16 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
-    // backgroundColor: '#EEE', // gray background
+    backgroundColor: 'transparent',    
     margin: 3,
   },
   scoreStyle: {
     fontSize: 20,
-    // color: '#ffffff', // white color
+    backgroundColor: 'transparent',    
   },
   label: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    backgroundColor: 'transparent',    
   }
 });
 
