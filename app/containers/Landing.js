@@ -15,7 +15,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TimerMixin from 'react-timer-mixin';
 
-const background = require("../assets/image/signup_bg.png");
+const background = require("../assets/image/SeaBlue.jpg");
 
 const { width , height } = Dimensions.get("window");
 

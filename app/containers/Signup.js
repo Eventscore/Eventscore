@@ -14,7 +14,7 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import { ActionCreators } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-const background = require("../assets/image/signup_bg.png");
+const background = require("../assets/image/SeaBlue.jpg");
 const backIcon = require("../assets/image/back.png");
 const personIcon = require("../assets/image/signup_person.png");
 const lockIcon = require("../assets/image/signup_lock.png");

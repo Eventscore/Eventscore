@@ -38,7 +38,9 @@ const defaultStyles = {
   },
   topBarLeft: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
+    // backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0,0,0,.2)',   
     width: WINDOW.width,
     height: 50,
     borderTopColor: '#7e7e7e',
@@ -49,7 +51,9 @@ const defaultStyles = {
   },
   topBarRight: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
+    // backgroundColor: 'transparent',    
+    backgroundColor: 'rgba(0,0,0,.2)',
     width: WINDOW.width,
     height: 50,
     borderTopColor: '#7e7e7e',
@@ -60,7 +64,9 @@ const defaultStyles = {
   },
   topBarMiddle: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
+    // backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0,0,0,.2)',
     width: WINDOW.width,
     height: 50,
     borderTopColor: '#7e7e7e',
@@ -70,7 +76,9 @@ const defaultStyles = {
     alignItems: 'center',
   },
   textInputContainer: {
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
+    // backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0,0,0,.2)',
     width: WINDOW.width,
     height: 44,
     borderTopColor: '#7e7e7e',
@@ -110,7 +118,7 @@ const defaultStyles = {
   },
   titleViewText: {
     marginTop: 25,
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#fff',
@@ -231,7 +239,8 @@ class Search extends Component {
             </View>            
           </View>
           <View style={defaultStyles.textInputContainer} >
-            <TextInput ref={component => this._textInput = component} style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})} />
+            <TextInput ref={component => this._textInput = component} style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})}>
+            </TextInput>
           </View>
           {searchInputShow}
         </View>

@@ -23,8 +23,8 @@ import TabBar from './TabBar';
 import Search from './Search'; //remove this later, only for testing
 import EventListItem from './EventListItem';
 
+const background = require("../assets/image/SeaBlue.jpg");
 const { width , height } = Dimensions.get("window");
-const background = require("../assets/image/login1_bg.png");
 const popImg = require("../assets/image/genres/pop_img.jpg");
 const rockImg = require("../assets/image/genres/rock_img.jpg");
 const countryImg = require("../assets/image/genres/country_img.jpg");
@@ -96,6 +96,11 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}> 
+        <Image 
+          source={background} 
+          style={[styles.container, styles.bg]}
+          resizeMode="cover"
+        >
         <View style={{flex: -1, zIndex: 1}}> 
           <Search />
         </View>
@@ -111,7 +116,8 @@ class Home extends Component {
         </View>
         <View style={{flex: 1, zIndex: 2}}>
           <TabBar />
-        </View>        
+        </View> 
+        </Image>       
       </View>
     );
   }
@@ -120,9 +126,15 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display: 'flex',
-    backgroundColor: '#050505',
+    // display: 'flex',
+    // backgroundColor: '#050505',
+    backgroundColor: 'transparent',
   },
+  bg: {
+    // paddingTop: 30,
+    width: null,
+    height: null
+  },  
   title: {
     // display: 'flex',
     flex: 8, 
