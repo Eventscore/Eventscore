@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactNative from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
@@ -7,22 +6,24 @@ import { Actions, ActionConst } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Graph from './Graph';
 import LocationMap from './Map';
-
 import BasicNav from './BasicNav';
 import TabBar from './TabBar';
-
-const {
-  Image,
-  ListView,
-  TouchableHighlight,
-  StyleSheet,
-  Text,
-  View,
-  Button,
+import {
   ScrollView,
-  Linking,
-  TouchableOpacity,
-} = ReactNative;
+  View,
+  ListView,
+  TextInput,
+  Text,
+  Image,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  TouchableOpacity, 
+  StyleSheet,
+  Platform,
+  ActivityIndicator,
+  PixelRatio,
+  Dimensions,  
+} from 'react-native';
 
 const background = require("../assets/image/login1_bg.png");
 
@@ -341,4 +342,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export default EventView;
-export default connect(({routes, loginReducers, eventsReducers}) => { return {routes, loginReducers, eventsReducers} }, mapDispatchToProps)(EventView);
+export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(EventView);
