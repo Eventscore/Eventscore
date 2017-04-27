@@ -21,17 +21,17 @@ const background = require("../assets/image/login1_bg.png");
 
 var FilterItemGenre = React.createClass({
   async fetchEventsByGenreRedux(){
-    let keyword = this.props.keyword || null;
     let genre = this.props.genre || null;
     let getLocation = await this.props.getLocation();
-    this.getEvents(keyword, genre);
+    this.getEvents(genre);
   },
 
   getEvents(...args){
     // this.props.fetchEventByKeyword(keyword, genre)});
-    this.props.fetchNearbyEvents(
+    this.props.fetchEventByGenre(
       this.props.locationReducers.geolocation.coords.longitude,
-      this.props.locationReducers.geolocation.coords.latitude
+      this.props.locationReducers.geolocation.coords.latitude,
+      genre
     ).then(() => {
       {Actions.event()}
     }).catch((error) => {

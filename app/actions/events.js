@@ -81,13 +81,14 @@ export function fetchNearbyEvents(long, lat) {
   }
 }
 
-export function fetchEventByKeyword(keyword, genre) {
+export function fetchEventByGenre(lon, lat, genre) {
   return (dispatch, getState) => {
     const params = [
-    `keyword/${encodeURIComponent(keyword)}`,
+    `longitude/${encodeURIComponent(long)}`,
+    `latitude/${encodeURIComponent(lat)}`,
     `genre/${encodeURIComponent(genre)}`,
     ];
-    return Api.get(`/api/events/${params.join('/')}`).then(res => {
+    return Api.get(`/api/events/genres/${params.join('/')}`).then(res => {
       dispatch({
         type: types.REQUEST_EVENTS_FILTER,
         keyword: keyword,
