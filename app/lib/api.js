@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-fetch';
+
 class Api {
   static headers() {
     return {

@@ -58,22 +58,22 @@ export function fetchNearbyEvents(long, lat) {
     return Api.get(`/api/events/${params.join('/')}`).then(res => {
       dispatch({
         type: types.RECEIVE_EVENTS,
-        long: long,
-        lat: lat,
+        // long: long,
+        // lat: lat,
         events: res,
         receivedAt: Date.now(),
-        res: res,
+        // res: res,
         cannotGetEvents: false,
         loadingEvents: false
       });
     }).catch( (ex) => {
       dispatch({
         type: types.RECEIVE_EVENTS_FAILED,
-        long: long,
-        lat: lat,
+        // long: long,
+        // lat: lat,
         events: null,
         receivedAt: Date.now(),        
-        res: ex,
+        // res: ex,
         cannotGetEvents: true,
         loadingEvents: false
       });
