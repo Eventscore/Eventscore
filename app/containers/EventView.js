@@ -135,7 +135,10 @@ class EventView extends Component {
               </View>
             </View>
           <View style={styles.eventInformation}>
-            <Graph/> 
+            <Graph
+              data={data}
+              colors={colors}
+            /> 
             <View style={styles.badgeList}>
               <View style={styles.badge}>
                 <Icon name='spotify' size={30} color='green' resizeMode='contain' />
@@ -153,10 +156,6 @@ class EventView extends Component {
                 <Text>{city}</Text>
               </View>
             </View>
-            <Graph 
-              data={data}
-              colors={colors}
-            /> 
           </View>
           <View>
             <TouchableOpacity
