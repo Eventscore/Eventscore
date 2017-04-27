@@ -3,6 +3,47 @@ import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
 import Api from '../lib/api';
 
+export function searchEvents(long, lat, keywords) {
+  return (dispatch, getState) => {
+
+    const params = [
+      `longitude/${encodeURIComponent(long)}`,
+      `latitude/${encodeURIComponent(lat)}`
+    ];
+    if (keywords.length > 0) {
+      const query = keywords.join('&');
+      params.push(`?keywords=${encodeURIComponent(query)}`);
+    }
+    dispatch({
+      type: types.REQUEST_EVENTS,
+      loadingEvents: true
+    })
+    return Api.get(`/api/events/search/${params.join('/')}`).then(res => {
+      dispatch({
+        type: types.RECEIVE_EVENTS,
+        long: long,
+        lat: lat,
+        events: res,
+        receivedAt: Date.now(),
+        res: res,
+        cannotGetEvents: false,
+        loadingEvents: false
+      });
+    }).catch( (ex) => {
+      dispatch({
+        type: types.RECEIVE_EVENTS_FAILED,
+        long: long,
+        lat: lat,
+        events: null,
+        receivedAt: Date.now(),        
+        res: ex,
+        cannotGetEvents: true,
+        loadingEvents: false
+      });
+    });
+  }
+}
+
 export function fetchNearbyEvents(long, lat) {
   return (dispatch, getState) => {
     const params = [

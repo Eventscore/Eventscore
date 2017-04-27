@@ -161,10 +161,24 @@ class Search extends Component {
   }
 
   submitSearch() {
-    //this.state.keywords or ''
-    //this.state.details.geometry.location.lng or lat
-    //or this.state.coords.longitude or latitude (this choice is for current location)
-    console.log('Searching...', this.state)
+    let keywords;
+    let longitude;
+    let latitude;
+    this.state.keywords ? keywords = this.state.keywords.split(' ') : keywords = [];
+    this.state.details ? longitude = this.state.details.geometry.location.lng : longitude = this.props.locationReducers.geolocation.coords.longitude;
+    this.state.details ? latitude =  this.state.details.geometry.location.lat : latitude = this.props.locationReducers.geolocation.coords.latitude;
+    console.log('SUBMIT SEARCH', keywords, longitude, latitude);
+    this.props.searchEvents(
+      longitude,
+      latitude,
+      keywords
+    ).then(() => {
+      this.setState({
+        eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   clearText() {
