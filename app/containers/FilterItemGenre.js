@@ -46,9 +46,9 @@ var FilterItemGenre = React.createClass({
         <TouchableOpacity style={styles.filterOptionGenre} onPress={() => this.fetchEventsByGenreRedux()} value={this.props.genre}>
           <Image source={this.props.genre[1]} 
           style={styles.genrePic} 
-          resizeMode='contain'>
-          </Image>     
-          <Text style={styles.genreTextTitle}>{this.props.genre[0]}</Text>
+          resizeMode='cover'>
+          </Image>
+          <Text style={styles.genreTextTitle}>{this.props.genre[0].toUpperCase()}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -62,17 +62,19 @@ const styles = StyleSheet.create({
     // margin: 5,
     width: 150,
     height: 150,
-    backgroundColor: 'dimgrey', // idk if we want solid pics or what. this color is ugly and is just a placeholder
+    backgroundColor: 'rgba(0,0,0,.6)',
     marginBottom: 25
   },
   genrePic: {
     width: 150,
-    height: 150,
+    height: 150, 
   },
   genreTextTitle: {
     color: '#FFF',
+    fontSize: 24,
+    // fontWeight: 'bold',
     alignSelf: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0,0,0,.4)',
     position: 'absolute',
     // justifySelf: 'center'
     // left: '50%',

@@ -21,25 +21,28 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FilterItemGenre from './FilterItemGenre'
 import TabBar from './TabBar';
 import Search from './Search'; //remove this later, only for testing
+import EventListItem from './EventListItem';
 
 const { width , height } = Dimensions.get("window");
 const background = require("../assets/image/login1_bg.png");
-const popImg = require("../assets/image/genres/pop.png");
-const rockImg = require("../assets/image/genres/rock.png");
-const countryImg = require("../assets/image/genres/country.png");
-const jazzImg = require("../assets/image/genres/jazz.png");
-const electronicImg = require("../assets/image/genres/electronic.png");
-const rapImg = require("../assets/image/genres/rap.png");
+const popImg = require("../assets/image/genres/pop_img.jpg");
+const rockImg = require("../assets/image/genres/rock_img.jpg");
+const countryImg = require("../assets/image/genres/country_img.jpg");
+const jazzImg = require("../assets/image/genres/jazz_img.jpg");
+const electronicImg = require("../assets/image/genres/electronic_img.jpg");
+const rapImg = require("../assets/image/genres/rap_img.jpeg");
 StatusBar.setBarStyle('light-content', true);
 
 class Home extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const ds2 = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});    
     const genreList = [['pop', popImg], ['rap', rapImg], ['rock', rockImg], ['country', countryImg], ['jazz', jazzImg], ['electronic', electronicImg] ];
     this.state = {
       keyword: '',
-      genreList: ds.cloneWithRows(genreList),    
+      genreList: ds.cloneWithRows(genreList),
+      eventList: ds.cloneWithRows([]),  
     }
   }
   
@@ -64,20 +67,48 @@ class Home extends Component {
     })    
   }
 
+  // async getNearbyEvents() {
+  //   let getLocation = await this.props.getLocation();
+  //   this.props.fetchNearbyEvents(
+  //     this.props.locationReducers.geolocation.coords.longitude,
+  //     this.props.locationReducers.geolocation.coords.latitude
+  //   ).then(() => {
+  //     this.setState({
+  //       eventList: this.state.eventList.cloneWithRows(this.props.eventsReducers.events),
+  //     });
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
+
+  // componentDidMount() {
+  //   this.getNearbyEvents();
+  // }
+
+  // <Text style={styles.titleText}>Hot Events Near You</Text>
+  //   <ListView
+  //     dataSource={this.state.eventList}
+  //     initialListSize={2}
+  //     pageSize={2}
+  //     renderRow={(event) => <EventListItem key={event._id} event={event} />}
+  //   />
+
   render() {
     return (
       <View style={styles.container}> 
         <View style={{flex: -1, zIndex: 1}}> 
           <Search />
         </View>
-        <ScrollView style={styles.title}>
-          <Text style={styles.titleText}>Search by Genres</Text>
-        <ListView
-          contentContainerStyle={styles.list}
-          dataSource={this.state.genreList}
-          renderRow={ (genre) => <FilterItemGenre genre={genre} />}
-        />
+        <View style={{flex: 8, zIndex: 0}}>
+        <ScrollView>
+        <Text style={styles.titleText}>Search by Genres</Text>
+          <ListView
+            contentContainerStyle={styles.list}
+            dataSource={this.state.genreList}
+            renderRow={ (genre) => <FilterItemGenre genre={genre} />}
+          />
         </ScrollView>
+        </View>
         <View style={{flex: 1, zIndex: 2}}>
           <TabBar />
         </View>        
@@ -101,6 +132,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 24,
     alignSelf: 'center',
+    margin: 10
   },
   list: {
     display: 'flex',
@@ -111,17 +143,8 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(state) {
-  return {
-    routes: state.routes,
-    loginReducers: state.loginReducers,
-    locationReducers: state.locationReducers,
-    eventReducers: state.eventReducers
-  }
-}
-
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(({routes, loginReducers, eventsReducers, locationReducers}) => { return {routes, loginReducers, eventsReducers, locationReducers}}, mapDispatchToProps)(Home);
