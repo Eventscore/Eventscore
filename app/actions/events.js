@@ -87,7 +87,7 @@ export function fetchEventByGenre(long, lat, genre) {
     const params = [
     `longitude/${encodeURIComponent(long)}`,
     `latitude/${encodeURIComponent(lat)}`,
-    `genre/${encodeURIComponent(genre)}`,
+    `genres/${encodeURIComponent(genre)}`,
     ];
     return Api.get(`/api/events/genres/${params.join('/')}`).then(res => {
       dispatch({
