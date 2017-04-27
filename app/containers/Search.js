@@ -196,12 +196,16 @@ class Search extends Component {
                           styles={{
                             textInputContainer: defaultStyles.textInputContainer,
                             textInput: defaultStyles.textInputBottom,
+<<<<<<< HEAD
                             description: {
                               fontWeight: 'bold',
                             },
                             predefinedPlacesDescription: {
                               color: '#1faadb',
                             },
+=======
+                            backgroundColor: 'rgba(0,0,0,.2)',                            
+>>>>>>> minor changes on UI
                             listView: {
                               flex: 1,
                               height: deviceHeight,
