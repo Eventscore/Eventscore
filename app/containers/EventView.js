@@ -106,6 +106,16 @@ class EventView extends Component {
       data.push({'weight': 2, 'name': 'Social Perception', 'score': _round(event.watsonScore.score * 100)});
     }
 
+    const eventScore = 
+      Math.round(
+      data.reduce(function(a, b) {
+        return a + (b.score * b.weight); 
+      }, 0) / 
+      data.reduce(function(a, b) { 
+        return a + b.weight; 
+      }, 0)
+      );
+
     const colors = [
       '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
       '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf'
@@ -138,6 +148,7 @@ class EventView extends Component {
             <Graph
               data={data}
               colors={colors}
+              eventScore={eventScore}
             /> 
             <View style={styles.badgeList}>
               <View style={styles.badge}>
@@ -174,9 +185,6 @@ class EventView extends Component {
               </View>
             </TouchableOpacity>
           </View>            
-
-
-
           </View>
         </ScrollView>
       </View>

@@ -86,15 +86,7 @@ class Graph extends Component {
     console.log('event red', this.props.eventsReducers.currEvent);
     data = this.props.data;
     colors = this.props.colors;
-    const eventScore = 
-      Math.round(
-      data.reduce(function(a, b) {
-        return a + (b.score * b.weight); 
-      }, 0) / 
-      data.reduce(function(a, b) { 
-        return a + b.weight; 
-      }, 0)
-      );
+    eventScore = this.props.eventScore;
     return (
       <View style={styles.container}>
 
@@ -122,7 +114,7 @@ class Graph extends Component {
           )
         }
         </Group>
-        
+
 
         </Surface>
         <View style={{position: 'absolute', top: propsradius + margin - 15}}>
