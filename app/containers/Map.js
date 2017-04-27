@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   map: {
     width: width,
     height: 120,
-    marginBottom: 50
+    // marginBottom: 50
   }
 });
 
