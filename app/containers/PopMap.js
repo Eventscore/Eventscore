@@ -82,4 +82,11 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(({routes, eventsReducers, listTypeReducers}) => { return {routes, eventsReducers, listTypeReducers} }, mapDispatchToProps)(PopMap);
+function mapStateToProps(state) {
+  return {
+    eventsReducers: state.eventsReducers,
+    listTypeReducers: state.listTypeReducers
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PopMap);
