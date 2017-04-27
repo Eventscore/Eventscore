@@ -57,8 +57,9 @@ class LocationMap extends Component {
           onPress={() => {
             console.log('triggering onPress');
             // set state to map
-            this.props.setListType(true);
-            Actions.pop();
+            // this.props.setListType(true);
+            // Actions.pop();
+            Actions.popmap();
           }}
         >
           <MapView.Marker
