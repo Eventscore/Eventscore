@@ -99,10 +99,9 @@ class Home extends Component {
         <View style={{flex: -1, zIndex: 1}}> 
           <Search />
         </View>
-
         <View style={{flex: 8, zIndex: 0}}>
-        <ScrollView style={styles.title}>
-        <Text style={styles.titleText}>Search by Genres</Text>
+          <ScrollView style={styles.title}>
+            <Text style={styles.titleText}>Search by Genres</Text>
           <ListView
             contentContainerStyle={styles.list}
             dataSource={this.state.genreList}
