@@ -28,6 +28,7 @@ import EventView from './containers/EventView';
 import EventList from './containers/EventList';
 import Search from './containers/Search'; //for testing, remove later
 import BasicNav from './containers/BasicNav';
+import PopMap from './containers/PopMap';
 
 const scenes = Actions.create(
   <Scene key="root">
@@ -38,6 +39,7 @@ const scenes = Actions.create(
     <Scene key="filter" component={Filter} title="Search" hideNavBar />
     <Scene key="event" component={EventList} title="Events" hideNavBar />
     <Scene key="eventview" component={EventView} hideNavBar />
+    <Scene key="popmap" component={PopMap} hideNavBar />
   </Scene>
 );
 
