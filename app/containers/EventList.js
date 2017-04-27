@@ -18,6 +18,7 @@ import EventListMap from './EventListMap';
 // import NavBar from './NavBar';
 import TabBar from './TabBar';
 import Search from './Search'; //remove this later, only for testing
+const background = require("../assets/image/SeaBlue.jpg");
 
 class EventList extends Component {
   static title = '<RefreshControl>';
@@ -113,6 +114,11 @@ class EventList extends Component {
 
     return (
       <View style={{flex: 1}}>
+        <Image 
+          source={background} 
+          style={[styles.container, styles.bg]}
+          resizeMode="cover"
+        >
         <View style={{flex: -1, zIndex: 1}}>
           <Search />
         </View>
@@ -122,6 +128,7 @@ class EventList extends Component {
         <View style={{flex: 1, zIndex: 2}}>
           <TabBar />
         </View>
+        </Image>
       </View>
     );
   }
@@ -137,11 +144,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    color: '#000000'
+    backgroundColor: 'transparent',
   },
+  bg: {
+    // paddingTop: 30,
+    width: null,
+    height: null
+  },    
   eventContainer: {
     flex: 1,
-    backgroundColor: '#050505',
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     display: 'flex',
   },

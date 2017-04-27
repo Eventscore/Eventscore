@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 
 const { width , height } = Dimensions.get("window");
 
-const background = require("../assets/image/login1_bg.png");
+const background = require("../assets/image/SeaBlue.jpg");
 const backIcon = require("../assets/image/back.png");
 const lockIcon = require("../assets/image/login1_lock.png");
 const personIcon = require("../assets/image/login1_person.png");
