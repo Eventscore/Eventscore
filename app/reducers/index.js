@@ -4,7 +4,7 @@ import loginReducers from './login';
 import signupReducers from './signup';
 import eventsReducers from './events';
 import locationReducers from './location';
-// import listOrMapReducers from './listOrMap';
+import listTypeReducers from './listType';
 // import * as loginReducers from './login';
 // ... other reducers
 
@@ -13,7 +13,7 @@ export default combineReducers({
   signupReducers,
   eventsReducers,
   locationReducers,
-  // listOrMapReducers,
+  listTypeReducers,
   routes,
   // ... other reducers
 });

@@ -60,7 +60,8 @@ class EventList extends Component {
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     let list = null;
-    if (this.state.listSwitch) {
+    // if (this.state.listSwitch) {
+    if (this.props.listTypeReducers.listType) {
       list = <EventListMap />;
     } else {
       list = 
@@ -103,8 +104,12 @@ class EventList extends Component {
       listPageRender = 
         <View style={styles.eventContainer}>
           {list}
-            <TouchableHighlight style={styles.floatButtonContainer} onPress={ (value) => { this.setState({listSwitch: !this.state.listSwitch}); }} value={this.state.listSwitch}>
-              <Text style={{fontSize: 15, color: '#FFF'}}>{this.state.listSwitch === false ? 'Map' : 'List'}</Text>
+            <TouchableHighlight 
+              style={styles.floatButtonContainer} 
+              onPress={ () => { this.props.setListType(!this.props.listTypeReducers.listType); }} 
+            >
+              <Text style={{fontSize: 15, color: '#FFF'}}>{this.props.listTypeReducers.listType === false ? 'Map' : 'List'}</Text>
+
             </TouchableHighlight>
         </View>;
     } else {
@@ -112,7 +117,6 @@ class EventList extends Component {
         <View style={styles.eventContainer}>
         </View>;
     }
-
     return (
       <View style={{flex: 1}}>
         <Image 
@@ -196,6 +200,7 @@ function mapStateToProps(state) {
   return {
     locationReducers: state.locationReducers,
     eventsReducers: state.eventsReducers,
+    listTypeReducers: state.listTypeReducers
     // routes: state.routes
   };
 };

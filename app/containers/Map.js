@@ -57,8 +57,7 @@ class LocationMap extends Component {
           onPress={() => {
             console.log('triggering onPress');
             // set state to map
-            
-            // Actions.event();
+            this.props.setListType(true);
             Actions.pop();
           }}
         >
@@ -118,4 +117,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 // export default EventView;
-export default connect(({routes, eventsReducers}) => { return {routes, eventsReducers} }, mapDispatchToProps)(LocationMap);
+export default connect(({routes, eventsReducers, listTypeReducers}) => { return {routes, eventsReducers, listTypeReducers} }, mapDispatchToProps)(LocationMap);
