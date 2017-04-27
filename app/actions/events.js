@@ -81,7 +81,8 @@ export function fetchNearbyEvents(long, lat) {
   }
 }
 
-export function fetchEventByGenre(lon, lat, genre) {
+export function fetchEventByGenre(long, lat, genre) {
+  console.log('EVENTS ARGS', long, lat, genre);
   return (dispatch, getState) => {
     const params = [
     `longitude/${encodeURIComponent(long)}`,
@@ -101,10 +102,9 @@ export function fetchEventByGenre(lon, lat, genre) {
     }).catch( (ex) => {
       dispatch({
         type: types.REQUEST_EVENTS_FILTER_FAILED,
-        keyword: keyword,
         genre: genre,
         receivedAt: Date.now(),
-        events: res,
+        events: null,
         status: 'error',
         res: ex        
       })
