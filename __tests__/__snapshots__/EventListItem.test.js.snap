@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventListItem renders correctly 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "column",
+        "padding": 3,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "stretch",
+          "display": "flex",
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "flex": 1,
+            "height": 150,
+            "resizeMode": "cover",
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "backgroundColor": "rgba(0,0,0,.6)",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "backgroundColor": "rgba(0,0,0,.6)",
+              "color": "#FFF",
+              "fontSize": 16,
+              "paddingLeft": 5,
+              "position": "absolute",
+              "textAlign": "left",
+              "top": "55%",
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "color": "#FFF5",
+              "fontSize": 14,
+              "paddingLeft": 5,
+              "position": "absolute",
+              "textAlign": "left",
+              "top": "65%",
+            }
+          }
+        >
+          12:NaNAM
+           @ 
+          Undefined
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#EEE",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-around",
+            "margin": 1.5,
+            "padding": 3,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-around",
+              "padding": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            resizeMode="contain"
+            style={
+              Array [
+                Object {
+                  "color": "#7a7b7c",
+                  "fontSize": 20,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "FontAwesome",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#7a7b7c",
+                "fontSize": 13,
+              }
+            }
+          >
+            TBD
+            , 
+            TBD
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-around",
+              "padding": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            resizeMode="contain"
+            style={
+              Array [
+                Object {
+                  "color": "#7a7b7c",
+                  "fontSize": 20,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "FontAwesome",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#7a7b7c",
+                "fontSize": 13,
+              }
+            }
+          >
+            N/A
+            , 
+            N/A
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "stretch",
+              "flex": 0.5,
+              "flexDirection": "row",
+              "justifyContent": "space-around",
+              "padding": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#7a7b7c",
+                "fontSize": 13,
+                "textAlign": "center",
+              }
+            }
+          >
+            Score:
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "alignSelf": "center",
+                "color": "#7a7b7c",
+                "fontSize": 18,
+              }
+            }
+          >
+            69
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

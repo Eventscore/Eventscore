@@ -1,8 +1,8 @@
-import { events } from '../app/actions/events';
+import { changeCurrEvent } from '../app/actions/events';
 
 describe('changeCurrEvent', () => {
   it('should have a type of "CHANGE_CURR_EVENT"', () => {
-    expect(events.changeCurrEvent().type).toEqual('CHANGE_CURR_EVENT');
+    expect(changeCurrEvent().type).toEqual('CHANGE_CURR_EVENT');
   });
 });
 

@@ -9,6 +9,7 @@
   "dependencies": {
     "art": "^0.10.1",
     "d3": "^4.7.4",
+    "moment": "^2.18.1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.43.2",
     "react-native-google-places-autocomplete": "^1.2.12",
