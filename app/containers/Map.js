@@ -117,5 +117,11 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-// export default EventView;
-export default connect(({routes, eventsReducers, listTypeReducers}) => { return {routes, eventsReducers, listTypeReducers} }, mapDispatchToProps)(LocationMap);
+function mapStateToProps(state) {
+  return {
+    eventsReducers: state.eventsReducers,
+    listTypeReducers: state.listTypeReducers
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationMap);
