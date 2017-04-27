@@ -43,7 +43,7 @@ var FilterItemGenre = React.createClass({
   render(){
     return(
       <View style={styles.filterOptionGenre}>
-        <TouchableOpacity style={styles.filterOptionGenre} onPress={() => this.fetchEventsByGenreRedux()} value={this.props.genre}>
+        <TouchableOpacity style={styles.genrePic} onPress={() => this.fetchEventsByGenreRedux()} value={this.props.genre}>
           <Image source={this.props.genre[1]} 
           style={styles.genrePic} 
           resizeMode='cover'>
@@ -57,29 +57,21 @@ var FilterItemGenre = React.createClass({
 
 const styles = StyleSheet.create({
   filterOptionGenre: {
-    // display: 'flex',
-    // flex: 1,
-    // margin: 5,
     width: 150,
     height: 150,
-    backgroundColor: 'rgba(0,0,0,.6)',
-    marginBottom: 25
+    marginBottom: 25,
   },
   genrePic: {
     width: 150,
-    height: 150, 
+    height: 150,
   },
   genreTextTitle: {
     color: '#FFF',
     fontSize: 24,
-    // fontWeight: 'bold',
     alignSelf: 'center',
     backgroundColor: 'rgba(0,0,0,.4)',
     position: 'absolute',
-    // justifySelf: 'center'
-    // left: '50%',
-    top: '50%', // isn't the best way because it's not centered
-    // transform: 'translate(-50%, -50%)'
+    top: '50%',
   }
 });
 

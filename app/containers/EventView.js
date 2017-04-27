@@ -213,8 +213,12 @@ const styles = StyleSheet.create({
     // flex: 1,
     // display: 'flex',
     height: 300,
-    width: null, 
-    // resizeMode: 'cover',
+    width: null,
+    // backgroundAttachment: 'fixed',
+    // backgroundPosition: 'center',
+    // backgroundRepeat: 'no-repeat',
+    // backgroundSize: 'cover'
+    resizeMode: 'cover',
   },
   eventInformation: {
     flex: 1,
