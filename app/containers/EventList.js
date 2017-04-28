@@ -91,7 +91,7 @@ class EventList extends Component {
         <View style={styles.eventContainer}>
           <ActivityIndicator size='large' style={{height: 80}} />
         </View>;
-    } else if (this.props.eventsReducers.cannotGetEvents || !this.props.eventsReducers.events.length) { // if cannot get user geolocation
+    } else if (this.props.eventsReducers.cannotGetEvents || (this.props.eventsReducers.events && !this.props.eventsReducers.events.length)) { // if cannot get user geolocation
       listPageRender = 
         <View style={styles.eventContainer}>
           <TouchableHighlight onPress={ () => this.searchPressed() }>
