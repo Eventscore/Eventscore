@@ -3,6 +3,13 @@ import createReducer from '../lib/createReducer';
 import * as types from '../actions/types';
 import Api from '../lib/api';
 
+export function initializeLoad() {
+  return {
+    type: types.SET_INITIAL_LOAD,
+    initialLoad: true
+  }
+}
+
 export function searchEvents(long, lat, keywords) {
   return (dispatch, getState) => {
 
@@ -89,15 +96,21 @@ export function fetchEventByGenre(long, lat, genre) {
     `latitude/${encodeURIComponent(lat)}`,
     `genres/${encodeURIComponent(genre)}`,
     ];
+    console.log('API GET', `/api/events/genres/${params.join('/')}`)
+    dispatch({
+      type: types.REQUEST_EVENTS,
+      loadingEvents: true
+    })
     return Api.get(`/api/events/genres/${params.join('/')}`).then(res => {
       dispatch({
         type: types.REQUEST_EVENTS_FILTER,
-        keyword: keyword,
         genre: genre,
         receivedAt: Date.now(),
         events: res,
         status: 'success',
-        res: res
+        res: res,
+        cannotGetEvents: false,
+        loadingEvents: false
       });
     }).catch( (ex) => {
       dispatch({
@@ -106,7 +119,9 @@ export function fetchEventByGenre(long, lat, genre) {
         receivedAt: Date.now(),
         events: null,
         status: 'error',
-        res: ex        
+        res: ex,
+        cannotGetEvents: true,
+        loadingEvents: false        
       })
     })
   }

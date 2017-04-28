@@ -28,13 +28,15 @@ var FilterItemGenre = React.createClass({
   },
 
   getEvents(...args){
+    this.props.initializeLoad();
+    {Actions.event()}
     // this.props.fetchEventByKeyword(keyword, genre)});
     this.props.fetchEventByGenre(
       this.props.locationReducers.geolocation.coords.longitude,
       this.props.locationReducers.geolocation.coords.latitude,
       this.props.genre[0]
     ).then(() => {
-      {Actions.event()}
+      // {Actions.event()}
     }).catch((error) => {
       console.log(error);
       //TODO: Include some sort of visual illustration that the call failed
