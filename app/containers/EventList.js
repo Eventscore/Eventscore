@@ -22,8 +22,7 @@ import FlipCard from 'react-native-flip-card';
 const background = require("../assets/image/SeaBlue.jpg");
 
 class EventList extends Component {
-  static title = '<RefreshControl>';
-  static description = 'Adds pull-to-refresh support to a scrollview.';
+
   constructor() {
     super();
     this.state = {
