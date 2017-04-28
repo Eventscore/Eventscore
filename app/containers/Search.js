@@ -32,9 +32,13 @@ class Search extends Component {
     super();
     this.state ={
       keywords: '',
+      focus: false,
+      subFocus: false,
     }
     this.submitSearch = this.submitSearch.bind(this);
     this.clearText = this.clearText.bind(this);
+    this.setFocusOn = this.setFocusOn.bind(this);
+    this.setFocusOff = this.setFocusOff.bind(this);
   }
 
   async getNearbyEvents() {
@@ -61,6 +65,15 @@ class Search extends Component {
   clearText() {
     this._textInput.setNativeProps({text: ''});
     this.setState({'keywords': ''});
+    this.setFocusOff();
+  }
+
+  setFocusOn() {
+    this.setState({'focus': true});
+  }
+
+  setFocusOff() {
+    this.setState({'focus': false});
   }
 
   componentDidMount() {
@@ -72,17 +85,15 @@ class Search extends Component {
 
   render() {
     let searchInputShow = null;
-    if(this.state.keywords) {
+    if(this.state.focus || this.state.keywords) {
       searchInputShow = <GooglePlacesAutocomplete
                           enablePoweredByContainer={false}
-                          placeholder="e.g San Francisco, Los Angeles"
-                          placeholderTextColor='#A8A8A8'
-                          minLength={2}
-                          autoFocus={false}
-                          fetchDetails={true}
                           getDefaultValue={() => {
                             return 'Current location'; // text input default value
                           }}
+                          minLength={2}
+                          autoFocus={false}
+                          fetchDetails={true}
                           onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
                             console.log('DATA', data);
                             console.log('DETAILS', details);
@@ -121,30 +132,40 @@ class Search extends Component {
 
     return (
       <View style={defaultStyles.searchContainer} >
+
         <View style={{flex: 1, flexDirection: 'column', justifyContent: 'space-between'}}>
+
           <View style={defaultStyles.topBarContainer}>
+
             <View style={defaultStyles.topBarLeft}>
-            {this.state.keywords.length > 0 && 
+            {(this.state.focus === true || this.state.keywords.length > 0) && 
               <TouchableOpacity onPress={this.clearText}>
                 <Text style={{color: '#FFF', marginTop: 25, marginLeft: 15}}>Cancel</Text>
               </TouchableOpacity>}
             </View>
+
             <View style={defaultStyles.topBarMiddle} >
                 <Text style={defaultStyles.titleViewText}>EventScore</Text>
             </View>
+
             <View style={defaultStyles.topBarRight}>
-            {this.state.keywords.length > 0 && 
+            {(this.state.focus === true || this.state.keywords.length > 0) &&
               <TouchableOpacity onPress={this.submitSearch}>
                 <Text style={{color: '#FFF', marginTop: 25, marginRight: 15}}>Search</Text>
               </TouchableOpacity>}          
-            </View>            
+            </View> 
+
           </View>
+
           <View style={defaultStyles.textInputContainer} >
-            <TextInput ref={component => this._textInput = component} style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})}>
+            <TextInput ref={component => this._textInput = component} style={defaultStyles.textInputTop} placeholder='e.g Beyonce, The Weeknd, Bruno Mars' value={this.keywords} onChangeText={(keywords) => this.setState({keywords})}  onFocus={this.setFocusOn}>
             </TextInput>
           </View>
+
           {searchInputShow}
+
         </View>
+
       </View>
     )
   }
