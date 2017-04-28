@@ -104,20 +104,19 @@ class EventListItem extends Component {
               {city ? city : 'N/A'}, {state ? state : 'N/A'}
             </Text>          
           </View>
-          <View style={styles.scoreBox}>
-            <Text style={styles.score}>Score:</Text>
-            <Text style={styles.scoreNumber}>
-              {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
-            </Text>
-          </View>
         </View>
       </View>
     </View>
     </TouchableHighlight>
     );
-          // {this.props.event.artists.map((artist) => {
-          //   return (<Text key={artist.name}>{artist.name}</Text>)
-          // })}
+    /*
+    <View style={styles.scoreBox}>
+      <Text style={styles.score}>Score:</Text>
+      <Text style={styles.scoreNumber}>
+        {artists[0] && artists[0].spotify.popularity ? artists[0].spotify.popularity : 69}
+      </Text>
+    </View>
+    */
   }
 }
 

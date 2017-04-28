@@ -62,7 +62,9 @@ const styles = StyleSheet.create({
   container: {
     borderStyle: 'solid',
     borderTopColor: '#fff',
-    borderTopWidth: 1
+    borderTopWidth: 1,
+    bottom: -3
+    // padding: 10
   },
   tabBarContainer: {
     display: 'flex',

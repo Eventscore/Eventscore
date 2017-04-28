@@ -37,14 +37,7 @@ class EventListMap extends Component {
         <View style={styles.scrollview}>
           <MapView
             style={styles.map}
-
             provider={this.props.provider}
-
-            // scrollEnabled={false}
-            // zoomEnabled={false}
-            // pitchEnabled={false}
-            // rotateEnabled={false}
-
             initialRegion={{
               latitude: LATITUDE,
               longitude: LONGITUDE,
