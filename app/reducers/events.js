@@ -21,17 +21,27 @@ export default function eventsReducer(state = {}, action) {
       return Object.assign({}, state, {
         currEvent: action.currEvent
       });
+    case 'SET_INITIAL_LOAD':
+      return Object.assign({}, state, {
+        initialLoad: action.initialLoad
+      });
     case 'REQUEST_EVENTS_FILTER':
       return Object.assign({}, state, {
         keyword: action.keyword,
         genre: action.genre,
-        status: action.status
+        status: action.status,
+        events: action.events,
+        loadingEvents: action.loadingEvents,
+        cannotGetEvents: action.cannotGetEvents
       });
     case 'REQUEST_EVENTS_FILTER_FAILED':
       return Object.assign({}, state, {
         keyword: action.keyword,
         genre: action.genre,
-        status: action.status
+        status: action.status,
+        events: action.events,
+        loadingEvents: action.loadingEvents,
+        cannotGetEvents: action.cannotGetEvents
       });      
     default:
       return state;

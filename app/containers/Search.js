@@ -44,6 +44,8 @@ class Search extends Component {
   }
 
   async submitSearch() {
+    this.props.initializeLoad();
+    {Actions.event()}
     let keywords, longitude, latitude;
     this.state.keywords ? keywords = this.state.keywords.split(' ') : keywords = [];
     this.state.details ? longitude = this.state.details.geometry.location.lng : longitude = this.props.locationReducers.geolocation.coords.longitude;
@@ -54,7 +56,6 @@ class Search extends Component {
       latitude,
       keywords
     );
-    Actions.event();
   }
 
   clearText() {
