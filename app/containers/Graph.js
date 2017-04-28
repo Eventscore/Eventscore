@@ -114,8 +114,6 @@ class Graph extends Component {
           )
         }
         </Group>
-
-
         </Surface>
         <View style={{position: 'absolute', top: propsradius + margin - 15}}>
           <Text style={[styles.scoreStyle, {}]}>{eventScore}</Text>

@@ -154,6 +154,7 @@ class EventView extends Component {
                 </TouchableHighlight>
               </View>
             </View>
+          <View style={styles.circleContainer}>
           <ScrollView 
             style={styles.metricContainer}
             ref='scrollView'
@@ -186,6 +187,7 @@ class EventView extends Component {
               eventScore={eventScore}
             /> 
           </ScrollView>
+          </View>
 
           <View>
             <TouchableOpacity
@@ -258,12 +260,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '85%'
   },
+  circleContainer: {
+    position: 'relative',
+    width: 350,
+    height: 350,
+    padding: 20,
+    borderWidth: 1,
+    borderRadius: 150,
+  },
   metricContainer: {
     flex: 1,
     flexDirection: 'column',
     height: 230,
-    width: null
-  },
+    width: null,
+    },
   eventInformation: {
     flex: 1,
     justifyContent: 'center',
