@@ -19,7 +19,6 @@ const store = configureStore();
 const RouterWithRedux = connect()(Router);
 
 import NavBar from './containers/NavBar';
-import Filter from './containers/Filter';
 import Landing from './containers/Landing';
 import Home from './containers/Home';
 import Login from './containers/Login';
@@ -32,11 +31,10 @@ import PopMap from './containers/PopMap';
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar />    
+    <Scene key="landing" direction="right" component={Landing} title="Landing" hideNavBar initial />    
     <Scene key="login" direction="right" component={Login} title="Login" hideNavBar />
     <Scene key="signup" direction="left" component={Signup} title="Sign Up" hideNavBar />
-    <Scene key="home" component={Home} title="Home" hideNavBar initial />
-    <Scene key="filter" component={Filter} title="Search" hideNavBar />
+    <Scene key="home" component={Home} title="Home" hideNavBar />
     <Scene key="event" component={EventList} title="Events" hideNavBar />
     <Scene key="eventview" component={EventView} hideNavBar />
     <Scene key="popmap" component={PopMap} hideNavBar />

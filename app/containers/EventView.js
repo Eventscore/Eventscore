@@ -22,15 +22,18 @@ import {
   Platform,
   ActivityIndicator,
   PixelRatio,
-  Dimensions,  
+  Dimensions,
+  Linking,
 } from 'react-native';
 
 const background = require("../assets/image/SeaBlue.jpg");
 
 class EventView extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      eventInfo: ds.cloneWithRows([]),  
     };
     
   }
@@ -47,7 +50,7 @@ class EventView extends Component {
   }
 
   handlePressMap() {
-
+    Actions.popmap();
   }
 
   render() {
@@ -127,92 +130,93 @@ class EventView extends Component {
           style={[styles.container, styles.bg]}
           resizeMode="cover"
         >
-        <View style={{flex: -1, zIndex: 1}}>      
-          <BasicNav />
-        </View>
-        <ScrollView style={styles.eventBasicContainer}>
-          <View style={{flex: 2, zIndex: 0}}>
-            <View style={styles.imageBox}>
-            { artists[0] ? 
-              <Image
-                style={styles.image}
-                source={{uri: artists[0].img }}
-              /> : 
-              <Image
-                style={styles.image}
-                source={background}
-              />
-            }
-              <View style={styles.headlineTitleContainer}>
-                <Text style={styles.headlineTitle}>{name}</Text>
-                <Text style={styles.headlineVenue}>{timeValue} @ {venue ? venue : 'Undefined'}</Text>
-                <TouchableHighlight 
-                  style={styles.floatButtonContainer} 
-                  onPress={ () => { this.refs.scrollView.scrollTo(_scrollToBottomY) }} 
-                >
-                  <Icon name='angle-double-down' size={25} color='#7a7b7c' resizeMode='contain' />
-                </TouchableHighlight>
+          <View style={{flex: -1, zIndex: 1}}>      
+            <BasicNav />
+          </View>
+          <ScrollView style={styles.eventBasicContainer} bounces={false}>
+            <View style={{flex: 2, zIndex: 0}}>
+              <View style={styles.imageBox}>
+              { artists[0] ? 
+                <Image
+                  style={styles.image}
+                  source={{uri: artists[0].img }}
+                /> : 
+                <Image
+                  style={styles.image}
+                  source={background}
+                />
+              }
+                <View style={styles.headlineTitleContainer}>
+                  <Text style={styles.headlineTitle}>{name}</Text>
+                  <Text style={styles.headlineVenue}>{timeValue} @ {venue ? venue : 'Undefined'}</Text>
+                  <TouchableHighlight 
+                    style={styles.floatButtonContainer} 
+                    onPress={ () => { this.refs.scrollView.scrollTo(_scrollToBottomY) }} 
+                  >
+                    <Icon name='angle-double-down' size={25} color='#7a7b7c' resizeMode='contain' />
+                  </TouchableHighlight>
+                </View>
               </View>
+            <View style={styles.metricContainer}>
+              <ScrollView 
+                ref='scrollView'
+                scrollEnabled = {false}
+                onContentSizeChange={(contentWidth, contentHeight) => {
+                  _scrollToBottomY = contentHeight;
+                }}>
+                <Graph
+                  data={data}
+                  colors={colors}
+                  eventScore={eventScore}
+                />
+              </ScrollView>               
             </View>
-          <View style={styles.circleContainer}>
-          <ScrollView 
-            style={styles.metricContainer}
-            ref='scrollView'
-            scrollEnabled = {false}
-            onContentSizeChange={(contentWidth, contentHeight) => {
-              _scrollToBottomY = contentHeight;
-            }}>
-            <View style={styles.eventInformation}>
-              <View style={styles.badgeList}>
-                <View style={styles.badge}>
-                  <Icon name='spotify' size={30} color='green' resizeMode='contain' />
-                  <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.popularity}</Text>
-                </View>
-                <View style={styles.badge}>
-                <Icon name='users' size={30} color='lime' resizeMode='contain' />
-                  <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.followers}</Text>
-                </View>
-                <View style={styles.badge}>
-                  <Icon name='globe' size={30} color='skyblue' resizeMode='contain' />
-                  <Text>{Math.round(this.props.eventsReducers.currEvent.venueScore * 100)}</Text>
-                </View>
-                <View style={styles.badge}>
-                  <Text>{city}</Text>
-                </View>
-              </View>
-            </View>            
-            <Graph
-              data={data}
-              colors={colors}
-              eventScore={eventScore}
-            /> 
-          </ScrollView>
-          </View>
-
-          <View>
-            <TouchableOpacity
-              onPress={(e) => this.handlePress(e)}>
+            <View style={styles.bottomContainer}>
               <View style={styles.buyButton}>
-                <Text style={styles.buyText}>Buy Tickets</Text>
+                <TouchableOpacity
+                  onPress={(e) => this.handlePress(e)}>
+                    <Text style={styles.buyText}>Buy Tickets</Text>
+                </TouchableOpacity>
               </View>
-            </TouchableOpacity>            
-            <TouchableOpacity
-              onPress={(e) => this.handlePressMap(e)}>
-              <LocationMap />
-              <View style={styles.addressButton}>
-                <Text style={styles.text}>{venue ? venue : 'N/A'}, {city ? city : 'N/A'}, {state ? state : 'N/A'}
-                </Text>
-                <Icon name='chevron-right' size={15} color='#7a7b7c' resizeMode='contain' />
-              </View>
-            </TouchableOpacity>
-          </View>            
-          </View>
-        </ScrollView>
+              <TouchableOpacity
+                onPress={(e) => this.handlePressMap(e)}>
+                <LocationMap />
+                <View style={styles.addressButton}>
+                  <Text style={styles.addressText}>{venue ? venue : 'N/A'}, {city ? city : 'N/A'}, {state ? state : 'N/A'}
+                  </Text>
+                  <Icon name='chevron-right' size={15} color='#7a7b7c' resizeMode='contain' />
+                </View>
+              </TouchableOpacity>
+
+
+            </View>
+            </View>
+          </ScrollView>
         </Image>
       </View>
     );
   }
 }
+
+/*
+  <View style={styles.badgeList}>
+    <View style={styles.badge}>
+      <Icon name='spotify' size={30} color='green' resizeMode='contain' />
+      <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.popularity}</Text>
+    </View>
+    <View style={styles.badge}>
+    <Icon name='users' size={30} color='lime' resizeMode='contain' />
+      <Text>{this.props.eventsReducers.currEvent.artists[0].spotify.followers}</Text>
+    </View>
+    <View style={styles.badge}>
+      <Icon name='globe' size={30} color='skyblue' resizeMode='contain' />
+      <Text>{Math.round(this.props.eventsReducers.currEvent.venueScore * 100)}</Text>
+    </View>
+    <View style={styles.badge}>
+      <Text>{city}</Text>
+    </View>
+  </View>
+*/
 
 const styles = StyleSheet.create({
   container: {
@@ -260,26 +264,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '85%'
   },
-  circleContainer: {
-    position: 'relative',
-    width: 350,
-    height: 350,
-    padding: 20,
-    borderWidth: 1,
-    borderRadius: 150,
-  },
   metricContainer: {
     flex: 1,
-    flexDirection: 'column',
-    height: 230,
-    width: null,
+    flexDirection: 'row',
     },
-  eventInformation: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
   floatButtonContainer: {
     backgroundColor: 'rgba(0,0,0,.2)',
     borderColor: '#fff5',
@@ -300,23 +288,24 @@ const styles = StyleSheet.create({
       width: 0
     }
   },
-
-
-
-
-  badgeList: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-  },
-  badge: {
+  bottomContainer: {
+    // flex: -1,
     display: 'flex',
-    height: 60,
-    width: 80,
+  },
+  buyButton: {
+    // position: 'absolute',
+    zIndex: 2,
+    top: '15%',
+    padding: 15,
+    backgroundColor: '#ff5722',
+    borderColor: '#ff5722',
+    margin: 25,
+    borderRadius: 50,
     alignItems: 'center',
-    padding: 5  
+  },
+  buyText: {
+    color: '#FFF',
+    fontSize: 16
   },
   addressButton: {
     flexDirection: 'row',
@@ -326,89 +315,27 @@ const styles = StyleSheet.create({
     borderBottomColor: '#b5b5b5',
     borderTopWidth: 1,
     borderBottomWidth: 1,    
+    backgroundColor: '#EEE',
   },
-  text: {
+  addressText: {
     color: '#7a7b7c',
   },
-  buyButton: {
-    padding: 10,
-    backgroundColor: 'dimgray',
-    margin: 20
-  },
-  buyText: {
-    color: '#FFF',
-    fontSize: 16
-  },
 
 
-  eventViewContainer: {
-    // backgroundColor: '#4682B4',
-    // flex: 1,
-    justifyContent: 'center',
-    display: 'flex',
-    paddingTop: 22,
-    paddingBottom: 50
-  },
-  eventContainer: {
-    display: 'flex',
+
+  badgeList: {
+    flex: .5,
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    // justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  badge: {
+    display: 'flex',
+    height: 60,
+    width: 80,
     alignItems: 'center',
-    backgroundColor: '#EEE',
-    // flex: 1,
-    justifyContent: 'space-around',
-    // height: 80,
-    // borderBottomWidth: 0.3,
-    padding: 3,
-    margin: 1.5,
-    // marginBottom: 3
-  },
-  dateBox: {
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 0.5
-  },
-  eventInfo: {
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 1
-  },
-  scoreBox: {
-    display: 'flex',
-    justifyContent: 'center',
-    flex: 0.5
-  },
-  weekday: {
-    textAlign: 'center',
-    fontSize: 18
-  },
-  date: {
-    textAlign: 'center',
-  },
-  artist: {
-    textAlign: 'center',
-  },
-  headline: {
-    textAlign: 'center',
-    // flex: 1,
-    fontSize: 18
-  },
-  timeVenue: {
-    textAlign: 'center',
-    fontSize: 12
-  },
-  location: {
-    textAlign: 'center',
-    fontSize: 12
-  },
-  score: {
-    textAlign: 'center',
-  },
-  scoreNumber: {
-    textAlign: 'center',
-    fontSize: 18
-  },
-  scroll: {
-    flex: 1
+    padding: 5,
   },
 });
 
